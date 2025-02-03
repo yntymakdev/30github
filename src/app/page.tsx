@@ -1,12 +1,13 @@
-import React from 'react';
+'use client';
 
-const Page = () => {
-    return (
-        <div>
-            
+export default function page() {
+  return (
+    <div>
+      <h1 >
 
-        </div>
-    );
+
+      </h1>
+
+    </div>
+  );
 };
-
-export default Page;
