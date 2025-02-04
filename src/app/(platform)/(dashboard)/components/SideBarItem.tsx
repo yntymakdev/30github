@@ -9,7 +9,7 @@ interface  SideBarItemProps {
 
 }
 
-export default function SideBarItem ()  {
+export default function SideBarItem ({icon,label,href}: SideBarItemProps)  {
   return (
     <div>
     SideBarItem

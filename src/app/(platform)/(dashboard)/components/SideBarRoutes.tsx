@@ -12,7 +12,7 @@ const guestRoutes = [
         icon: Compass,
         label: 'Browse',
         href: '/search',
-    }
+    },
 ]
 
 export default function SideBarRoutes ()  {
@@ -28,8 +28,7 @@ export default function SideBarRoutes ()  {
             href={route.href}
             />
 
-        )}
-  
+        ))}
     </div>
   );
 };
