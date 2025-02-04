@@ -14,16 +14,16 @@ const guestRoutes = [
         href: '/search',
     }, {
         icon: Compass,
-        label: 'Browse',
-        href: '/',
+        label: 'Settings',
+        href: '/settings',
     }, {
         icon: Compass,
-        label: 'Browse',
-        href: '/',
+        label: 'Think',
+        href: '/think',
     }, {
         icon: Compass,
-        label: 'Browse',
-        href: '/',
+        label: 'What',
+        href: '/what',
     },
 ]
 
