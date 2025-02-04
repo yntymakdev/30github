@@ -1,9 +1,10 @@
-import {UserButton} from "@clerk/nextjs";
+// import {UserButton} from "@clerk/nextjs";
 
 export default function Sidebar ()  {
   return (
-    <div>
-<UserButton/>
+    <div className='h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm'>
+        SideBar !
+{/*<UserButton/>*/}
     </div>
   );
 };
