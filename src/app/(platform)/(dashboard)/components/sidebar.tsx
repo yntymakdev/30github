@@ -1,9 +1,10 @@
-import {UserButton} from "@clerk/nextjs";
+// import {UserButton} from "@clerk/nextjs";
 
 export default function Sidebar ()  {
   return (
-    <div>
-<UserButton/>
+    <div className='h-full'>
+        SideBar !
+{/*<UserButton/>*/}
     </div>
   );
 };
