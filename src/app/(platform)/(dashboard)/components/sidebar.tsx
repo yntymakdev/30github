@@ -1,14 +1,17 @@
 import Logo from "@/app/(platform)/(dashboard)/components/logo";
+import SidebarRoutes from "@/app/(platform)/(dashboard)/components/sidebar-routes";
 
 export default function Sidebar ()  {
   return (
+
     <div className='h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm'>
 
         <div className='p-6'>
             <Logo/>
-
+    </div>
+        <div className='flex flex-col w-full'>
+            <SidebarRoutes/>
         </div>
-        SideBar !
     </div>
   );
 };
