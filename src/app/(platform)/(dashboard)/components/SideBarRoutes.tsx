@@ -25,6 +25,18 @@ const guestRoutes = [
         label: 'What',
         href: '/what',
     },
+],
+    const teacherRoutes = [
+    {
+        icon: Layout,
+        label: 'Courses',
+        href: '/teacher/courses',
+    } ,
+    {
+        icon: Compass,
+        label: 'Analitycs',
+        href: '/teacher/analitycs',
+    },
 ]
 
 export default function SideBarRoutes ()  {
