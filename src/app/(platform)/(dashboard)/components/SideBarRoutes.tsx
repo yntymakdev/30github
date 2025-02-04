@@ -1,6 +1,6 @@
 'use client'
 import {Compass, Layout} from "lucide-react";
-import SideBarItem from "@/app/(platform)/(dashboard)/components/side-bar-item";
+import SideBarItem from "@/app/(platform)/(dashboard)/components/SideBarItem";
 
 const guestRoutes = [
     {
@@ -15,7 +15,7 @@ const guestRoutes = [
     }
 ]
 
-export default function SidebarRoutes ()  {
+export default function SideBarRoutes ()  {
     const  routes = guestRoutes;
 
   return (
