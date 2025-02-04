@@ -1,7 +1,7 @@
 import Logo from "@/app/(platform)/(dashboard)/components/logo";
-import SidebarRoutes from "@/app/(platform)/(dashboard)/components/sidebar-routes";
+import SideBarRoutes from "@/app/(platform)/(dashboard)/components/SideBarRoutes";
 
-export default function Sidebar ()  {
+export default function SideBar ()  {
   return (
 
     <div className='h-full border-r flex flex-col overflow-y-auto bg-white shadow-sm'>
@@ -10,7 +10,7 @@ export default function Sidebar ()  {
             <Logo/>
     </div>
         <div className='flex flex-col w-full'>
-            <SidebarRoutes/>
+            <SideBarRoutes/>
         </div>
     </div>
   );
