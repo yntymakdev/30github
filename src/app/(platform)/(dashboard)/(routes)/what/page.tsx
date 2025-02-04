@@ -1,8 +1,8 @@
 'use client'
-export default function page ()  {
+export default function What ()  {
   return (
     <div>
-    page
+    What
   
     </div>
   );
