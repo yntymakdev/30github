@@ -1,5 +1,5 @@
 import Image from "next/image";
-import  logo from "./logoipsum-296.svg"
+import  logo from "./logoipsum-297.svg"
 export default function Logo ()  {
   return (
     <div>
