@@ -39,8 +39,8 @@ const teacherRoutes = [
     },
     {
         icon: BarChart,
-        label: 'Analitycs',
-        href: '/teacher/analitycs',
+        label: 'Analytics',
+        href: '/teacher/analytics',
     },
 ];
 
