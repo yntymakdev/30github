@@ -1,8 +1,8 @@
 'use client'
-export default function page ()  {
+export default function SearchPage ()  {
   return (
     <div>
-    page
+    SearchPage 
   
     </div>
   );
