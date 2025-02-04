@@ -1,5 +1,5 @@
 'use client'
-import { Compass, Layout } from "lucide-react";
+import {BarChart, Compass, Layout, List} from "lucide-react";
 import SideBarItem from "@/app/(platform)/(dashboard)/components/SideBarItem";
 import { usePathname } from "next/navigation";
 
