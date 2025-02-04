@@ -1,12 +1,14 @@
 'use client';
 
-export default function page() {
+
+
+import {Button} from "@/components/ui/button";
+
+export default function Home() {
   return (
     <div>
-      <h1 >
-
-
-      </h1>
+      <p className='text-3xl font-medium text-sky-700'>Page</p>
+        <Button>Click</Button>
 
     </div>
   );
