@@ -1,4 +1,4 @@
-# It - Course Project
+# IT - Course Project
 
 This project is a functional platform focused on providing high-quality and free IT courses, as well as other educational content. It is part of the **Challenge 30github** initiative.
 
