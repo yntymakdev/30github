@@ -16,13 +16,13 @@ export default function NavbarRoutes ()  {
     <div className='flex gap-x-2 ml-auto'>
       {
         isTeacherPage || isPlayerPage ? (
-            <Button>
+            <Button size='sm' variant='ghost'>
               <LogOut className='h-4 w-4 mr-2'/>
               Exit
             </Button>
         ) :(
             <Link href='/teacher/courses'>
-              <Button>
+              <Button size='sm' variant='ghost'>
                 Teach Mode
               </Button>
             </Link>
