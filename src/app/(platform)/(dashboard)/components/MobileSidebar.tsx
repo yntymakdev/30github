@@ -3,11 +3,11 @@ import {Menu} from "lucide-react";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import SideBar from "@/app/(platform)/(dashboard)/components/SideBar";
 
-export default function MobileNavbar ()  {
+export default function MobileSidebar ()  {
   return (
 
       <Sheet>
-<SheetTrigger className="hidden md:flex h-full w-56 flex-col">
+<SheetTrigger className="md:hidden pr-4 hover:opacity-75  transition">
 
     <div>
     <Menu/>
