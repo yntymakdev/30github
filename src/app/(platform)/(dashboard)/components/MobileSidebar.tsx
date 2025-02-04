@@ -13,7 +13,7 @@ export default function MobileSidebar ()  {
     <Menu/>
     </div>
 </SheetTrigger>
-          <SheetContent side='left' className='p-0 bg-white'>
+          <SheetContent  side='left' className='p-0 bg-white'>
               <SideBar/>
           </SheetContent>
       </Sheet>
