@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {router} from "next/client";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
     title: z.string().min(1, { message: 'Title is required' })
@@ -27,8 +29,7 @@ try {
     const response = await axios.post('/api/courses,values');
     router.push(`/teacher/courses/${response.data.id}`);
 }catch(error) {
-    console.log('Something went wrong');
-
+    toast.error('something went wrong');
 }
     };
 
