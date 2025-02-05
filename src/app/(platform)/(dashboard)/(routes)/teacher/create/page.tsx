@@ -49,9 +49,8 @@ export default function CreatePage() {
                                     />
                                 </FormControl>
                                 <FormDescription>What will you teach in this course?</FormDescription>
-
+                    <FormMessage/>
                             </FormItem>
-</Form>
                         )}
                     />
 
@@ -64,11 +63,9 @@ export default function CreatePage() {
                         <Button type='submit' disabled={!isValid || isSubmitting}>
                             Continue
                         </Button>
-
+        </div>
                 </form>
-            </Form>
-        </div>
-        </div>
+</Form>
 </div>
     );
-}
+};
