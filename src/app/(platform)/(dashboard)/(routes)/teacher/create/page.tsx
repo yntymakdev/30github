@@ -1,8 +1,10 @@
 'use client';
 
 import { z } from 'zod';
-import { useForm } from 'react-hook-form';
+import {Form, useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from "next/link";
+import {Button} from "@/components/ui/button";
 
 
 const formSchema = z.object({
@@ -33,16 +35,45 @@ export default function CreatePage() {
 <p className='text-sm text-slate-600'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet atque dignissimos est itaque neque, odit quis tempore ullam voluptate!</p>
           </div>
 
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <input
-              type="text"
-              {...form.register('title')}
-              placeholder="Enter title"
-          />
-          {errors.title && <p style={{ color: 'red' }}>{errors.title.message}</p>}
+        <Form {...form}>
+            <form  className='space-y-8 mt-8'onSubmit={form.handleSubmit(onSubmit  )}  ></form>
+       <FormField control={form.control} name='title' render={({field}) => (
+           <FormItem>
+               <FormLabel>
+<FormControl>
+    <Input>
+         disabled={isSubmitting} placeholder='e.g Advanced web development'
+        {...field}
+        />
 
-          <button type="submit">Submit</button>
-        </form>
+    </Input>
+    <FormDescription>
+        What will you tech this course ?
+
+    </FormDescription>
+
+
+</FormControl>
+                   Course title
+               </FormLabel>
+
+           </FormItem>
+       )}>
+       <div className='flex items-center gap-x-2'>
+           <Link href='/'>
+               <Button typeof='button' variant='ghost'>
+                   Cancel
+
+               </Button>
+
+
+
+           </Link>
+
+       </div>
+       </FormField>
+
+        </Form>
       </div>
   );
 }
