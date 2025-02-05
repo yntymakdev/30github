@@ -24,8 +24,15 @@ export default function CreatePage() {
   };
 
   return (
-      <div>
-        <h1>Create Page</h1>
+      <div className='max-w-5xl mx-auto flex md:items-center md:justify-center h-ful'>
+          <div >
+
+
+
+        <h1 className='text-2xl'>Create Page</h1>
+<p className='text-sm text-slate-600'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet atque dignissimos est itaque neque, odit quis tempore ullam voluptate!</p>
+          </div>
+
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <input
               type="text"
