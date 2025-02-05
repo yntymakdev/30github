@@ -3,6 +3,8 @@
 import { z } from 'zod';
 import {Form, useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from "next/link";
+import {Button} from "@/components/ui/button";
 
 
 const formSchema = z.object({
@@ -45,14 +47,31 @@ export default function CreatePage() {
         />
 
     </Input>
+    <FormDescription>
+        What will you tech this course ?
+
+    </FormDescription>
+
 
 </FormControl>
                    Course title
                </FormLabel>
 
            </FormItem>
+       )}>
+       <div className='flex items-center gap-x-2'>
+           <Link href='/'>
+               <Button typeof='button' variant='ghost'>
+                   Cancel
 
-       )}></FormField>
+               </Button>
+
+
+
+           </Link>
+
+       </div>
+       </FormField>
 
         </Form>
       </div>
