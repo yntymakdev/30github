@@ -38,7 +38,15 @@ export default function CreatePage() {
        <FormField control={form.control} name='title' render={({field}) => (
            <FormItem>
                <FormLabel>
+<FormControl>
+    <Input>
+         disabled={isSubmitting} placeholder='e.g Advanced web development'
+        {...field}
+        />
 
+    </Input>
+
+</FormControl>
                    Course title
                </FormLabel>
 
@@ -46,14 +54,6 @@ export default function CreatePage() {
 
        )}></FormField>
 
-          <input
-              type="text"
-              {...form.register('title')}
-              placeholder="Enter title"
-          />
-          {errors.title && <p style={{ color: 'red' }}>{errors.title.message}</p>}
-
-          <button type="submit">Submit</button>
         </Form>
       </div>
   );
