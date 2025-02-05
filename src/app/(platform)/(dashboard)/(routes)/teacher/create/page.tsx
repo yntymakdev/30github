@@ -7,6 +7,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {router} from "next/client";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const formSchema = z.object({
     title: z.string().min(1, { message: 'Title is required' })
@@ -22,8 +25,13 @@ export default function CreatePage() {
 
     const { isValid, isSubmitting, errors } = form.formState;
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values);
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+try {
+    const response = await axios.post('/api/courses,values');
+    router.push(`/teacher/courses/${response.data.id}`);
+}catch(error) {
+    toast.error('something went wrong');
+}
     };
 
     return (
