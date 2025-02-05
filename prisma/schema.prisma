@@ -7,9 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Category{
-
-
+model Category {
+  id     String   @id @default(cuid())
+  userId String
+  name   String   @unique
+  course Course[]
 }
 
 model Course {
@@ -24,6 +26,7 @@ model Course {
   attachments Attachment[]
   createdAt   DateTime     @default(now())
   updateAt    DateTime     @updatedAt
+  Category    Category?    @relation(fields: [categoryId], references: [id])
 
   @@map("courses")
 }
