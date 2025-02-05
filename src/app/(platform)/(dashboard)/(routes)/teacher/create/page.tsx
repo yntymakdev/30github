@@ -1,7 +1,7 @@
 'use client';
 
 import { z } from 'zod';
-import { useForm } from 'react-hook-form';
+import {Form, useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 
@@ -33,7 +33,19 @@ export default function CreatePage() {
 <p className='text-sm text-slate-600'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet atque dignissimos est itaque neque, odit quis tempore ullam voluptate!</p>
           </div>
 
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <Form {...form}>
+            <form  className='space-y-8 mt-8'onSubmit={form.handleSubmit(onSubmit  )}  ></form>
+       <FormField control={form.control} name='title' render={({field}) => (
+           <FormItem>
+               <FormLabel>
+
+                   Course title
+               </FormLabel>
+
+           </FormItem>
+
+       )}></FormField>
+
           <input
               type="text"
               {...form.register('title')}
@@ -42,7 +54,7 @@ export default function CreatePage() {
           {errors.title && <p style={{ color: 'red' }}>{errors.title.message}</p>}
 
           <button type="submit">Submit</button>
-        </form>
+        </Form>
       </div>
   );
 }
