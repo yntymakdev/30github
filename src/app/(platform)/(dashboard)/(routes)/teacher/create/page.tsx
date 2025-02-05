@@ -5,7 +5,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { FormControl, FormDescription, FormField, FormItem, FormLabel,FormMessage } from '@/components/ui/form';
+import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 
 const formSchema = z.object({
@@ -33,9 +33,7 @@ export default function CreatePage() {
                 <p className='text-sm text-slate-600'>
                     What would you like to name yout course?Dont worry you can change later
                 </p>
-            </div>
-            </div>
-            <FormProvider {...form}>
+            <Form {...form}>
                 <form className='space-y-8 mt-8' onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
                         control={form.control}
@@ -53,6 +51,7 @@ export default function CreatePage() {
                                 <FormDescription>What will you teach in this course?</FormDescription>
 
                             </FormItem>
+</Form>
                         )}
                     />
 
@@ -67,7 +66,9 @@ export default function CreatePage() {
                         </Button>
 
                 </form>
-            </FormProvider>
+            </Form>
         </div>
+        </div>
+</div>
     );
 }
