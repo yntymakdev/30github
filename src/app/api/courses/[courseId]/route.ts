@@ -1,11 +1,12 @@
-'use client'
-export default function `Page` ()  {
-  return (
-    <div>
-    `Page`
-  
-    </div>
-  );
-};
+export async function PATCH(
+req:Request
+){
+    try {
+
+    }
+    catch (){
+
+    }
 
 
+}
