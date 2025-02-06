@@ -4,10 +4,10 @@ import { z } from 'zod';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {router} from "next/client";
 import toast from "react-hot-toast";
 import axios from "axios";
 
@@ -16,6 +16,7 @@ const formSchema = z.object({
 });
 
 export default function CreatePage() {
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -23,16 +24,16 @@ export default function CreatePage() {
         }
     });
 
-    const { isValid, isSubmitting, errors } = form.formState;
+    const {isSubmitting ,isValid} = form.formState;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-try {
-    const response = await axios.post('/api/courses',values);
-    router.push(`/teacher/courses/${response.data.id}`);
-    toast.success('Course successfully created!');
-}catch(error) {
-    toast.error('something went wrong');
-}
+        try {
+            const response = await axios.post('/api/courses', values);
+            router.push(`/teacher/courses/${response.data.id}`);
+            toast.success('Course successfully created!');
+        } catch {
+            toast.error('Something went wrong');
+        }
     };
 
     return (
@@ -59,7 +60,7 @@ try {
                                         />
                                     </FormControl>
                                     <FormDescription>What will you teach in this course?</FormDescription>
-                                    {errors.title && <FormMessage>{errors.title.message}</FormMessage>}
+                                    <FormMessage /> {/* ✅ Теперь ошибки отображаются правильно */}
                                 </FormItem>
                             )}
                         />
