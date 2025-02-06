@@ -17,9 +17,9 @@ model Category {
 model Course {
   id          String       @id @default(cuid())
   userId      String
-  title       String?
-  description String?
-  imageUrl    String?
+  title       String?      @db.Text
+  description String?      @db.Text
+  imageUrl    String?      @db.Text
   price       Float?
   isPublished Boolean      @default(false)
   categoryId  String?
@@ -33,7 +33,7 @@ model Course {
 
 model Attachment {
   id        String   @id @default(cuid())
-  url       String
+  url       String   @db.Text
   Course    Course?  @relation(fields: [courseId], references: [id])
   courseId  String?
   createdAt DateTime @default(now())
