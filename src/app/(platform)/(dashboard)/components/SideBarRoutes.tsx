@@ -46,7 +46,7 @@ const teacherRoutes = [
 
 export default function SideBarRoutes() {
     const pathname = usePathname();
-    const isTeacherPage = pathname.startsWith("/teacher"); // Предположим, что это определяет, является ли текущая страница страницей учителя
+    const isTeacherPage = pathname.startsWith("/teacher");
     const routes = isTeacherPage ? teacherRoutes : guestRoutes;
 
     return (
