@@ -1,4 +1,6 @@
 import {cva, type VariantProps} from "class-variance-authority";
+import {allowedDisplayValues} from "next/dist/compiled/@next/font/dist/constants";
+import {cn} from "@/lib/utils";
 
 const  backgroundVariants= cva(
     'rounded-full flex items-center justify-center',
@@ -45,6 +47,17 @@ const   iconVariants = cva(
 type BackgroundVariantsProps = VariantProps<typeof backgroundVariants>;
 type IconVariantsProps = VariantProps<typeof iconVariants>;
 
+interface IconBadgeProps  extends  BackgroundVariantsProps ,IconVariantsProps{
+    export  const IconBadge = ({
+        icon: Icon,
+        variant,
+        size
+    } : IconBadgeProps) => {
+        <div className={cn(backgroundVariants({variant,size}))}>
+            <Icon className={cn(iconVariants({variant,size}))}/>
 
+        </div>
 
+}
 
+}
