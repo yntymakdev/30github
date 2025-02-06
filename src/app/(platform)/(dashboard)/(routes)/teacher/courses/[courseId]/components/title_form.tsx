@@ -25,6 +25,18 @@ const onSubmit=async (values:z.infer<typeof formSchema> ) => {
             Course Title
         </div>
         <Button variant='ghost'>
+
+            {isEditting && (
+                <>Cancel </>
+
+            )}{
+                isEditting && (
+                    <>
+                    <Pencil
+                    </>
+            )
+
+        }
 <Pencil className='h-4'/>
 
         </Button>
