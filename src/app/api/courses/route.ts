@@ -1,29 +1,26 @@
-import {auth} from "@clerk/nextjs/server";
-import {NextResponse} from "next/server";
+import { auth } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
-export async function POST(
-
-    req:Request
-
-) {
+export async function POST(req: Request) {
     try {
-        const {userId} = auth()
-        const {title} = await req.json
-        if(!userId)
-            return new NextResponse("Unauthorized")
-    }
-    const course  = await  db.course.create({
-        data:{
-            userId,
-            title
-
+        const { userId } = await auth();
+        if (!userId) {
+            return new NextResponse("Unauthorized", { status: 401 });
         }
 
-    })
+        const { title } = await req.json();
 
-    catch (error) {
+        const course = await db.course.create({
+            data: {
+                userId,
+                title,
+            },
+        });
+
+        return NextResponse.json(course);
+
+    } catch (error) {
         console.log('[COURSES]', error);
-        return new NextResponse("Internal Error", {status: 500})
-
+        return new NextResponse("Internal Error", { status: 500 });
     }
 }
