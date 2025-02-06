@@ -19,9 +19,13 @@ const onSubmit=async (values:z.infer<typeof formSchema> ) => {
 }
 
   return (
-    <div>
+    <div className='mt-6 border bg-slate-100 rounded-md p-4'>
+        <div className='font-medium flex items-center justify-between'>
+            Course Title
+
+        </div>
+
     TitleForm
-  
     </div>
   );
 };
