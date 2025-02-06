@@ -12,6 +12,8 @@ interface TitleFormProps{
 
 export const  TitleForm =({initalData,courseId}: TitleFormProps)=>  {
     const [ isEditing,setIsEditting] = useState()
+
+
     const toggleEdit = () => setIsEditting((current) => !current)
 
     const form  = useForm<z.infer<typeof  formSchema>>({
@@ -19,6 +21,11 @@ export const  TitleForm =({initalData,courseId}: TitleFormProps)=>  {
     })
     const {isSubmitting,isValid} = form.formState
 const onSubmit=async (values:z.infer<typeof formSchema> ) => {
+        try {
+await  axios.patch(`/api/courses/${courseId}/courses/${courseId}/edit`,{})
+        }
+        catch ()
+
     console.log(values)
 
 }
