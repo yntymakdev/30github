@@ -13,7 +13,10 @@ export const  TitleForm =({initalData,courseId}: TitleFormProps)=>  {
         defaultValues: initalData
     })
     const {isSubmitting,isValid} = form.formState
-const onSubmit=async (values)
+const onSubmit=async (values:z.infer<typeof formSchema> ) => {
+    console.log(values)
+
+}
 
   return (
     <div>
