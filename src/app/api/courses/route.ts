@@ -12,8 +12,18 @@ export async function POST(
         if(!userId)
             return new NextResponse("Unauthorized")
     }
+    const course  = await  db.course.create({
+        data:{
+            userId,
+            title
+
+        }
+
+    })
+
     catch (error) {
-        error
+        console.log('[COURSES]', error);
+        return new NextResponse("Internal Error", {status: 500})
 
     }
 }
