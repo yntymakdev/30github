@@ -44,8 +44,17 @@ const completionText = `(${completedFields}/${totalFields})`
                 </span>
             </div>
         </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-16'>
+            <div>
+                <div className='flex items-center gap-x-2'>
+                    <h2 className='text-xl'>
+                        Costomize your course
+                    </h2>
+                </div>
+            </div>
 
-  
+        </div>
+
     </div>
   );
 };
