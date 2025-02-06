@@ -44,7 +44,7 @@ const completionText = `(${completedFields}/${totalFields})`
                 </span>
             </div>
         </div>
-    CourseIdPagePage
+
   
     </div>
   );
