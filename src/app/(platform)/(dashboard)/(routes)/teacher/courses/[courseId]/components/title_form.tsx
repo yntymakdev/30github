@@ -10,6 +10,9 @@ interface TitleFormProps{
 }
 
 export const  TitleForm =({initalData,courseId}: TitleFormProps)=>  {
+    const [ isEditing,setIsEditting] = useState()
+    const toggleEdit = () => set
+
     const form  = useForm<z.infer<typeof  formSchema>>({
         defaultValues: initalData
     })
@@ -32,7 +35,7 @@ const onSubmit=async (values:z.infer<typeof formSchema> ) => {
             )}{
                 isEditting && (
                     <>
-                    <Pencil
+                    <Pencil/>
                     </>
             )
 
