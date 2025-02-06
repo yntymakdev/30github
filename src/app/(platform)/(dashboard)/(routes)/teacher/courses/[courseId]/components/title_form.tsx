@@ -11,8 +11,9 @@ interface TitleFormProps{
 export const  TitleForm =({initalData,courseId}: TitleFormProps)=>  {
     const form  = useForm<z.infer<typeof  formSchema>>({
         defaultValues: initalData
-
     })
+    const {isSubmitting,isValid} = form.formState
+const onSubmit=async (values)
 
   return (
     <div>
