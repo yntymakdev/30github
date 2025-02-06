@@ -10,7 +10,7 @@ const {userId} = await  auth()
             return new NextResponse('Unauthorized', {status: 401})
         }
     }
-    catch(err){}
+    const course = await  db.course.update
     catch (){
         console.log()
     }
