@@ -2,6 +2,7 @@
 import  * as z from 'zod'
 import {useForm} from "react-hook-form";
 import {Pencil} from "lucide-react";
+import {defaultOverrides} from "next/dist/server/require-hook";
 
 interface TitleFormProps{
     initalData:{
@@ -11,7 +12,7 @@ interface TitleFormProps{
 
 export const  TitleForm =({initalData,courseId}: TitleFormProps)=>  {
     const [ isEditing,setIsEditting] = useState()
-    const toggleEdit = () => set
+    const toggleEdit = () => setIsEditting((current) => !current)
 
     const form  = useForm<z.infer<typeof  formSchema>>({
         defaultValues: initalData
@@ -43,7 +44,12 @@ const onSubmit=async (values:z.infer<typeof formSchema> ) => {
 <Pencil className='h-4'/>
 
         </Button>
+     <div>
+
+     </div>
     </div>
+
+
   );
 };
 
