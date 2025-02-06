@@ -2,6 +2,9 @@
 import {db} from "@/lib/db";
 import {auth} from "@clerk/nextjs/server";
 import {redirect} from "next/navigation";
+import {IconBadge} from "@/components/icon-badge";
+import {LayoutDashboard, LayoutDashboardIcon} from "lucide-react";
+import TitleForm from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/title_form";
 
 const  CourseIdPagePage  = async({params}: {params:{courseId: string}})=> {
 
@@ -47,10 +50,14 @@ const completionText = `(${completedFields}/${totalFields})`
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-16'>
             <div>
                 <div className='flex items-center gap-x-2'>
+                    <IconBadge   icon={LayoutDashboard} />
                     <h2 className='text-xl'>
                         Costomize your course
                     </h2>
                 </div>
+                <TitleForm initalData={course} courseId={course.id}/>
+
+
             </div>
 
         </div>
