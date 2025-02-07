@@ -46,13 +46,17 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">Course Title</div>
       <Button variant="ghost" onClick={toggleEdit}>
-        {isEditing ? (
-          <>
-            Cancel <Pencil className="h-4" />
-          </>
-        ) : (
-          <Pencil className="h-4" />
-        )}
+        {isEditing ?(
+
+            <>Cancel</> 
+        ):(
+<>
+            
+            <Pencil className="h-4" />
+            Edit Title
+            }
+</>
+        )} 
       </Button>
       {isEditing && (
         <form onSubmit={form.handleSubmit(onSubmit)}>
