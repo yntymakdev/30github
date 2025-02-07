@@ -8,6 +8,8 @@ import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import toast from "react-hot-toast";
+import {router} from "next/client";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -32,14 +34,14 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // try {
-    //   await axios.patch(`/api/courses/${courseId}/edit`, values);
-    //   toggleEdit();
-    // } catch (error) {
-    //   console.error("Ошибка при обновлении курса:", error);
-    // }
-    // console.log(values);
-    console.log(values);
+    try {
+      await axios.patch(`/api/courses/${courseId}`, values);
+      toast.success("Course updated!");
+      toggleEdit();
+      router.refresh()
+    } catch (error) {
+      console.error("Ошибка при обновлении курса:", error);
+    }
   };
 
   return (
