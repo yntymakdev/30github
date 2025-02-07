@@ -53,7 +53,6 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
             Edit Title
           </>
         )}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, temporibus.
       </Button>
 
       {isEditing && (
