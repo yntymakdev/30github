@@ -26,9 +26,11 @@ where:  {
         })            
     return NextResponse.json(courseId)    
     
-    catch (){
-        console.log()
+    catch (error){
+        console.log('[COURSE_ID]',error)
+    return NextResponse.json('Interval server error', {status: 500})    
+
     }
 
 
-}
+    }}
