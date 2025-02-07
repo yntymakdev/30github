@@ -12,17 +12,17 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-    title: z.string().min(1, "Title is required"),
+    title: z.string().min(1, "Description is required"),
 });
 
-interface TitleFormProps {
+interface DescriptionFormProps {
     initialData: {
         title: string;
     };
     courseId: string;
 }
 
-export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
+export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter(); // ✅ Используем useRouter()
 
@@ -50,9 +50,9 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Title
+                Course Description
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Title</>}
+                    {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Description</>}
                 </Button>
             </div>
 
