@@ -10,14 +10,16 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
-    title: z.string().min(1, "Description is required"),
+    description: z.string().min(1, "Description is required"),
 });
 
 interface DescriptionFormProps {
     initialData: {
-        title: string;
+        description: string;
     };
     courseId: string;
 }
@@ -29,11 +31,11 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: initialData?.title ?? "", // ✅ Защита от undefined
+            description: initialData?.description ?? ""
         },
     });
 
-    const { isSubmitting, isDirty } = form.formState; // ✅ isDirty вместо isValid
+    const { isSubmitting, isDirty } = form.formState;
     const toggleEdit = () => setIsEditing((current) => !current);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -56,16 +58,25 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                 </Button>
             </div>
 
+            {
+                !isEditing && (
+                    <p className={cn(
+                        'text-sm mt-2',
+                        !initialData.description ? 'text-slate-100 italic' : ''
+                    )}>
+                        {initialData.description || 'No description'}
+                    </p>
+                )}
             {isEditing && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="title"
+                            name="description"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input disabled={isSubmitting} placeholder="Enter course title..." {...field} />
+                                        <Textarea disabled={isSubmitting} placeholder="Description Page" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
