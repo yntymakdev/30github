@@ -14,15 +14,18 @@ req:Request,
 if(!userId){
     return new NextResponse('Unauthorized', {status: 401})
         }
-            const course = await  db.course.update({
+const course = await  db.course.update({
 where:  {
-    
-}
+    id: params.courseId,
+    userId
+},
 
-            })
-            
-        }
-    }   
+    data:{
+        ...values
+    }
+        })            
+    return NextResponse.json(courseId)    
+    
     catch (){
         console.log()
     }
