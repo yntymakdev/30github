@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import {Textarea} from "@/components/ui/textarea";
 
 const formSchema = z.object({
     description:   z.string().min(1, "Description is required"),
@@ -57,6 +58,7 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
             </div>
 
             {
+
                 !isEditing && (
                     <p className='text-sm mt-2'>
                         {initialData.description}
@@ -75,7 +77,7 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input disabled={isSubmitting} placeholder="Enter course description..." {...field} />
+                                        <Textarea disabled={isSubmitting} placeholder="Description Page" {...field}/>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
