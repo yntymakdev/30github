@@ -17,18 +17,20 @@ interface TitleFormProps {
   };
   courseId: string;
 }
+const form = useForm<z.infer<typeof formSchema>>({
+  title: z.string().min(1, { message: "Title is required" }),
+  defaultValues: initialData,
+});
 
 export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-
-  const toggleEdit = () => setIsEditing((current) => !current);
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData,
   });
 
   const { isSubmitting, isValid } = form.formState;
+  const toggleEdit = () => setIsEditing((current) => !current);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
