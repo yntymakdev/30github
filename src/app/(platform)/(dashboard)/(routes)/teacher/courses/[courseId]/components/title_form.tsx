@@ -7,6 +7,7 @@ import axios from "axios";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -61,14 +62,13 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField control={form.control} name="title" render={{ field } => (
                 <FormItem>
-<FormControl></FormControl>
-
+<FormControl>
+    <Input  disabled={isSubmitting} placeholder="e.gaskalskalsk" {...field}/>
+</FormControl>
                 </FormItem>
-            )</form>}></FormField>
-          </form>
-          <input {...form.register("title")} className="border p-2 rounded" placeholder="Enter course title" />
-          <Button type="submit" disabled={!isValid || isSubmitting}>
-            Save
+            )}
+            </form>
+            </FormField> 
           </Button>
         </Form>
       )}
