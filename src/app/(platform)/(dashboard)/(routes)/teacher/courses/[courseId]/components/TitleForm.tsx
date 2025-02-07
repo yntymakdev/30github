@@ -32,12 +32,13 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await axios.patch(`/api/courses/${courseId}/edit`, values);
-      toggleEdit();
-    } catch (error) {
-      console.error("Ошибка при обновлении курса:", error);
-    }
+    // try {
+    //   await axios.patch(`/api/courses/${courseId}/edit`, values);
+    //   toggleEdit();
+    // } catch (error) {
+    //   console.error("Ошибка при обновлении курса:", error);
+    // }
+    // console.log(values);
     console.log(values);
   };
 
