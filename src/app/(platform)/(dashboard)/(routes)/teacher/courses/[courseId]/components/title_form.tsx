@@ -19,13 +19,10 @@ interface TitleFormProps {
   };
   courseId: string;
 }
-const form = useForm<z.infer<typeof formSchema>>({
-  title: z.string().min(1, { message: "Title is required" }),
-  defaultValues: initialData,
-});
 
 export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData,
@@ -56,20 +53,27 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
             Edit Title
           </>
         )}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, temporibus.
       </Button>
+
       {isEditing && (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField control={form.control} name="title" render={{ field } => (
+          <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
                 <FormItem>
-<FormControl>
-    <Input  disabled={isSubmitting} placeholder="e.gaskalskalsk" {...field}/>
-</FormControl>
+                  <FormControl>
+                    <Input disabled={isSubmitting} placeholder="Enter course title..." {...field} />
+                  </FormControl>
                 </FormItem>
-            )}
-            </form>
-            </FormField> 
-          </Button>
+              )}
+            />
+            <Button type="submit" disabled={isSubmitting || !isValid} className="mt-2">
+              Save
+            </Button>
+          </form>
         </Form>
       )}
     </div>
