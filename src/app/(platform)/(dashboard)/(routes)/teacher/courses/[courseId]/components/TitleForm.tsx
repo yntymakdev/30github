@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
@@ -32,12 +32,13 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await axios.patch(`/api/courses/${courseId}/edit`, values);
-      toggleEdit();
-    } catch (error) {
-      console.error("Ошибка при обновлении курса:", error);
-    }
+    // try {
+    //   await axios.patch(`/api/courses/${courseId}/edit`, values);
+    //   toggleEdit();
+    // } catch (error) {
+    //   console.error("Ошибка при обновлении курса:", error);
+    // }
+    // console.log(values);
     console.log(values);
   };
 
@@ -53,7 +54,6 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
             Edit Title
           </>
         )}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, temporibus.
       </Button>
 
       {isEditing && (
@@ -67,12 +67,17 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
                   <FormControl>
                     <Input disabled={isSubmitting} placeholder="Enter course title..." {...field} />
                   </FormControl>
+                  <FormMessage/>
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmitting || !isValid} className="mt-2">
+            <div className='flex items-center gap-x-2'>
+
+            <Button type="submit" disabled={!isValid || isSubmitting} className="mt-2">
               Save
             </Button>
+
+            </div>
           </form>
         </Form>
       )}
