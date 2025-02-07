@@ -56,6 +56,14 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
           </Button>
         </div>
 
+        {
+            !isEditing && (
+                <p className='text-sm mt-2'>
+                  {initialData.title}
+                </p>
+            )
+
+        }
         {isEditing && (
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">

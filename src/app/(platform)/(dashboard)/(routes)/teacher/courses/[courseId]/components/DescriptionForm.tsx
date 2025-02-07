@@ -12,12 +12,12 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-    title:   z.string().min(1, "Description is required"),
+    description:   z.string().min(1, "Description is required"),
 });
 
 interface DescriptionFormProps {
     initialData: {
-        title: string;
+        description: string;
     };
     courseId: string;
 }
@@ -29,7 +29,7 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: initialData?.title ?? ""
+            description: initialData?.description ?? ""
         },
     });
 
@@ -56,17 +56,26 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                 </Button>
             </div>
 
+            {
+                !isEditing && (
+                    <p className='text-sm mt-2'>
+                        {initialData.description}
+                    </p>
+                )
+
+            }
+
 
             {isEditing && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                             name="title"
+                             name="description"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input disabled={isSubmitting} placeholder="Enter course title..." {...field} />
+                                        <Input disabled={isSubmitting} placeholder="Enter course description..." {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
