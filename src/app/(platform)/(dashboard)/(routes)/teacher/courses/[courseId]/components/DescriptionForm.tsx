@@ -10,10 +10,11 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import {Textarea} from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
-    description:   z.string().min(1, "Description is required"),
+    description: z.string().min(1, "Description is required"),
 });
 
 interface DescriptionFormProps {
@@ -58,26 +59,24 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
             </div>
 
             {
-
                 !isEditing && (
-                    <p className='text-sm mt-2'>
-                        {initialData.description}
+                    <p className={cn(
+                        'text-sm mt-2',
+                        !initialData.description ? 'text-slate-100 italic' : ''
+                    )}>
+                        {initialData.description || 'No description'}
                     </p>
-                )
-
-            }
-
-
+                )}
             {isEditing && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                             name="description"
+                            name="description"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Textarea disabled={isSubmitting} placeholder="Description Page" {...field}/>
+                                        <Textarea disabled={isSubmitting} placeholder="Description Page" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -94,5 +93,3 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
         </div>
     );
 };
-
-
