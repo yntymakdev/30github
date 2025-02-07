@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { IconBadge } from "@/components/icon-badge";
 import { LayoutDashboard, LayoutDashboardIcon } from "lucide-react";
-import { TitleForm } from "./components/title_form";
+import { TitleForm } from "./components/TitleForm";
 
 const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) => {
 
@@ -12,9 +12,9 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
     return redirect("/");
   }
 
-Z  const course = await db.course.findUnique({
+  const course = await db.course.findUnique({
     where: {
-      id: params.courseId, // Используем курс из params
+      id: params.courseId,
     },
   });
 
@@ -22,7 +22,7 @@ Z  const course = await db.course.findUnique({
     return redirect("/");
   }
 
-  // Проверяем обязательные поля
+
   const requiredFields = [course.title, course.description, course.imageUrl, course.price, course.categoryId];
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
@@ -42,7 +42,14 @@ Z  const course = await db.course.findUnique({
               <IconBadge icon={LayoutDashboard} />
               <h2 className="text-xl">Customize your course</h2>
             </div>
-            <TitleForm initialData={course} courseId={course.id}></TitleForm>
+            <TitleForm
+                initialData={{
+                  ...course,
+                  title: course.title ?? ""
+                }}
+                courseId={course.id}
+            />
+
           </div>
         </div>
       </div>
