@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-    title: z.string().min(1, "Description is required"),
+    title:   z.string().min(1, "Description is required"),
 });
 
 interface DescriptionFormProps {
@@ -29,11 +29,11 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: initialData?.title ?? "", // ✅ Защита от undefined
+            title: initialData?.title ?? ""
         },
     });
 
-    const { isSubmitting, isDirty } = form.formState; // ✅ isDirty вместо isValid
+    const { isSubmitting, isDirty } = form.formState;
     const toggleEdit = () => setIsEditing((current) => !current);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -56,12 +56,13 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                 </Button>
             </div>
 
+
             {isEditing && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="title"
+                             name="title"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
@@ -82,3 +83,5 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
         </div>
     );
 };
+
+

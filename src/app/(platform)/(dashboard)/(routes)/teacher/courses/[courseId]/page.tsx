@@ -4,6 +4,9 @@ import { redirect } from "next/navigation";
 import { IconBadge } from "@/components/icon-badge";
 import { LayoutDashboard, LayoutDashboardIcon } from "lucide-react";
 import { TitleForm } from "./components/TitleForm";
+import {
+    DescriptionForm
+} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/DescriptionForm";
 
 const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) => {
 
