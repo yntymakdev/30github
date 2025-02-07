@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
@@ -66,12 +66,17 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
                   <FormControl>
                     <Input disabled={isSubmitting} placeholder="Enter course title..." {...field} />
                   </FormControl>
+                  <FormMessage/>
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmitting || !isValid} className="mt-2">
+            <div className='flex items-center gap-x-2'>
+
+            <Button type="submit" disabled={!isValid || isSubmitting} className="mt-2">
               Save
             </Button>
+
+            </div>
           </form>
         </Form>
       )}
