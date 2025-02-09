@@ -46,7 +46,7 @@ export const ComboboxDemo = ({
                     <CommandList>
                         <CommandEmpty>No framework found.</CommandEmpty>
                         <CommandGroup>
-                            {frameworks.map((framework) => (
+                            {options.map((option) => (
                                 <CommandItem
                                     key={framework.value}
                                     value={framework.value}
