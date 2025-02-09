@@ -60,7 +60,7 @@ export const ComboboxDemo = ({
                                             value === option.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label}
+                                    {option.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>
