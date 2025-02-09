@@ -23,7 +23,7 @@ interface  ComboboxProps{
 }
 export const ComboboxDemo = ({
     options,
-    value,})  =>{
+    value,onChange})  =>{
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState<string>("") // Убедитесь, что value - строка
 
