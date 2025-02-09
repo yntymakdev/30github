@@ -4,7 +4,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { Pencil, PlusCircle } from "lucide-react";
+import {ImageIcon, Pencil, PlusCircle} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -69,9 +69,16 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
                 </Button>
             </div>
             {!isEditing && (
-                <p className={cn("text-sm mt-2", !initialData.imageUrl ? "text-slate-400 italic" : "")}>
-                    {initialData.imageUrl || "No Image"}
-                </p>
+            !initialData.imageUrl ? (
+                <div className='flex items-center justify-center h-60 bg-slate-200 rounded-md'
+                >
+                    <ImageIcon className='h-10 w-10 text-slate-500'/>
+                </div>
+            ) : (
+                <div>
+                    current image
+                </div>
+            )
             )}
             {isEditing && (
                 <Form {...form}>
