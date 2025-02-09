@@ -5,6 +5,7 @@ import { IconBadge } from "@/components/icon-badge";
 import { LayoutDashboard } from "lucide-react";
 import { TitleForm } from "./components/TitleForm";
 import { DescriptionForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/DescriptionForm";
+import {ImageForm} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ImageForm";
 
 const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) => {
     const { userId } = await auth();
@@ -48,6 +49,11 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         courseId={course.id}
                     />
                     <DescriptionForm
+                        initialData={{
+                            description: course.description ?? "",  // Ensure description is not null
+                        }}
+                        courseId={course.id}
+                    /> <ImageForm
                         initialData={{
                             description: course.description ?? "",  // Ensure description is not null
                         }}
