@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Course } from "@prisma/client";
 import Image from "next/image";
+import {FileUpload} from "@/components/file-upload";
 
 const formSchema = z.object({
     imageUrl: z.string().min(1, {
@@ -83,27 +84,19 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
             )
             )}
             {isEditing && (
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
-                        <FormField
-                            control={form.control}
-                            name="imageUrl"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormControl>
-                                        <Input disabled={isSubmitting} placeholder="Image URL" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
+                <div>
+                    <FileUpload  endpoint='courseImage' onChange={(url) => {
+                        if(url) {
+                            onSubmit({imageUrl: url})
+                        }
+                    }}
                         />
-                        <div className="flex items-center gap-x-2">
-                            <Button type="submit" disabled={isSubmitting || !isDirty} className="mt-2">
-                                Save
-                            </Button>
+                                 <div className='text-xs text-muted-foreground mt-4'>
+                                     16:9 aspect ralio recommended
+
                         </div>
-                    </form>
-                </Form>
+                </div>
+
             )}
         </div>
     );
