@@ -25,8 +25,6 @@ export const ComboboxDemo = ({
     options,
     value,onChange}: ComboboxProps)  =>{
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState<string>("") // Убедитесь, что value - строка
-
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -37,7 +35,7 @@ export const ComboboxDemo = ({
                     className="w-[200px] justify-between"
                 >
                     {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
+                        ? options.find((framework) => framework.value === value)?.label
                         : "Select framework..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
