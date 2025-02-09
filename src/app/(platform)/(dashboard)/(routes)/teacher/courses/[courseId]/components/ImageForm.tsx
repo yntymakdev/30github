@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Course } from "@prisma/client";
+import Image from "next/image";
 
 const formSchema = z.object({
     imageUrl: z.string().min(1, {
@@ -75,8 +76,9 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
                     <ImageIcon className='h-10 w-10 text-slate-500'/>
                 </div>
             ) : (
-                <div>
-                    current image
+                <div className='relative aspect-video mt-2'>
+                    <Image alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
+
                 </div>
             )
             )}
