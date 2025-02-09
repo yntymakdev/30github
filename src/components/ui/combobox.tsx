@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
 
@@ -19,32 +17,9 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
-const frameworks = [
-    {
-        value: "next.js",
-        label: "Next.js",
-    },
-    {
-        value: "sveltekit",
-        label: "SvelteKit",
-    },
-    {
-        value: "nuxt.js",
-        label: "Nuxt.js",
-    },
-    {
-        value: "remix",
-        label: "Remix",
-    },
-    {
-        value: "astro",
-        label: "Astro",
-    },
-]
-
 export function ComboboxDemo() {
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
+    const [value, setValue] = React.useState<string>("") // Убедитесь, что value - строка
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -72,6 +47,7 @@ export function ComboboxDemo() {
                                     key={framework.value}
                                     value={framework.value}
                                     onSelect={(currentValue) => {
+                                        // Проверка: если текущее значение не совпадает с выбранным
                                         setValue(currentValue === value ? "" : currentValue)
                                         setOpen(false)
                                     }}
