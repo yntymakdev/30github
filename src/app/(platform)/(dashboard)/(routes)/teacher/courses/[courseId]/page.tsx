@@ -23,7 +23,7 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
         return redirect("/");
     }
 
-    const categories = await
+    const categories = await db
 
     const requiredFields = [course.title, course.description, course.imageUrl, course.price, course.categoryId];
     const totalFields = requiredFields.length;
