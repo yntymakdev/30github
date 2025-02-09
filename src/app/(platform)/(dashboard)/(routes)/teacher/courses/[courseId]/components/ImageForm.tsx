@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import {ImageIcon, Pencil, PlusCircle} from "lucide-react";
 import { Button } from "@/components/ui/button";
