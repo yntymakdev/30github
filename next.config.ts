@@ -1,13 +1,11 @@
-import { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    webpack: (config) => {
-        config.module.rules.push({
-            test: /\.md$/,
-            use: 'null-loader',
-        });
-        return config;
-    },
+images:{
+    domains:[
+        'utfs.io'
+    ]
+}
 };
 
 export default nextConfig;
