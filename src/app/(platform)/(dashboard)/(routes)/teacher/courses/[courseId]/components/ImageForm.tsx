@@ -1,4 +1,4 @@
-"use client";
+`"use client";
 import React, { useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -60,15 +60,18 @@ export const ImageForm   = ({ initialData, courseId }: ImageFormProps) => {
                     {isEditing && (
                         <>Cancel</>
                     )}{
-                !isEditing && (
-                         <><Pencil className="h-4" /> Edit Image</>
-                    )
-                    }
+                    {!isEditing && !initialData?.imageUrl &&(
+                        <>
+                    <PlusCircle className="w-5 h-5 mr-2" />
+                    Add an image
+                    </>
 
-                }
+                    )}
+                !isEditing && initialData?.imageUrl && (
+                         <><Pencil className="h-4" /> Edit Image</>
+                    )}
                 </Button>
             </div>
-
             {
                 !isEditing && (
                     <p className={cn(
@@ -104,3 +107,4 @@ export const ImageForm   = ({ initialData, courseId }: ImageFormProps) => {
         </div>
     );
 };
+`
