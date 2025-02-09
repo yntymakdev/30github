@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import {ImageIcon, Pencil, PlusCircle} from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,14 +25,7 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            imageUrl: initialData?.imageUrl ?? "",
-        },
-    });
 
-    const { isSubmitting, isDirty } = form.formState;
     const toggleEdit = () => setIsEditing((current) => !current);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -75,7 +66,7 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
                 </div>
             ) : (
                 <div className='relative aspect-video mt-2'>
-                    <Image width={100} height={100} alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
+                    <Image fill alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
 
                 </div>
             )
