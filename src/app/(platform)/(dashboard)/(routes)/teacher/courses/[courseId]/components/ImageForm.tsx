@@ -6,11 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import {ImageIcon, Pencil, PlusCircle} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
 import { Course } from "@prisma/client";
 import Image from "next/image";
 import {FileUpload} from "@/components/file-upload";
@@ -78,7 +75,7 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
                 </div>
             ) : (
                 <div className='relative aspect-video mt-2'>
-                    <Image alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
+                    <Image width={100} height={100} alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
 
                 </div>
             )

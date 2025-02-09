@@ -54,9 +54,7 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         }}
                         courseId={course.id}
                     /> <ImageForm
-                        initialData={{
-                            description: course.description ?? "",  // Ensure description is not null
-                        }}
+                        initialData={course}
                         courseId={course.id}
                     />
                 </div>
