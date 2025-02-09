@@ -27,14 +27,7 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            imageUrl: initialData?.imageUrl ?? "",
-        },
-    });
 
-    const { isSubmitting, isDirty } = form.formState;
     const toggleEdit = () => setIsEditing((current) => !current);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
