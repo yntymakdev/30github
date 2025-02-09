@@ -50,7 +50,7 @@ export const ComboboxDemo = ({
                                 <CommandItem
                                     key={option.value}
                                     onSelect={() => {
-                                        onChange(option.value === value ? "" : currentValue)
+                                        onChange(option.value === value ? "" : option.value)
                                         setOpen(false)
                                     }}
                                 >
