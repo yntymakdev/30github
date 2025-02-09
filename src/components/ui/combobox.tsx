@@ -35,7 +35,7 @@ export const ComboboxDemo = ({
                     className="w-[200px] justify-between"
                 >
                     {value
-                        ? options.find((framework) => framework.value === value)?.label
+                        ? options.find((option) => option.value === value)?.label
                         : "Select framework..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
