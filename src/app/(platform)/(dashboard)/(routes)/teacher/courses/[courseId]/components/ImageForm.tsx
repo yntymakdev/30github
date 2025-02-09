@@ -57,7 +57,15 @@ export const ImageForm   = ({ initialData, courseId }: ImageFormProps) => {
             <div className="font-medium flex items-center justify-between">
                 Course Image
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Image</>}
+                    {isEditing && (
+                        <>Cancel</>
+                    )}{
+                !isEditing && (
+                         <><Pencil className="h-4" /> Edit Image</>
+                    )
+                    }
+
+                }
                 </Button>
             </div>
 
@@ -75,7 +83,7 @@ export const ImageForm   = ({ initialData, courseId }: ImageFormProps) => {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="description"
+                            name="Image"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
