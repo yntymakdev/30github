@@ -49,10 +49,8 @@ export const ComboboxDemo = ({
                             {options.map((option) => (
                                 <CommandItem
                                     key={option.value}
-                                    value={framework.value}
-                                    onSelect={(currentValue) => {
-                                        // Проверка: если текущее значение не совпадает с выбранным
-                                        setValue(currentValue === value ? "" : currentValue)
+                                    onSelect={() => {
+                                        onChange(option.value === value ? "" : currentValue)
                                         setOpen(false)
                                     }}
                                 >
