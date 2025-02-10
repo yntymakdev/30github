@@ -60,7 +60,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.price && 'text-slate-100 italic'                    )}>
+                        !initialData.price && 'text-slate-500 italic'                    )}>
                         {initialData.price ? formatPrice(initialData.price) : 'No Price'}
                     </p>
                 )}
