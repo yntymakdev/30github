@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation"; // ✅ Правильный импорт
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -24,16 +24,15 @@ interface TitleFormProps {
 
 export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter(); // ✅ Используем useRouter()
-
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: initialData?.title ?? "", // ✅ Защита от undefined
+      title: initialData?.title ?? "",
     },
   });
 
-  const { isSubmitting, isDirty } = form.formState; // ✅ isDirty вместо isValid
+  const { isSubmitting, isDirty } = form.formState;
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -41,7 +40,7 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
       await axios.patch(`/api/courses/${courseId}`, values);
       toast.success("Course updated!");
       toggleEdit();
-      router.refresh(); // ✅ Теперь работает
+      router.refresh();
     } catch (error) {
       console.error("Ошибка при обновлении курса:", error);
     }

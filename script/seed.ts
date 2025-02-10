@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+const { PrismaClient } = require("@prisma/client");
 const database = new PrismaClient();
 
 async function main() {
@@ -13,7 +13,7 @@ async function main() {
                 { name: "Technologies" },
             ],
         });
-        console.log('Successfully created the database');
+        console.log('Successfully created the database',);
     } catch (error) {
         console.log('Error seeding the database categories', error);
     } finally {
