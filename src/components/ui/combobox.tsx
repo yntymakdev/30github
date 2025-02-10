@@ -50,12 +50,11 @@ export const  ComboboxDemo =({
                     <CommandList>
                         <CommandEmpty>No Option found.</CommandEmpty>
                         <CommandGroup>
-                            {options.map((framework) => (
+                            {options.map((option) => (
                                 <CommandItem
-                                    key={framework.value}
-                                    value={framework.value}
+                                    key={option.value}
                                     onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue)
+                                        onChange(option.value === value ? "" : option.value)
                                         setOpen(false)
                                     }}
                                 >
