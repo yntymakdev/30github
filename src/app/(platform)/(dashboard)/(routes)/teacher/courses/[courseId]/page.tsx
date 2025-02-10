@@ -28,6 +28,9 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
             name: 'asc',
         }
     })
+    if(!course){
+        return redirect("/");
+    }
 
     const requiredFields = [course.title, course.description, course.imageUrl, course.price, course.categoryId];
     const totalFields = requiredFields.length;
