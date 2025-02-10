@@ -50,6 +50,8 @@ export const CategoryForm = ({ initialData, courseId,options }: CategoryFormProp
         }
     };
 
+        const selectedOption = options.find(option => option.value === initialData.categoryId);
+
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
@@ -63,9 +65,9 @@ export const CategoryForm = ({ initialData, courseId,options }: CategoryFormProp
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.categoryId ? 'text-slate-100 italic' : ''
+                        !initialData.categoryId ? 'text-slate-500 italic' : ''
                     )}>
-                        {initialData.categoryId || 'No description'}
+                        {selectedOption?.label || 'No Category'}
                     </p>
                 )}
             {isEditing && (
