@@ -39,18 +39,18 @@ export const  ComboboxDemo =({
                     className="w-[200px] justify-between"
                 >
                     {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select framework..."}
+                        ? options.find((option) => options.value === value)?.label
+                        : "Select option..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
                 <Command>
-                    <CommandInput placeholder="Search framework..." />
+                    <CommandInput placeholder="Search options..." />
                     <CommandList>
-                        <CommandEmpty>No framework found.</CommandEmpty>
+                        <CommandEmpty>No Option found.</CommandEmpty>
                         <CommandGroup>
-                            {frameworks.map((framework) => (
+                            {options.map((framework) => (
                                 <CommandItem
                                     key={framework.value}
                                     value={framework.value}
