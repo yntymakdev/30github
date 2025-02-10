@@ -26,6 +26,8 @@ interface ComboboxProps {
 export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
     const [open, setOpen] = React.useState(false);
 
+    const selectedOption = options.find((option) => option.value === value);
+
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
@@ -35,9 +37,7 @@ export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
                     aria-expanded={open}
                     className="w-[200px] justify-between"
                 >
-                    {value
-                        ? options.find((option) => option.value === value)?.label
-                        : "Select option..."}
+                    {selectedOption ? selectedOption.label : "Select option..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -52,6 +52,7 @@ export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
                                     key={option.value}
                                     onSelect={() => {
                                         if (onChange) {
+                                            // Обрабатываем выбор новой опции
                                             onChange(option.value === value ? "" : option.value);
                                         }
                                         setOpen(false);
