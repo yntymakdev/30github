@@ -16,7 +16,7 @@ import {Course} from "@prisma/client";
 import {formatPrice} from "@/lib/format";
 
 const formSchema = z.object({
-    price: z.number().min(1, "Price is required"),
+    price: z.coerce.number(),
 });
 interface PriceForm {
     initialData: Course
