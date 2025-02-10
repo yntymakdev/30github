@@ -12,14 +12,13 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import {Course} from "@prisma/client";
 
 
 interface CategoryFormProps {
-    initialData: {
-        description: string;
+    initialData:  Course;
+    options: {label: string; value: string}[];
     courseId: string;
-    options: {label: string; value: string}[]
-    };
 }
 
 const formSchema = z.object({
@@ -74,7 +73,7 @@ export const CategoryForm = ({ initialData, courseId,options }: CategoryFormProp
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="category"
+                            name="categoryId"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>

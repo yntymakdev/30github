@@ -70,7 +70,10 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                     /><CategoryForm
                         initialData={course}
                         courseId={course.id}
-                        options={categories.map((category) => ({}))}
+                        options={categories.map((category) => ({
+                            label: category.name,
+                            value: category.id,
+                        }))}
                     />
                 </div>
             </div>
