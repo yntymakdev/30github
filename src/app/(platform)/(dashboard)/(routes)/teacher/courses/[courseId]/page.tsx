@@ -47,7 +47,7 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                     </div>
 
                     <TitleForm initialData={{ title: course.title ?? "" }} courseId={course.id} />
-                    <DescriptionForm initialData={{ description: course.description ?? "" }} courseId={course.id} />
+                    <DescriptionForm initialData={course} courseId={course.id} />
                     <ImageForm initialData={course} courseId={course.id} />
                     <CategoryForm
                         initialData={course}

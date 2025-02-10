@@ -13,9 +13,10 @@ import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import {Course} from "@prisma/client";
+import {formatPrice} from "@/lib/format";
 
 const formSchema = z.object({
-    price: z.string().min(1, "Price is required"),
+    price: z.coerce.number(),
 });
 interface PriceForm {
     initialData: Course
@@ -59,9 +60,8 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.price ? 'text-slate-100 italic' : ''
-                    )}>
-                        {initialData.price || 'No price'}
+                        !initialData.price && 'text-slate-500 italic'                    )}>
+                        {initialData.price ? formatPrice(initialData.price) : 'No Price'}
                     </p>
                 )}
             {isEditing && (
@@ -73,7 +73,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Textarea disabled={isSubmitting} placeholder="Price Page" {...field} />
+                                        <Input type='number' step='0.01' disabled={isSubmitting} placeholder="Price Page" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
