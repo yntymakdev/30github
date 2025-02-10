@@ -1,8 +1,10 @@
-import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
+"use client"
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import * as React from "react"
+import { Check, ChevronsUpDown } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import {
     Command,
     CommandEmpty,
@@ -10,21 +12,22 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
 interface ComboboxProps {
-    options: { label: string; value: string }[];
-    value?: string;
-    onChange?: (value: string) => void;
+    options:{label:string; value:string}[];
+    value?:string;
+    onChange:(value:string) => void;
 }
-
-export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
-    const [open, setOpen] = React.useState(false);
+export const  Combobox =({
+    options,value,onChange,
+                             }: ComboboxProps) => {
+    const [open, setOpen] = React.useState(false)
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -43,18 +46,16 @@ export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
                 <Command>
-                    <CommandInput placeholder="Search framework..." />
+                    <CommandInput placeholder="Search options..." />
                     <CommandList>
-                        <CommandEmpty>No framework found.</CommandEmpty>
+                        <CommandEmpty>No Option found.</CommandEmpty>
                         <CommandGroup>
                             {options.map((option) => (
                                 <CommandItem
                                     key={option.value}
-                                    onSelect={() => {
-                                        if (onChange) {
-                                            onChange(option.value === value ? "" : option.value);
-                                        }
-                                        setOpen(false);
+                                    onSelect={(currentValue) => {
+                                        onChange(option.value === value ? "" : option.value)
+                                        setOpen(false)
                                     }}
                                 >
                                     <Check
@@ -71,5 +72,5 @@ export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
                 </Command>
             </PopoverContent>
         </Popover>
-    );
-};
+    )
+}
