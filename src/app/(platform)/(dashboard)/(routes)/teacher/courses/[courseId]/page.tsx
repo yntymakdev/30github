@@ -6,6 +6,7 @@ import { LayoutDashboard } from "lucide-react";
 import { TitleForm } from "./components/TitleForm";
 import { DescriptionForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/DescriptionForm";
 import {ImageForm} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ImageForm";
+import {CategoryForm} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/CategoryForm";
 
 const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) => {
     const { userId } = await auth();
@@ -66,6 +67,10 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                     /> <ImageForm
                         initialData={course}
                         courseId={course.id}
+                    /><CategoryForm
+                        initialData={course}
+                        courseId={course.id}
+                        options={categories.map((category) => ({}))}
                     />
                 </div>
             </div>

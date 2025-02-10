@@ -13,25 +13,27 @@ import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-const formSchema = z.object({
-    description: z.string().min(1, "Description is required"),
-});
 
-interface DescriptionFormProps {
+interface CategoryFormProps {
     initialData: {
         description: string;
-    };
     courseId: string;
+    options: {label: string; value: string}[]
+    };
 }
 
-export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
+const formSchema = z.object({
+    categoryId: z.string().min(1),
+});
+
+export const CategoryForm = ({ initialData, courseId,options }: CategoryFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
-    const router = useRouter(); // ✅ Используем useRouter()
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            description: initialData?.description ?? ""
+            categoryId: initialData?.categoryId ?? ""
         },
     });
 
@@ -43,7 +45,7 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
             await axios.patch(`/api/courses/${courseId}`, values);
             toast.success("Course updated!");
             toggleEdit();
-            router.refresh(); // ✅ Теперь работает
+            router.refresh();
         } catch (error) {
             console.error("Ошибка при обновлении курса:", error);
         }
@@ -52,7 +54,7 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Description
+                Course Des  cription
                 <Button variant="ghost" onClick={toggleEdit}>
                     {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Description</>}
                 </Button>
@@ -62,9 +64,9 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.description ? 'text-slate-100 italic' : ''
+                        !initialData.categoryId ? 'text-slate-100 italic' : ''
                     )}>
-                        {initialData.description || 'No description'}
+                        {initialData.categoryId || 'No description'}
                     </p>
                 )}
             {isEditing && (
@@ -72,7 +74,7 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="description"
+                            name="category"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
