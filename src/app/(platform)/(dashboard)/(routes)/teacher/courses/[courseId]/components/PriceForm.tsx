@@ -73,7 +73,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Textarea disabled={isSubmitting} placeholder="Price Page" {...field} />
+                                        <Input step='0.01' disabled={isSubmitting} placeholder="Price Page" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
