@@ -7,16 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Category {
-  id     String   @id @default(cuid())
-  userId String?
-  name   String   @unique
-  course Course[]
-}
-
 model Course {
   id          String       @id @default(cuid())
-  userId      String
+  userId      String?
   title       String?      @db.Text
   description String?      @db.Text
   imageUrl    String?      @db.Text
@@ -29,6 +22,12 @@ model Course {
   Category    Category?    @relation(fields: [categoryId], references: [id])
 
   @@map("courses")
+}
+
+model Category {
+  id     String   @id @default(cuid())
+  name   String   @unique
+  course Course[]
 }
 
 model Attachment {

@@ -6,7 +6,7 @@ async function main() {
         await database.category.createMany({
             data: [
                 { name: "IT" },
-                { name: "Islam" }, // Запятая после этой строки
+                { name: "Islam" },
                 { name: "Software Engineering" },
                 { name: "Engineering" },
                 { name: "Robot Technik" },
@@ -17,6 +17,7 @@ async function main() {
     } catch (error) {
         console.log('Error seeding the database categories', error);
     } finally {
-        await database.$disconnect(); // Исправлено
+        await database.$disconnect();
     }
 }
+main();
