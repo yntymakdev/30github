@@ -20,10 +20,6 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
         },
     });
 
-    if (!course) {
-        return redirect("/");
-    }
-
     const categories = await db.category.findMany({
         orderBy:{
             name: 'asc',
@@ -34,7 +30,12 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
         return redirect("/");
     }
 
-    const requiredFields = [course.title, course.description, course.imageUrl, course.price, course.categoryId];
+    const requiredFields = [
+        course.title,
+        course.description,
+        course.imageUrl,
+        course.price,
+        course.categoryId];
     const totalFields = requiredFields.length;
     const completedFields = requiredFields.filter(Boolean).length;
     const completionText = `(${completedFields}/${totalFields})`;
