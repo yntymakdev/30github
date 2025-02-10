@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import {Course} from "@prisma/client";
 
 const formSchema = z.object({
-    price: z.string().min(1, "Price is required"),
+    price: z.number().min(1, "Price is required"),
 });
 interface PriceForm {
     initialData: Course
@@ -61,7 +61,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                         'text-sm mt-2',
                         !initialData.price ? 'text-slate-100 italic' : ''
                     )}>
-                        {initialData.price || 'No price'}
+                        {initialData.price ? format}
                     </p>
                 )}
             {isEditing && (
