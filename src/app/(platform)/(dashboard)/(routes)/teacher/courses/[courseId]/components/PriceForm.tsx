@@ -12,14 +12,15 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import {Course} from "@prisma/client";
-import {formatPrice} from "@/lib/format";
+import { Course } from "@prisma/client";
+import { formatPrice } from "@/lib/format";
 
 const formSchema = z.object({
     price: z.number().min(1, "Price is required"),
 });
+
 interface PriceForm {
-    initialData: Course
+    initialData: Course;
     courseId: string;
 }
 
@@ -57,14 +58,17 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
             </div>
 
             {
+                // Условие для проверки наличия цены и применения стилей
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.price ? 'text-slate-100 italic' : ''
+                        (initialData.price === null || initialData.price === undefined || initialData.price === 0) ? 'text-slate-100 italic' : ''
                     )}>
-                        {initialData.price ? formatPrice(initialData.price) : 'No Price'}
+                        {initialData.price === null || initialData.price === undefined || initialData.price === 0 ? 'No Price' : formatPrice(initialData.price)}
                     </p>
-                )}
+                )
+            }
+
             {isEditing && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
