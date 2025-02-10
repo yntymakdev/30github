@@ -39,7 +39,7 @@ export const  ComboboxDemo =({
                     className="w-[200px] justify-between"
                 >
                     {value
-                        ? options.find((option) => options.value === value)?.label
+                        ? options.find((option) => option.value === value)?.label
                         : "Select option..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
@@ -61,10 +61,10 @@ export const  ComboboxDemo =({
                                     <Check
                                         className={cn(
                                             "mr-2 h-4 w-4",
-                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                            value === option.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label}
+                                    {option.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>
