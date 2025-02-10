@@ -12,14 +12,13 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import {Course} from "@prisma/client";
 
 const formSchema = z.object({
-    price: z.string().min(1, "Price is required"),
+    description: z.string().min(1, "Price is required"),
 });
 interface PriceForm {
-    initialData: {
-        price: string;
-    };
+    initialData: Course
     courseId: string;
 }
 
@@ -30,7 +29,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            price: initialData?.price ?? ""
+            description: initialData?.description ?? ""
         },
     });
 
@@ -61,9 +60,9 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.price ? 'text-slate-100 italic' : ''
+                        !initialData.description ? 'text-slate-100 italic' : ''
                     )}>
-                        {initialData.price || 'No price'}
+                        {initialData.description || 'No description'}
                     </p>
                 )}
             {isEditing && (
@@ -71,7 +70,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="price"
+                            name="description"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>

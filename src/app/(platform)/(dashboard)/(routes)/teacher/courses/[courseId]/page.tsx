@@ -7,6 +7,7 @@ import { TitleForm } from "./components/TitleForm";
 import { DescriptionForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/DescriptionForm";
 import { ImageForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ImageForm";
 import { CategoryForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/CategoryForm";
+import {PriceForm} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/PriceForm";
 
 const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) => {
     const { userId } = await auth();
@@ -67,10 +68,12 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         <p>TODO: Chapters</p>
                     </div>
 
+
                     <div className="flex items-center gap-x-2">
                         <IconBadge icon={CircleDollarSign} />
                         <h2 className="text-xl">Sell your course</h2>
                     </div>
+                    <PriceForm initialData={course} courseId={course.id}/>
                 </div>
             </div>
         </div>
