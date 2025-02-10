@@ -19,19 +19,19 @@ const formSchema = z.object({
 
 interface DescriptionFormProps {
     initialData: {
-        description: string;
+        price: string;
     };
     courseId: string;
 }
 
 export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
-    const router = useRouter(); // ✅ Используем useRouter()
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            description: initialData?.description ?? ""
+            price: initialData?.price ?? ""
         },
     });
 
