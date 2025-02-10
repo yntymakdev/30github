@@ -60,8 +60,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.price ? 'text-slate-100 italic' : ''
-                    )}>
+                        !initialData.price && 'text-slate-100 italic'                    )}>
                         {initialData.price ? formatPrice(initialData.price) : 'No Price'}
                     </p>
                 )}
@@ -74,7 +73,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input step='0.01' disabled={isSubmitting} placeholder="Price Page" {...field} />
+                                        <Input type='number' step='0.01' disabled={isSubmitting} placeholder="Price Page" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
