@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { IconBadge } from "@/components/icon-badge";
-import { LayoutDashboard } from "lucide-react";
+import {LayoutDashboard, ListChecks} from "lucide-react";
 import { TitleForm } from "./components/TitleForm";
 import { DescriptionForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/DescriptionForm";
 import {ImageForm} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ImageForm";
@@ -77,6 +77,21 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         }))}
                     />
                 </div>
+<div className='space-y-6'>
+
+
+                <div className='flex items-center gap-x-2'>
+                    <IconBadge icon={ListChecks} />
+                    <h2 className='text-xl '>
+                        Course chapters
+                    </h2>
+                </div>
+</div>
+                <div>
+
+                </div>
+
+
             </div>
         </div>
     );
