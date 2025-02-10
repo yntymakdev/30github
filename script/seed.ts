@@ -1,11 +1,22 @@
-
-import {PrismaClient} = require("@prisma/client");
-const db = new PrismaClient()
+import { PrismaClient } from "@prisma/client";
+const database = new PrismaClient();
 
 async function main() {
     try {
-
-    }catch (error) {
-        console.log(error)
+        await database.category.createMany({
+            data: [
+                { name: "IT" },
+                { name: "Islam" }, // Запятая после этой строки
+                { name: "Software Engineering" },
+                { name: "Engineering" },
+                { name: "Robot Technik" },
+                { name: "Technologies" },
+            ],
+        });
+        console.log('Successfully created the database');
+    } catch (error) {
+        console.log('Error seeding the database categories', error);
+    } finally {
+        await database.$disconnect(); // Исправлено
     }
 }
