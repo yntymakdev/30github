@@ -14,17 +14,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
-    description: z.string().min(1, "Description is required"),
+    price: z.string().min(1, "Price is required"),
 });
-
-interface DescriptionFormProps {
+interface PriceForm {
     initialData: {
         price: string;
     };
     courseId: string;
 }
 
-export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
+export const PriceForm = ({ initialData, courseId }: PriceForm) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
@@ -52,9 +51,9 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Description
+                Course Price
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Description</>}
+                    {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Price</>}
                 </Button>
             </div>
 
@@ -62,9 +61,9 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.description ? 'text-slate-100 italic' : ''
+                        !initialData.price ? 'text-slate-100 italic' : ''
                     )}>
-                        {initialData.description || 'No description'}
+                        {initialData.price || 'No price'}
                     </p>
                 )}
             {isEditing && (
@@ -72,11 +71,11 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="description"
+                            name="price"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Textarea disabled={isSubmitting} placeholder="Description Page" {...field} />
+                                        <Textarea disabled={isSubmitting} placeholder="Price Page" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
