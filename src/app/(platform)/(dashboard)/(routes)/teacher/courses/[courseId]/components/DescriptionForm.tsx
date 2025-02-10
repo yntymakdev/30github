@@ -12,21 +12,20 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import {Course} from "@prisma/client";
 
 const formSchema = z.object({
     description: z.string().min(1, "Description is required"),
 });
 
 interface DescriptionFormProps {
-    initialData: {
-        description: string;
-    };
+    initialData:Course
     courseId: string;
 }
 
 export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
-    const router = useRouter(); // ✅ Используем useRouter()
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -43,7 +42,7 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
             await axios.patch(`/api/courses/${courseId}`, values);
             toast.success("Course updated!");
             toggleEdit();
-            router.refresh(); // ✅ Теперь работает
+            router.refresh();
         } catch (error) {
             console.error("Ошибка при обновлении курса:", error);
         }

@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import {Course} from "@prisma/client";
 
 const formSchema = z.object({
-    description: z.string().min(1, "Price is required"),
+    price: z.string().min(1, "Price is required"),
 });
 interface PriceForm {
     initialData: Course
@@ -25,11 +25,10 @@ interface PriceForm {
 export const PriceForm = ({ initialData, courseId }: PriceForm) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            description: initialData?.description ?? ""
+            price: initialData?.price || undefined,
         },
     });
 
@@ -41,7 +40,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
             await axios.patch(`/api/courses/${courseId}`, values);
             toast.success("Course updated!");
             toggleEdit();
-            router.refresh(); // ✅ Теперь работает
+            router.refresh();
         } catch (error) {
             console.error("Ошибка при обновлении курса:", error);
         }
@@ -60,9 +59,9 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                 !isEditing && (
                     <p className={cn(
                         'text-sm mt-2',
-                        !initialData.description ? 'text-slate-100 italic' : ''
+                        !initialData.price ? 'text-slate-100 italic' : ''
                     )}>
-                        {initialData.description || 'No description'}
+                        {initialData.price || 'No price'}
                     </p>
                 )}
             {isEditing && (
@@ -70,7 +69,7 @@ export const PriceForm = ({ initialData, courseId }: PriceForm) => {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="description"
+                            name="price"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
