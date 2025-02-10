@@ -7,18 +7,15 @@ import axios from "axios";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import {Course} from "@prisma/client";
-import {ComboboxDemo} from "@/components/ui/combobox";
-
+import { Course } from "@prisma/client";
+import { Combobox } from "@/components/ui/combobox";
 
 interface CategoryFormProps {
-    initialData:  Course;
-    options: {label: string; value: string}[];
+    initialData: Course;
+    options: { label: string; value: string }[];
     courseId: string;
 }
 
@@ -26,14 +23,14 @@ const formSchema = z.object({
     categoryId: z.string().min(1),
 });
 
-export const CategoryForm = ({ initialData, courseId,options }: CategoryFormProps) => {
+export const CategoryForm = ({ initialData, courseId, options }: CategoryFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            categoryId: initialData?.categoryId ?? ""
+            categoryId: initialData?.categoryId ?? "",
         },
     });
 
@@ -51,26 +48,23 @@ export const CategoryForm = ({ initialData, courseId,options }: CategoryFormProp
         }
     };
 
-        const selectedOption = options.find(option => option.value === initialData.categoryId);
+    const selectedOption = options.find((option) => option.value === initialData.categoryId);
 
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Des  cription
+                Course Category
                 <Button variant="ghost" onClick={toggleEdit}>
                     {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Description</>}
                 </Button>
             </div>
 
-            {
-                !isEditing && (
-                    <p className={cn(
-                        'text-sm mt-2',
-                        !initialData.categoryId ? 'text-slate-500 italic' : ''
-                    )}>
-                        {selectedOption?.label || 'No Category'}
-                    </p>
-                )}
+            {!isEditing && (
+                <p className={cn('text-sm mt-2', !initialData.categoryId ? 'text-slate-500 italic' : '')}>
+                    {selectedOption?.label || 'No Category'}
+                </p>
+            )}
+
             {isEditing && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
@@ -80,7 +74,7 @@ export const CategoryForm = ({ initialData, courseId,options }: CategoryFormProp
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                  <Combobox={...options}{...field}/>
+                                        <Combobox options={options} {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
