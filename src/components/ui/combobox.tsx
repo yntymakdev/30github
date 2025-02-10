@@ -1,8 +1,10 @@
-import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
+"use client"
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import * as React from "react"
+import { Check, ChevronsUpDown } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import {
     Command,
     CommandEmpty,
@@ -10,23 +12,17 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
-interface ComboboxProps {
-    options: { label: string; value: string }[];
-    value?: string;
-    onChange?: (value: string) => void;
-}
 
-export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
-    const [open, setOpen] = React.useState(false);
-
-    const selectedOption = options.find((option) => option.value === value);
+export function ComboboxDemo() {
+    const [open, setOpen] = React.useState(false)
+    const [value, setValue] = React.useState("")
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -37,7 +33,9 @@ export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
                     aria-expanded={open}
                     className="w-[200px] justify-between"
                 >
-                    {selectedOption ? selectedOption.label : "Select option..."}
+                    {value
+                        ? frameworks.find((framework) => framework.value === value)?.label
+                        : "Select framework..."}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -47,24 +45,22 @@ export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
                     <CommandList>
                         <CommandEmpty>No framework found.</CommandEmpty>
                         <CommandGroup>
-                            {options.map((option) => (
+                            {frameworks.map((framework) => (
                                 <CommandItem
-                                    key={option.value}
-                                    onSelect={() => {
-                                        if (onChange) {
-                                            // Обрабатываем выбор новой опции
-                                            onChange(option.value === value ? "" : option.value);
-                                        }
-                                        setOpen(false);
+                                    key={framework.value}
+                                    value={framework.value}
+                                    onSelect={(currentValue) => {
+                                        setValue(currentValue === value ? "" : currentValue)
+                                        setOpen(false)
                                     }}
                                 >
                                     <Check
                                         className={cn(
                                             "mr-2 h-4 w-4",
-                                            value === option.value ? "opacity-100" : "opacity-0"
+                                            value === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {option.label}
+                                    {framework.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>
@@ -72,5 +68,5 @@ export const ComboboxDemo = ({ options, value, onChange }: ComboboxProps) => {
                 </Command>
             </PopoverContent>
         </Popover>
-    );
-};
+    )
+}
