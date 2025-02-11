@@ -61,15 +61,14 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                >
                    Not attachemnt yet
                </p>
-       </>
            )}
-                )
+       </>
             )}
             {isEditing && (
                 <div>
-                    <FileUpload  endpoint='courseImage' onChange={(url) => {
+                    <FileUpload  endpoint='courseAttachment' onChange={(url) => {
                         if(url) {
-                            onSubmit({imageUrl: url})
+                            onSubmit({url: url})
                         }
                     }}
                     />
@@ -77,7 +76,6 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                         16:9 aspect ralio recommended
                     </div>
                 </div>
-
             )}
         </div>
     );
