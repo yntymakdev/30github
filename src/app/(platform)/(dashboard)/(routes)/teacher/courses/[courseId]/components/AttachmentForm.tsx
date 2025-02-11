@@ -30,7 +30,7 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            await axios.patch(`/api/courses/${courseId}`, values);
+            await axios.post(`/api/courses/${courseId}/attachments`, values);
             toast.success("Course updated!");
             toggleEdit();
             router.refresh();
@@ -73,7 +73,7 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                     }}
                     />
                     <div className='text-xs text-muted-foreground mt-4'>
-                      Add anything
+                      Add anything your students might need to complete the course
                     </div>
                 </div>
             )}
