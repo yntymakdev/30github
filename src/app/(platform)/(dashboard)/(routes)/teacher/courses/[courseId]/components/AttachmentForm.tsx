@@ -44,14 +44,15 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
             <div className="font-medium flex items-center justify-between">
                 Course Image
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing ? (
+                    {isEditing  && (
                         <>Cancel</>
-                    ) {!isEditing && !initialData   mageUrl ? (
+                    )}
+                        {!isEditing && !initialData.imageUrl && (
                         <>
                             <PlusCircle className="w-5 h-5 mr-2" />
                             Add an image
                         </>
-                    )
+                    )}
                 </Button>
             </div>
             {!isEditing && (
