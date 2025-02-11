@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import * as z from "zod";
 import axios from "axios";
-import {ImageIcon, Pencil, PlusCircle} from "lucide-react";
+import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Course } from "@prisma/client";
 import Image from "next/image";
-import {FileUpload} from "@/components/file-upload";
+import { FileUpload } from "@/components/file-upload";
 
 const formSchema = z.object({
     imageUrl: z.string().min(1, {
@@ -25,7 +25,6 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
-
     const toggleEdit = () => setIsEditing((current) => !current);
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -36,6 +35,7 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
             router.refresh();
         } catch (error) {
             console.error("Ошибка при обновлении курса:", error);
+            toast.error("Error updating course.");
         }
     };
 
@@ -44,47 +44,49 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
             <div className="font-medium flex items-center justify-between">
                 Course Attachment Resources
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing && (
+                    {isEditing ? (
                         <>Cancel</>
-                    )} { !isEditing && !initialData.imageUrl && (
+                    ) : initialData.imageUrl ? (
                         <>
-                            <PlusCircle className="w-5 h-5 mr-2" />
-                            Add an File
+                            <Pencil className="h-4" /> Edit Image
                         </>
                     ) : (
                         <>
-                            <Pencil className="h-4" /> Edit Image
+                            <PlusCircle className="w-5 h-5 mr-2" />
+                            Add a File
                         </>
                     )}
                 </Button>
             </div>
-            {!isEditing && (
-            !initialData.imageUrl ? (
-                <div className='flex items-center justify-center h-60 bg-slate-200 rounded-md'
-                >
-                    <ImageIcon className='h-10 w-10 text-slate-500'/>
-                </div>
-            ) : (
-                <div className='relative aspect-video mt-2'>
-                    <Image fill alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
-
-                </div>
-            )
-            )}
-            {isEditing && (
-                <div>
-                    <FileUpload  endpoint='courseImage' onChange={(url) => {
-                        if(url) {
-                            onSubmit({imageUrl: url})
-                        }
-                    }}
+            {!isEditing ? (
+                !initialData.imageUrl ? (
+                    <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
+                        <ImageIcon className="h-10 w-10 text-slate-500" />
+                    </div>
+                ) : (
+                    <div className="relative aspect-video mt-2">
+                        <Image
+                            fill
+                            alt="Upload"
+                            className="object-cover rounded-md"
+                            src={initialData.imageUrl}
                         />
-                                 <div className='text-xs text-muted-foreground mt-4'>
-                                     16:9 aspect ralio recommended
-
-                        </div>
+                    </div>
+                )
+            ) : (
+                <div>
+                    <FileUpload
+                        endpoint="courseImage"
+                        onChange={(url) => {
+                            if (url) {
+                                onSubmit({ imageUrl: url });
+                            }
+                        }}
+                    />
+                    <div className="text-xs text-muted-foreground mt-4">
+                        16:9 aspect ratio recommended
+                    </div>
                 </div>
-
             )}
         </div>
     );
