@@ -16,12 +16,12 @@ const formSchema = z.object({
     }),
 });
 
-interface ImageFormProps {
+interface AttachmentFormProps {
     initialData: Course;
     courseId: string;
 }
 
-export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
+export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
@@ -51,7 +51,7 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
                             <PlusCircle className="w-5 h-5 mr-2" />
                             Add an image
                         </>
-                    ) : (
+                    ) {(!isEditing && !initialData
                         <>
                             <Pencil className="h-4" /> Edit Image
                         </>
