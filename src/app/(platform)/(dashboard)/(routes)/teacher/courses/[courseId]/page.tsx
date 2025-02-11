@@ -8,6 +8,9 @@ import { DescriptionForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/c
 import { ImageForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ImageForm";
 import { CategoryForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/CategoryForm";
 import {PriceForm} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/PriceForm";
+import {
+    AttachmentForm
+} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/AttachmentForm";
 
 const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) => {
     const { userId } = await auth();
@@ -80,6 +83,7 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         <IconBadge icon={File} />
                         <h2 className="text-xl">Resource Attacment</h2>
                     </div>
+                        <AttachmentForm initialData={course}  courseId={course.id}/>
                 </div>
             </div>
         </div>

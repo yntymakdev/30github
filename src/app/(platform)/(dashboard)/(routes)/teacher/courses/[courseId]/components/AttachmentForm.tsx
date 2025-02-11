@@ -21,7 +21,7 @@ interface AttachmentFormProps {
     courseId: string;
 }
 
-export const ImageForm = ({ initialData, courseId }: AttachmentFormProps) => {
+export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
@@ -42,34 +42,30 @@ export const ImageForm = ({ initialData, courseId }: AttachmentFormProps) => {
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Attachment Resourec
+                Course Image
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing && (
+                    {isEditing  && (
                         <>Cancel</>
-                    )} { !isEditing && !initialData.imageUrl && (
+                    )}
+                        {!isEditing && !initialData.imageUrl && (
                         <>
                             <PlusCircle className="w-5 h-5 mr-2" />
-                            Add an File
-                        </>
-                    ) : (
-                        <>
-                            <Pencil className="h-4" /> Edit Image
+                            Add an image
                         </>
                     )}
                 </Button>
             </div>
             {!isEditing && (
-            !initialData.imageUrl ? (
-                <div className='flex items-center justify-center h-60 bg-slate-200 rounded-md'
-                >
-                    <ImageIcon className='h-10 w-10 text-slate-500'/>
-                </div>
-            ) : (
-                <div className='relative aspect-video mt-2'>
-                    <Image fill alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
-
-                </div>
-            )
+                !initialData.imageUrl ? (
+                    <div className='flex items-center justify-center h-60 bg-slate-200 rounded-md'
+                    >
+                        <ImageIcon className='h-10 w-10 text-slate-500'/>
+                    </div>
+                ) : (
+                    <div className='relative aspect-video mt-2'>
+                        <Image fill alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
+                    </div>
+                )
             )}
             {isEditing && (
                 <div>
@@ -78,11 +74,10 @@ export const ImageForm = ({ initialData, courseId }: AttachmentFormProps) => {
                             onSubmit({imageUrl: url})
                         }
                     }}
-                        />
-                                 <div className='text-xs text-muted-foreground mt-4'>
-                                     16:9 aspect ralio recommended
-
-                        </div>
+                    />
+                    <div className='text-xs text-muted-foreground mt-4'>
+                        16:9 aspect ralio recommended
+                    </div>
                 </div>
 
             )}
