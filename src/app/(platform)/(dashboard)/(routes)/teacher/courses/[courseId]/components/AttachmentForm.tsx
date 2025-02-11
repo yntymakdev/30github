@@ -55,16 +55,14 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                     )}
                 </Button>
             </div>
-            {!isEditing && (
-                !initialData.imageUrl ? (
-                    <div className='flex items-center justify-center h-60 bg-slate-200 rounded-md'
-                    >
-                        <ImageIcon className='h-10 w-10 text-slate-500'/>
-                    </div>
-                ) : (
-                    <div className='relative aspect-video mt-2'>
-                        <Image fill alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
-                    </div>
+       <>
+           {initialData.attachements.length === 0 && (
+               <p className='text-sm mt-2 text-slate=500 italic'
+               >
+                   Not attachemnt yet
+               </p>
+       </>
+           )}
                 )
             )}
             {isEditing && (
