@@ -15,6 +15,8 @@ return new NextResponse('Unauthorized', {status:401});
             return new NextResponse('Unautorized', {status:401})
         }
 
-        const
+        const attachment = await  db.attachment.create({
+            data:courseOwner,
+        })
     }catch(err){}
 }
