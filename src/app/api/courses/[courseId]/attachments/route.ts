@@ -3,6 +3,10 @@ export async function POST(
         {params}: {params: courseId:string}
 ){
     try {
-const {}
+const {userId} = auth();
+const {url} = await  req.json()
+        if(!userId){
+
+        }
     }catch(err){}
 }
