@@ -10,5 +10,6 @@ const {url} = await  req.json()
         if(!userId){
 return new NextResponse('Unauthorized', {status:401});
         }
+        const  courseOwner = await  db.course
     }catch(err){}
 }
