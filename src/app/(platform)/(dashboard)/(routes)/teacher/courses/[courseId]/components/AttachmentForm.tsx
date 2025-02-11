@@ -73,7 +73,7 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                     }}
                     />
                     <div className='text-xs text-muted-foreground mt-4'>
-                        16:9 aspect ralio recommended
+                      Add anything
                     </div>
                 </div>
             )}
