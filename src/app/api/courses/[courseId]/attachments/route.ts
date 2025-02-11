@@ -10,6 +10,6 @@ const {url} = await  req.json()
         if(!userId){
 return new NextResponse('Unauthorized', {status:401});
         }
-        const  courseOwner = await  db.course
+        const  courseOwner = await  db.course.findUnique({where:{id:params.courseId}});
     }catch(err){}
 }
