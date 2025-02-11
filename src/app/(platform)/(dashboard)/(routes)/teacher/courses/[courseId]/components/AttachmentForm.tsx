@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import * as z from "zod";
 import axios from "axios";
-import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import {ImageIcon, Pencil, PlusCircle} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Course } from "@prisma/client";
 import Image from "next/image";
-import { FileUpload } from "@/components/file-upload";
+import {FileUpload} from "@/components/file-upload";
 
 const formSchema = z.object({
     imageUrl: z.string().min(1, {
@@ -16,14 +16,15 @@ const formSchema = z.object({
     }),
 });
 
-interface AttachmentFormProps {
+interface ImageFormProps {
     initialData: Course;
     courseId: string;
 }
 
-export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) => {
+export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
+
 
     const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -35,54 +36,53 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
             router.refresh();
         } catch (error) {
             console.error("Ошибка при обновлении курса:", error);
-            toast.error("Error updating course.");
         }
     };
 
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Attachment Resources
+                Course Image
                 <Button variant="ghost" onClick={toggleEdit}>
                     {isEditing ? (
                         <>Cancel</>
-                    )}{!isEditing && (
+                    ) : !initialData?.imageUrl ? (
                         <>
                             <PlusCircle className="w-5 h-5 mr-2" />
-                            Add a File
+                            Add an image
+                        </>
+                    ) : (
+                        <>
+                            <Pencil className="h-4" /> Edit Image
                         </>
                     )}
                 </Button>
             </div>
             {!isEditing && (
                 !initialData.imageUrl ? (
-                    <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
-                        <ImageIcon className="h-10 w-10 text-slate-500" />
+                    <div className='flex items-center justify-center h-60 bg-slate-200 rounded-md'
+                    >
+                        <ImageIcon className='h-10 w-10 text-slate-500'/>
                     </div>
                 ) : (
-                    <div className="relative aspect-video mt-2">
-                        <Image
-                            fill
-                            alt="Upload"
-                            className="object-cover rounded-md"
-                            src={initialData.imageUrl}
-                        />
+                    <div className='relative aspect-video mt-2'>
+                        <Image fill alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
                     </div>
                 )
-            ) : (
+            )}
+            {isEditing && (
                 <div>
-                    <FileUpload
-                        endpoint="courseImage"
-                        onChange={(url) => {
-                            if (url) {
-                                onSubmit({ imageUrl: url });
-                            }
-                        }}
+                    <FileUpload  endpoint='courseImage' onChange={(url) => {
+                        if(url) {
+                            onSubmit({imageUrl: url})
+                        }
+                    }}
                     />
-                    <div className="text-xs text-muted-foreground mt-4">
-                        16:9 aspect ratio recommended
+                    <div className='text-xs text-muted-foreground mt-4'>
+                        16:9 aspect ralio recommended
                     </div>
                 </div>
+
             )}
         </div>
     );

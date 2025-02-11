@@ -67,7 +67,6 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
             ) : (
                 <div className='relative aspect-video mt-2'>
                     <Image fill alt='Upload' className='object-cover rounded-md' src={initialData.imageUrl}/>
-
                 </div>
             )
             )}
@@ -81,7 +80,6 @@ export const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
                         />
                                  <div className='text-xs text-muted-foreground mt-4'>
                                      16:9 aspect ralio recommended
-
                         </div>
                 </div>
 
