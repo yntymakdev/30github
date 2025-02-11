@@ -11,5 +11,8 @@ const {url} = await  req.json()
 return new NextResponse('Unauthorized', {status:401});
         }
         const  courseOwner = await  db.course.findUnique({where:{id:params.courseId}});
+        if(!courseOwner){
+            return new NextResponse('Unautorized', {status:401})
+        }
     }catch(err){}
 }
