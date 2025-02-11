@@ -46,10 +46,8 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                 <Button variant="ghost" onClick={toggleEdit}>
                     {isEditing ? (
                         <>Cancel</>
-                    ) : initialData.imageUrl ? (
-                        <>
-                            <Pencil className="h-4" /> Edit Image
-                        </>
+                    )}{!isEditing && (
+
                     ) : (
                         <>
                             <PlusCircle className="w-5 h-5 mr-2" />
