@@ -18,7 +18,8 @@ return new NextResponse('Unauthorized', {status:401});
         const attachment = await  db.attachment.create({
             data:{
                 url,
-                name:url.split('/')[0]
+                name:url.split('/').pop(),
+                courseId:params.courseId
             }
         })
     }catch(err){}
