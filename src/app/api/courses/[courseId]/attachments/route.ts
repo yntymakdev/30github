@@ -14,5 +14,18 @@ return new NextResponse('Unauthorized', {status:401});
         if(!courseOwner){
             return new NextResponse('Unautorized', {status:401})
         }
-    }catch(err){}
+
+        const attachment = await  db.attachment.create({
+            data:{
+                url,
+                name:url.split('/').pop(),
+                courseId:params.courseId
+            }
+        })
+
+        return NextResponse.json(attachment);
+    }catch(err){
+        console.log('COURSE_ID_ATTACHEMENTS', error);
+        return new NextResponse('Internal server error',{status:500});
+    }
 }
