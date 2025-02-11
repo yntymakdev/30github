@@ -22,5 +22,10 @@ return new NextResponse('Unauthorized', {status:401});
                 courseId:params.courseId
             }
         })
-    }catch(err){}
+    }catch(err){
+
+
+        console.log('COURSE_ID_ATTACHEMENTS', error);
+        return new NextResponse('Internal server error', err);
+    }
 }
