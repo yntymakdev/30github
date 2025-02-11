@@ -22,9 +22,9 @@ return new NextResponse('Unauthorized', {status:401});
                 courseId:params.courseId
             }
         })
+
+        return NextResponse
     }catch(err){
-
-
         console.log('COURSE_ID_ATTACHEMENTS', error);
         return new NextResponse('Internal server error',{status:500});
     }
