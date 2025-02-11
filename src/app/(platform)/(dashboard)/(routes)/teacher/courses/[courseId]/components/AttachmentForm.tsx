@@ -21,7 +21,7 @@ interface AttachmentFormProps {
     courseId: string;
 }
 
-export const ImageForm = ({ initialData, courseId }: AttachmentFormProps) => {
+export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
