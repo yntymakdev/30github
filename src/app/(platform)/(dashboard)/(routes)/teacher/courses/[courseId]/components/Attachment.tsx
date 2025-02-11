@@ -44,12 +44,12 @@ export const ImageForm = ({ initialData, courseId }: AttachmentFormProps) => {
             <div className="font-medium flex items-center justify-between">
                 Course Attachment Resourec
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing ? (
+                    {isEditing && (
                         <>Cancel</>
-                    ) : !initialData?.imageUrl ? (
+                    )} { !isEditing && !initialData.imageUrl && (
                         <>
                             <PlusCircle className="w-5 h-5 mr-2" />
-                            Add an image
+                            Add an File
                         </>
                     ) : (
                         <>
