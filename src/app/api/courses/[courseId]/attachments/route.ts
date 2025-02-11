@@ -14,5 +14,7 @@ return new NextResponse('Unauthorized', {status:401});
         if(!courseOwner){
             return new NextResponse('Unautorized', {status:401})
         }
+
+        const
     }catch(err){}
 }
