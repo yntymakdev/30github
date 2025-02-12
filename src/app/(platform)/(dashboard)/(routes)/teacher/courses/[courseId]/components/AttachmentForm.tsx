@@ -13,7 +13,7 @@ const formSchema = z.object({
 });
 
 interface AttachmentFormProps {
-    initialData: Course & { attachements: Attachment[] };
+    initialData: Course & { attachments: Attachment[] };
     courseId: string;
 }
 
@@ -51,7 +51,7 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                     )}
                 </Button>
             </div>
-            {initialData.attachements.length === 0 && (
+            {initialData.attachments.length === 0 && (
                 <p className="text-sm mt-2 text-slate-500 italic">
                     Not attachment yet
                 </p>
