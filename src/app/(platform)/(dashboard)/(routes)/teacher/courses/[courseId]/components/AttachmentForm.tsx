@@ -38,11 +38,11 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Image
+                Course Attachments
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing ? (
+                    {isEditing &&(
                         <>Cancel</>
-                    ) : !initialData.imageUrl ? (
+                    )} : !initialData.imageUrl ? (
                         <>
                             <PlusCircle className="w-5 h-5 mr-2" />
                             Add a File
