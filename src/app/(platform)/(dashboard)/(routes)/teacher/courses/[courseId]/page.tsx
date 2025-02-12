@@ -77,15 +77,12 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         </div>
                         <p>TODO: Chapters</p>
                     </div>
-
-
                     <div className="flex items-center gap-x-2">
                         <IconBadge icon={CircleDollarSign} />
                         <h2 className="text-xl">Sell your course</h2>
                     </div>
                     <PriceForm initialData={course} courseId={course.id}/>
                 </div>
-                <div className='border bg-red-200'>
                     <div className="flex items-center gap-x-2">
                         <IconBadge icon={File} />
                         <h2 className="text-xl">Resource Attacment</h2>
@@ -93,7 +90,6 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         <AttachmentForm initialData={course}  courseId={course.id}/>
                 </div>
             </div>
-        </div>
     );
 };
 

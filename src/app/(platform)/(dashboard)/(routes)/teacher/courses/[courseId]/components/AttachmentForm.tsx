@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from "react";
 import * as z from "zod";
 import axios from "axios";
