@@ -56,7 +56,6 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                     Not attachment yet
                 </p>
             )}
-            {isEditing && (
                 <div>
                     <FileUpload
                         endpoint="courseAttachment"
@@ -70,7 +69,7 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                         Add anything your students might need to complete the course
                     </div>
                 </div>
-            )}
+            )
         </div>
     );
 };
