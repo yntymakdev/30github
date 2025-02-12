@@ -32,6 +32,7 @@ model Category {
 
 model Attachment {
   id        String   @id @default(cuid())
+  name      String
   url       String   @db.Text
   Course    Course?  @relation(fields: [courseId], references: [id])
   courseId  String?
