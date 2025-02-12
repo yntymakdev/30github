@@ -1,30 +1,25 @@
-"use client";
 import React, { useState } from "react";
 import * as z from "zod";
 import axios from "axios";
-import {ImageIcon, Pencil, PlusCircle} from "lucide-react";
+import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import {Attachment, Course} from "@prisma/client";
-import Image from "next/image";
-import {FileUpload} from "@/components/file-upload";
+import { Attachment, Course } from "@prisma/client";
+import { FileUpload } from "@/components/file-upload";
 
 const formSchema = z.object({
-    imageUrl: z.string().min(1, {
-        message: "Image is required",
-    }),
+    url: z.string().min(1),
 });
 
 interface AttachmentFormProps {
-    initialData: Course &{attachements: Attachment[]};
+    initialData: Course & { attachements: Attachment[] };
     courseId: string;
 }
 
 export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
-
 
     const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -44,36 +39,35 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
             <div className="font-medium flex items-center justify-between">
                 Course Image
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing  && (
+                    {isEditing ? (
                         <>Cancel</>
-                    )}
-                        {!isEditing && !initialData.imageUrl && (
+                    ) : !initialData.imageUrl ? (
                         <>
                             <PlusCircle className="w-5 h-5 mr-2" />
                             Add a File
                         </>
+                    ) : (
+                        "Edit Image"
                     )}
                 </Button>
             </div>
-       <>
-           {initialData.attachements.length === 0 && (
-               <p className='text-sm mt-2 text-slate=500 italic'
-               >
-                   Not attachemnt yet
-               </p>
-           )}
-       </>
+            {initialData.attachements.length === 0 && (
+                <p className="text-sm mt-2 text-slate-500 italic">
+                    Not attachment yet
+                </p>
             )}
             {isEditing && (
                 <div>
-                    <FileUpload  endpoint='courseAttachment' onChange={(url) => {
-                        if(url) {
-                            onSubmit({url: url})
-                        }
-                    }}
+                    <FileUpload
+                        endpoint="courseAttachment"
+                        onChange={(url) => {
+                             if (url) {
+                                onSubmit({ url: url });
+                            }
+                        }}
                     />
-                    <div className='text-xs text-muted-foreground mt-4'>
-                      Add anything your students might need to complete the course
+                    <div className="text-xs text-muted-foreground mt-4">
+                        Add anything your students might need to complete the course
                     </div>
                 </div>
             )}
