@@ -30,8 +30,8 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
             toast.success("Course updated!");
             toggleEdit();
             router.refresh();
-        } catch (error) {
-            console.error("Ошибка при обновлении курса:", error);
+        } catch (error: any) {
+            toast.error(`Ошибка при обновлении курса: ${error.message}`);
         }
     };
 
@@ -40,9 +40,9 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
             <div className="font-medium flex items-center justify-between">
                 Course Attachments
                 <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing &&(
+                    {isEditing ? (
                         <>Cancel</>
-                    )}{!isEditing && (
+                    ) : (
                         <>
                             <PlusCircle className="w-5 h-5 mr-2" />
                             Add a File
@@ -50,24 +50,30 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                     )}
                 </Button>
             </div>
-            {initialData.attachments.length === 0 && (
+
+            {/* Проверяем, есть ли attachments */}
+            {initialData.attachments.length === 0 && !isEditing && (
                 <p className="text-sm mt-2 text-slate-500 italic">
-                    Not attachment yet
+                    No attachment yet
                 </p>
             )}
-            <div>
-                <FileUpload
-                    endpoint="courseAttachment"
-                    onChange={(url) => {
-                        if (url) {
-                            onSubmit({ url });
-                        }
-                    }}
-                />
-                <div className="text-xs text-muted-foreground mt-4">
-                    Add anything your students might need to complete the course
+
+            {/* Отображаем FileUpload только если isEditing true */}
+            {isEditing && (
+                <div>
+                    <FileUpload
+                        endpoint="courseAttachment"
+                        onChange={(url) => {
+                            if (url) {
+                                onSubmit({ url });
+                            }
+                        }}
+                    />
+                    <div className="text-xs text-muted-foreground mt-4">
+                        Add anything your students might need to complete the course
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
