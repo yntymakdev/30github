@@ -13,7 +13,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
 
         const courseOwner = await db.course.findUnique({ where: { id: params.courseId } });
         if (!courseOwner) {
-            return new NextResponse('Not Found', { status: 404 });  // изменен статус с 401 на 404
+            return new NextResponse('Not Found', { status: 404 });
         }
 
         const fileName = url.split('/').pop();
