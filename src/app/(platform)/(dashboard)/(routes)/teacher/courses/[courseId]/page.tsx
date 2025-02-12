@@ -90,7 +90,7 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         <IconBadge icon={File} />
                         <h2 className="text-xl">Resource Attacment</h2>
                     </div>
-                        <AttachmentForm initialData={course}  courseId={course.id}/>
+                        {/*<AttachmentForm initialData={course}  courseId={course.id}/>*/}
                 </div>
             </div>
         </div>
