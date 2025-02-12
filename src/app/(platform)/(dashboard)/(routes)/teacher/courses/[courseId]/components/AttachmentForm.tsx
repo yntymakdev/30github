@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from "react";
 import * as z from "zod";
 import axios from "axios";
@@ -57,20 +57,19 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                     Not attachment yet
                 </p>
             )}
-                <div>
-                    <FileUpload
-                        endpoint="courseAttachment"
-                        onChange={(url) => {
-                             if (url) {
-                                onSubmit({ url: url });
-                            }
-                        }}
-                    />
-                    <div className="text-xs text-muted-foreground mt-4">
-                        Add anything your students might need to complete the course
-                    </div>
+            <div>
+                <FileUpload
+                    endpoint="courseAttachment"
+                    onChange={(url) => {
+                        if (url) {
+                            onSubmit({ url });
+                        }
+                    }}
+                />
+                <div className="text-xs text-muted-foreground mt-4">
+                    Add anything your students might need to complete the course
                 </div>
-            )
+            </div>
         </div>
     );
 };
