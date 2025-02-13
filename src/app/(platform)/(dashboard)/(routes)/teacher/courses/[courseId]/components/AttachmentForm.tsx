@@ -64,13 +64,10 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                 <div>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 </div>
-            )} {deletingId === attachment.id && (
-                <div>
-                    <button className=''>
-
+            )} {deletingId !== attachment.id && (
+                    <button className='ml-auto hover:opacity-75 transition'>
+                    <X className="w-4 h-4" />
                     </button>
-                    <X className="ml-auto hover:opacity-75 transition" />
-                </div>
             )}
         </div>
 
