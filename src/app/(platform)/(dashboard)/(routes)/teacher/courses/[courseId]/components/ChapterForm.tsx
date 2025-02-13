@@ -9,9 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import {Course} from "@prisma/client";
+import {Chapter, Course} from "@prisma/client";
 import {Input} from "@/components/ui/input";
 
 const formSchema = z.object({
@@ -19,7 +18,7 @@ const formSchema = z.object({
 });
 
 interface ChapterFormProps {
-    initialData:Course
+    initialData:Course &{chapters:Chapter[]},
     courseId: string;
 }
 
@@ -58,16 +57,6 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
                         {isCreating ? <>Cancel</> : <><PlusCircle className="h-4" /> Add a chapter</>}
                 </Button>
             </div>
-
-            {
-                !isCreating && (
-                    <p className={cn(
-                        'text-sm mt-2',
-                        !initialData.description ? 'text-slate-500 italic' : ''
-                    )}>
-                        {initialData.description || 'No chapters'}
-                    </p>
-                )}
             {isCreating && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
@@ -91,15 +80,19 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
             )}
             {
                 !isCreating &&(
-                    <div>
+                    <div className={cn(
+                        'text-sm mt-2';
+                    {!initialData.chapters.length &&'text-slate-500 italic'
+                    )}>
 
                         No Chapters
                     </div>
                 )}
             {
                 !isCreating &&(
-
-
+<p className='text-xs text-muted-foreground mt-4'>
+    Drag and drop to reorder the chapters
+</p>
                 )
             }
         </div>
