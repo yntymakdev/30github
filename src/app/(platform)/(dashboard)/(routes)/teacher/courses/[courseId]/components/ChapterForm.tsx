@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import {Course} from "@prisma/client";
+import {Input} from "@/components/ui/input";
 
 const formSchema = z.object({
     title: z.string().min(1),
@@ -52,7 +53,7 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Description
+                Chapter Customize
                 <Button variant="ghost" onClick={toggleCreating}>
                         {isCreating ? <>Cancel</> : <><PlusCircle className="h-4" /> Add a chapter</>}
                 </Button>
@@ -64,7 +65,7 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
                         'text-sm mt-2',
                         !initialData.description ? 'text-slate-500 italic' : ''
                     )}>
-                        {initialData.description || 'No description'}
+                        {initialData.description || 'No chapters'}
                     </p>
                 )}
             {isCreating && (
@@ -76,20 +77,31 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Textarea disabled={isSubmitting} placeholder="Description Page" {...field} />
+                                        <Input disabled={isSubmitting} placeholder="Description Page" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <div className="flex items-center gap-x-2">
                             <Button type="submit" disabled={isSubmitting || !isDirty} className="mt-2">
-                                Save
+                                Create
                             </Button>
-                        </div>
                     </form>
                 </Form>
             )}
+            {
+                !isCreating &&(
+                    <div>
+
+                        No Chapters
+                    </div>
+                )}
+            {
+                !isCreating &&(
+
+
+                )
+            }
         </div>
     );
 };
