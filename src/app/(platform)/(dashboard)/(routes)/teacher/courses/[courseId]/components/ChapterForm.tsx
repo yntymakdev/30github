@@ -4,7 +4,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { Pencil } from "lucide-react";
+import {Pencil, PlusCircle} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import toast from "react-hot-toast";
@@ -53,13 +53,13 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
                 Course Description
-                <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Description</>}
+                <Button variant="ghost" onClick={toggleCreating}>
+                        {isCreating ? <>Cancel</> : <><PlusCircle className="h-4" /> Add a chapter</>}
                 </Button>
             </div>
 
             {
-                !isEditing && (
+                !isCreating && (
                     <p className={cn(
                         'text-sm mt-2',
                         !initialData.description ? 'text-slate-500 italic' : ''
@@ -67,7 +67,7 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
                         {initialData.description || 'No description'}
                     </p>
                 )}
-            {isEditing && (
+            {isCreating && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
