@@ -7,16 +7,16 @@ export async function DELETE(
     context: { params?: { courseId?: string; attachmentId?: string } } // ✅ Оборачиваем параметры в `?`
 ) {
     try {
-        const params = context.params; // ✅ Извлекаем `params`
+        const { params } = context; // ✅ Извлекаем `params`
 
-        console.log("📌 params:", params);
+        console.log("📌 Received params:", params); // Для отладки
 
         if (!params?.courseId || !params?.attachmentId) {
             return NextResponse.json({ error: "Invalid parameters" }, { status: 400 });
         }
 
-        // Получаем userId
-        const { userId } =await auth();
+        // Получаем userId из auth
+        const { userId } = await auth();
         if (!userId) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
@@ -25,6 +25,7 @@ export async function DELETE(
         const courseOwner = await db.course.findUnique({
             where: { id: params.courseId, userId },
         });
+
         if (!courseOwner) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
@@ -33,6 +34,7 @@ export async function DELETE(
         const attachmentExists = await db.attachment.findUnique({
             where: { id: params.attachmentId },
         });
+
         if (!attachmentExists) {
             return NextResponse.json({ error: "Attachment not found" }, { status: 404 });
         }
@@ -44,7 +46,7 @@ export async function DELETE(
 
         return NextResponse.json({ message: "Attachment deleted", attachment });
     } catch (error) {
-        console.error("❌ ATTACHMENT_ID ERROR:", error);
+        console.error("❌ ATTACHMENTS_ID ERROR:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
