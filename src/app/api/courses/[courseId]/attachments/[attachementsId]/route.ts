@@ -4,10 +4,11 @@ import { db } from "@/lib/db";
 
 export async function DELETE(
     req: Request,
-    context: { params: { courseId: string; attachmentId: string } }
+    context: { params?: { courseId?: string; attachmentId?: string } } // ✅ Оборачиваем параметры в `?`
 ) {
     try {
-        const { params } = context; // ✅ Извлекаем params явно
+        const params = context.params; // ✅ Извлекаем `params`
+
         console.log("📌 params:", params);
 
         if (!params?.courseId || !params?.attachmentId) {
@@ -15,7 +16,7 @@ export async function DELETE(
         }
 
         // Получаем userId
-        const { userId } = await auth();
+        const { userId } =await auth();
         if (!userId) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
