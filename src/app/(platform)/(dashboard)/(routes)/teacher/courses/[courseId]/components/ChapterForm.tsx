@@ -40,9 +40,9 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
     }
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            await axios.patch(`/api/courses/${courseId}`, values);
-            toast.success("Course updated!");
-            toggleEdit();
+            await axios.patch(`/api/courses/${courseId}/chapters`, values);
+            toast.success("Chapter created!");
+            toggleCreating();
             router.refresh();
         } catch (error) {
             console.error("Ошибка при обновлении курса:", error);
