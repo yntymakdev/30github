@@ -24,7 +24,8 @@ interface ChapterFormProps {
 }
 
 export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
-    const [isEditing, setIsEditing] = useState(false);
+    const [isCreating,setIsCreating] = useState(false);
+    const [Isupdating, setIsupdating] = useState(false);
     const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
