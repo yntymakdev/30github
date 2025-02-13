@@ -1,29 +1,29 @@
-"use client";
+'use client'
 import React, { useState } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import {Pencil, PlusCircle} from "lucide-react";
+import { Pencil, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import {Course} from "@prisma/client";
+import { Chapter, Course } from "@prisma/client";
+import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
     title: z.string().min(1),
 });
 
 interface ChapterFormProps {
-    initialData:Course
+    initialData: Course & { chapters: Chapter[] };
     courseId: string;
 }
 
 export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
-    const [isCreating,setIsCreating] = useState(false);
+    const [isCreating, setIsCreating] = useState(false);
     const [Isupdating, setIsupdating] = useState(false);
     const router = useRouter();
 
@@ -36,8 +36,9 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
 
     const { isSubmitting, isDirty } = form.formState;
     const toggleCreating = () => {
-    setIsCreating((current) => !current);
+        setIsCreating((current) => !current);
     }
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             await axios.patch(`/api/courses/${courseId}/chapters`, values);
@@ -52,21 +53,11 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course Description
+                Chapter Customize
                 <Button variant="ghost" onClick={toggleCreating}>
-                        {isCreating ? <>Cancel</> : <><PlusCircle className="h-4" /> Add a chapter</>}
+                    {isCreating ? <>Cancel</> : <><PlusCircle className="h-4" /> Add a chapter</>}
                 </Button>
             </div>
-
-            {
-                !isCreating && (
-                    <p className={cn(
-                        'text-sm mt-2',
-                        !initialData.description ? 'text-slate-500 italic' : ''
-                    )}>
-                        {initialData.description || 'No description'}
-                    </p>
-                )}
             {isCreating && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
@@ -76,19 +67,27 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Textarea disabled={isSubmitting} placeholder="Description Page" {...field} />
+                                        <Input disabled={isSubmitting} placeholder="Description Page" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <div className="flex items-center gap-x-2">
-                            <Button type="submit" disabled={isSubmitting || !isDirty} className="mt-2">
-                                Save
-                            </Button>
-                        </div>
+                        <Button type="submit" disabled={isSubmitting || !isDirty} className="mt-2">
+                            Create
+                        </Button>
                     </form>
                 </Form>
+            )}
+            {!isCreating && (
+                <div className={cn('text-sm mt-2', { 'text-slate-500 italic': !initialData.chapters.length })}>
+                    {!initialData.chapters.length ? 'No chapters' : ''}
+                </div>
+            )}
+            {!isCreating && (
+                <p className="text-xs text-muted-foreground mt-4">
+                    Drag and drop to reorder the chapters
+                </p>
             )}
         </div>
     );
