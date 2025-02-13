@@ -20,6 +20,7 @@ model Course {
   createdAt   DateTime     @default(now())
   updateAt    DateTime     @updatedAt
   Category    Category?    @relation(fields: [categoryId], references: [id])
+  chapters    Chapter[]
 
   @@map("courses")
 }
@@ -39,5 +40,47 @@ model Attachment {
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 
+  @@index([courseId])
   @@map("attachments")
 }
+
+model Chapter {
+  id            String         @id @default(cuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  title         String
+  position      String
+  videoUrl      String
+  isPublished   String
+  isFree        Boolean        @default(false)
+  muxData       MuxData?
+  courseId      String
+  course        Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  userPostgress UserProgress[]
+
+  @@index([courseId])
+}
+
+model MuxData {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  playbackId String?
+  chapterId  String  @unique
+  chapter    Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model UserProgress {
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  id          String   @id @default(cuid())
+  isCompleted Boolean  @default(false)
+  chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  chapterId   String
+  userId      String
+
+  @@unique([userId, chapterId])
+  @@index([chapterId])
+}
+model
