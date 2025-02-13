@@ -39,7 +39,6 @@ model Attachment {
   courseId  String?
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
-  courseiD
 
   @@index([courseId])
   @@map("attachments")
@@ -68,4 +67,11 @@ model MuxData {
   playbackId String?
   chapterId  String  @unique
   chapter    Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model UserProgress {
+ id String @id @default(cuid())
+
+  Chapter   Chapter? @relation(fields: [chapterId], references: [id])
+  chapterId String?
 }
