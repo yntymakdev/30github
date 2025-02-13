@@ -18,12 +18,12 @@ const formSchema = z.object({
     description: z.string().min(1, "Description is required"),
 });
 
-interface DescriptionFormProps {
+interface ChapterFormProps {
     initialData:Course
     courseId: string;
 }
 
-export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
+export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const router = useRouter();
 
