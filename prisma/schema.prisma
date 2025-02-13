@@ -20,6 +20,7 @@ model Course {
   createdAt   DateTime     @default(now())
   updateAt    DateTime     @updatedAt
   Category    Category?    @relation(fields: [categoryId], references: [id])
+  chapters    Chapter[]
 
   @@map("courses")
 }
@@ -38,6 +39,7 @@ model Attachment {
   courseId  String?
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
+  courseiD
 
   @@index([courseId])
   @@map("attachments")
@@ -52,4 +54,7 @@ model Chapter {
   videoUrl    String
   isPublished String
   isFree      Boolean  @default(false)
+  muxData     MuxData?
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
 }
