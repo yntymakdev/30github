@@ -79,6 +79,7 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                             <IconBadge icon={ListChecks} />
                             <h2 className="text-xl">Course chapters</h2>
                         </div>
+                        <DescriptionForm initialData={course} courseId={course.id} />
                         <p>TODO: Chapters</p>
                     </div>
 
@@ -90,7 +91,6 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         <PriceForm initialData={course} courseId={course.id} />
                     </div>
 
-                    {/* ✅ Теперь Resource Attachment в правильном месте */}
                     <div>
                         <div className="flex items-center gap-x-2">
                             <IconBadge icon={File} />
