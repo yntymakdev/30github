@@ -2,15 +2,13 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { IconBadge } from "@/components/icon-badge";
-import { CircleDollarSign, LayoutDashboard, ListChecks,File } from "lucide-react";
+import { CircleDollarSign, LayoutDashboard, ListChecks, File } from "lucide-react";
 import { TitleForm } from "./components/TitleForm";
 import { DescriptionForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/DescriptionForm";
 import { ImageForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ImageForm";
 import { CategoryForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/CategoryForm";
-import {PriceForm} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/PriceForm";
-import {
-    AttachmentForm
-} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/AttachmentForm";
+import { PriceForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/PriceForm";
+import { AttachmentForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/AttachmentForm";
 
 const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) => {
     const { userId } = await auth();
@@ -20,13 +18,13 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
 
     const course = await db.course.findUnique({
         where: { id: params.courseId },
-        include:{
-            attachments:{
-                orderBy:{
-                    createdAt: 'desc'
-                }
-            }
-        }
+        include: {
+            attachments: {
+                orderBy: {
+                    createdAt: "desc",
+                },
+            },
+        },
     });
 
     const categories = await db.category.findMany({ orderBy: { name: "asc" } });
@@ -35,7 +33,13 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
         return redirect("/");
     }
 
-    const requiredFields = [course.title, course.description, course.imageUrl, course.price, course.categoryId];
+    const requiredFields = [
+        course.title,
+        course.description,
+        course.imageUrl,
+        course.price,
+        course.categoryId,
+    ];
     const totalFields = requiredFields.length;
     const completedFields = requiredFields.filter(Boolean).length;
     const completionText = `(${completedFields}/${totalFields})`;
@@ -51,7 +55,7 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
                 <div>
-                    <div className="flex items-center gap-x-2   ">
+                    <div className="flex items-center gap-x-2">
                         <IconBadge icon={LayoutDashboard} />
                         <h2 className="text-xl">Customize your course</h2>
                     </div>
@@ -77,19 +81,26 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         </div>
                         <p>TODO: Chapters</p>
                     </div>
-                    <div className="flex items-center gap-x-2">
-                        <IconBadge icon={CircleDollarSign} />
-                        <h2 className="text-xl">Sell your course</h2>
+
+                    <div>
+                        <div className="flex items-center gap-x-2">
+                            <IconBadge icon={CircleDollarSign} />
+                            <h2 className="text-xl">Sell your course</h2>
+                        </div>
+                        <PriceForm initialData={course} courseId={course.id} />
                     </div>
-                    <PriceForm initialData={course} courseId={course.id}/>
-                </div>
-                    <div className="flex items-center gap-x-2">
-                        <IconBadge icon={File} />
-                        <h2 className="text-xl">Resource Attacment</h2>
+
+                    {/* ✅ Теперь Resource Attachment в правильном месте */}
+                    <div>
+                        <div className="flex items-center gap-x-2">
+                            <IconBadge icon={File} />
+                            <h2 className="text-xl">Resource Attachment</h2>
+                        </div>
+                        <AttachmentForm initialData={course} courseId={course.id} />
                     </div>
-                        <AttachmentForm initialData={course}  courseId={course.id}/>
                 </div>
             </div>
+        </div>
     );
 };
 
