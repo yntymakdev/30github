@@ -41,9 +41,14 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
         try {
 setDeletingId(id)
             await axios.delete(`/api/courses/${courseId}/attachments/${id}`)
+        toast.success("Attachment deleted!");
+router.refresh();
         }
         catch (error) {
 toast.error('Something went wrong!');
+        }
+        finally {
+            setDeletingId(null);
         }
     }
 
@@ -71,7 +76,7 @@ toast.error('Something went wrong!');
 <p className='text-xs line-clamp-1'>
     {attachment.name}
 </p>
-            {deletingId === attachment.id && (
+             {deletingId === attachment.id && (
                 <div>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 </div>
