@@ -60,8 +60,8 @@ model Chapter {
   userPostgress UserProgress[]
 }
 
-
-model MuxData{
-
+model MuxData {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
-
