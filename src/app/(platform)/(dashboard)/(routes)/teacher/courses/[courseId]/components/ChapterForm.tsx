@@ -7,7 +7,6 @@ import axios from "axios";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,13 +30,14 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: initialData?.description || ""
+            title: ""
         },
     });
 
     const { isSubmitting, isDirty } = form.formState;
-    const toggleEdit = () => setIsEditing((current) => !current);
-
+    const toggleCreating = () => {
+    setIsCreating((current) => !current);
+    }
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             await axios.patch(`/api/courses/${courseId}`, values);
