@@ -76,6 +76,7 @@ model UserProgress {
   isCompleted Boolean  @default(false)
   chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   chapterId   String
+  userId      String
 
   @@unique([userId, chapterId])
   @@index([chapterId])
