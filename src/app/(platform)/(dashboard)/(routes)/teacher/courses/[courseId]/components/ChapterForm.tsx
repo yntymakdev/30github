@@ -4,10 +4,9 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { Pencil } from "lucide-react";
+import {Pencil, PlusCircle} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,7 +14,7 @@ import { cn } from "@/lib/utils";
 import {Course} from "@prisma/client";
 
 const formSchema = z.object({
-    description: z.string().min(1, "Description is required"),
+    title: z.string().min(1),
 });
 
 interface ChapterFormProps {
@@ -24,24 +23,26 @@ interface ChapterFormProps {
 }
 
 export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
-    const [isEditing, setIsEditing] = useState(false);
+    const [isCreating,setIsCreating] = useState(false);
+    const [Isupdating, setIsupdating] = useState(false);
     const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            description: initialData?.description || ""
+            title: ""
         },
     });
 
     const { isSubmitting, isDirty } = form.formState;
-    const toggleEdit = () => setIsEditing((current) => !current);
-
+    const toggleCreating = () => {
+    setIsCreating((current) => !current);
+    }
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            await axios.patch(`/api/courses/${courseId}`, values);
-            toast.success("Course updated!");
-            toggleEdit();
+            await axios.patch(`/api/courses/${courseId}/chapters`, values);
+            toast.success("Chapter created!");
+            toggleCreating();
             router.refresh();
         } catch (error) {
             console.error("Ошибка при обновлении курса:", error);
@@ -52,13 +53,13 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
                 Course Description
-                <Button variant="ghost" onClick={toggleEdit}>
-                    {isEditing ? <>Cancel</> : <><Pencil className="h-4" /> Edit Description</>}
+                <Button variant="ghost" onClick={toggleCreating}>
+                        {isCreating ? <>Cancel</> : <><PlusCircle className="h-4" /> Add a chapter</>}
                 </Button>
             </div>
 
             {
-                !isEditing && (
+                !isCreating && (
                     <p className={cn(
                         'text-sm mt-2',
                         !initialData.description ? 'text-slate-500 italic' : ''
@@ -66,12 +67,12 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
                         {initialData.description || 'No description'}
                     </p>
                 )}
-            {isEditing && (
+            {isCreating && (
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="description"
+                            name="title"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
