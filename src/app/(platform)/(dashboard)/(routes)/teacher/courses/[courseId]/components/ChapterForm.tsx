@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import {Course} from "@prisma/client";
 
 const formSchema = z.object({
-    description: z.string().min(1, "Description is required"),
+    title: z.string().min(1),
 });
 
 interface ChapterFormProps {
@@ -30,7 +30,7 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            description: initialData?.description || ""
+            title: initialData?.description || ""
         },
     });
 
@@ -71,7 +71,7 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
                     <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
                         <FormField
                             control={form.control}
-                            name="description"
+                            name="title"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
