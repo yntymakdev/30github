@@ -17,8 +17,18 @@ export async function DELETE(
                 userId: userId
             }
         })
-    }
+        if (!courseOwner) {
+            return new NextResponse('Unautorized', {status: 401})
+        }
+        const attachment = await db.attachment.delete({
+            where: {
+                courseId: params.courseId,
+                id: params.attachmentId,
+            }
+        })
 
+        return NextResponse.json(attachment)
+    }
     catch (error) {
         console.error('ATTACHMENT_ID', error);
         return new NextResponse('Internal server error', {status:500});
