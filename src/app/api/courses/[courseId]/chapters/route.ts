@@ -11,11 +11,13 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    const courseOwner = await db.course.findUnique({ where: { id: params.courseId } });
+    const courseOwner = await db.course.findUnique({ where: { id: params.courseId,userId: userId } });
     if (!courseOwner) {
-      return new NextResponse('Not Found', { status: 404 });
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
+
+const lastChapter = await  db.chapter
     const fileName = url.split('/').pop();
     if (!fileName) {
       return new NextResponse('Invalid file URL', { status: 400 });
