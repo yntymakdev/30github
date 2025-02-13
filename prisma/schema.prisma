@@ -46,16 +46,22 @@ model Attachment {
 }
 
 model Chapter {
-  id          String   @id @default(cuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  title       String
-  position    String
-  videoUrl    String
-  isPublished String
-  isFree      Boolean  @default(false)
-  muxData     MuxData?
-  courseId    String
-  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  use
+  id            String         @id @default(cuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  title         String
+  position      String
+  videoUrl      String
+  isPublished   String
+  isFree        Boolean        @default(false)
+  muxData       MuxData?
+  courseId      String
+  course        Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  userPostgress UserProgress[]
 }
+
+
+model MuxData{
+
+}
+
