@@ -21,6 +21,7 @@ model Course {
   updateAt    DateTime     @updatedAt
   Category    Category?    @relation(fields: [categoryId], references: [id])
   chapters    Chapter[]
+  purchase    Purchase[]
 
   @@map("courses")
 }
@@ -83,4 +84,20 @@ model UserProgress {
   @@unique([userId, chapterId])
   @@index([chapterId])
 }
-model
+
+model Purchase {
+  id       String @id @default(cuid())
+  userId   String
+  courseId String
+  Course   Course @relation(fields: [courseId], references: [id])
+
+  @@index([courseId])
+}
+
+model StripeCustomer {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  stripeCustomer String   @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

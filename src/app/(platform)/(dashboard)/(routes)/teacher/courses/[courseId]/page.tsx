@@ -9,6 +9,7 @@ import { ImageForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses
 import { CategoryForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/CategoryForm";
 import { PriceForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/PriceForm";
 import { AttachmentForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/AttachmentForm";
+import {ChapterForm} from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ChapterForm";
 
 const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) => {
     const { userId } = await auth();
@@ -19,6 +20,11 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
     const course = await db.course.findUnique({
         where: { id: params.courseId },
         include: {
+            chapters:{
+                orderBy:{
+                    position: 'asc'
+                }
+            },
             attachments: {
                 orderBy: {
                     createdAt: "desc",
@@ -79,6 +85,7 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                             <IconBadge icon={ListChecks} />
                             <h2 className="text-xl">Course chapters</h2>
                         </div>
+                        <ChapterForm initialData={course} courseId={course.id} />
                         <p>TODO: Chapters</p>
                     </div>
 
@@ -90,7 +97,6 @@ const CourseIdPagePage = async ({ params }: { params: { courseId: string } }) =>
                         <PriceForm initialData={course} courseId={course.id} />
                     </div>
 
-                    {/* ✅ Теперь Resource Attachment в правильном месте */}
                     <div>
                         <div className="flex items-center gap-x-2">
                             <IconBadge icon={File} />
