@@ -36,6 +36,17 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
         }
     };
 
+
+    const onDelete = async(id:string) => {
+        try {
+setDeletingId(id)
+            await axios.delete(`/api/courses/${courseId}/attachments/${id}`)
+        }
+        catch (error) {
+toast.error('Something went wrong!');
+        }
+    }
+
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
@@ -65,7 +76,7 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 </div>
             )} {deletingId !== attachment.id && (
-                    <button className='ml-auto hover:opacity-75 transition'>
+                    <button onClick={() => onDelete(attachment.id)}  className='ml-auto hover:opacity-75 transition'>
                     <X className="w-4 h-4" />
                     </button>
             )}
