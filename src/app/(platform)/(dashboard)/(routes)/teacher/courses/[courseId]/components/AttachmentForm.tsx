@@ -51,14 +51,15 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
                 </Button>
             </div>
 
-            {/* Проверяем, есть ли attachments */}
-            {initialData.attachments.length === 0 && !isEditing && (
-                <p className="text-sm mt-2 text-slate-500 italic">
-                    No attachment yet
-                </p>
+            {initialData.attachments.length > 0 && (
+<div className='space-y-2'>
+    {initialData.attachments.map((attachment) => (
+        <div key={attachment.id}></div>
+
+    ))}
+</div>
             )}
 
-            {/* Отображаем FileUpload только если isEditing true */}
             {isEditing && (
                 <div>
                     <FileUpload
