@@ -57,6 +57,8 @@ model Chapter {
   courseId      String
   course        Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
   userPostgress UserProgress[]
+
+  @@index([courseId])
 }
 
 model MuxData {
@@ -81,3 +83,4 @@ model UserProgress {
   @@unique([userId, chapterId])
   @@index([chapterId])
 }
+model
