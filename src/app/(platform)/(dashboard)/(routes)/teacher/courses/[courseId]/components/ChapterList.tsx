@@ -2,6 +2,7 @@
 
 import {Chapter} from "@prisma/client";
 import {useEffect, useState} from "react";
+import {Droppable} from "@hello-pangea/dnd";
 
 interface  ChapterListFrom{
 items: Chapter[];
@@ -16,7 +17,7 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
   }, []);
   useEffect(() => {
     setChapters(items);
-  }, []);
+  }, [items]);
 
 
 
@@ -25,6 +26,7 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
   }
   return (
     <div>
+      <Droppable droppableId={} items={items}
     ChapterList
   
     </div>
