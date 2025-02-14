@@ -27,6 +27,12 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
   return (
     <div>
       <Droppable droppableId='chapters'/>
+      <Droppable droppableId='chapters'>
+        {(provided) => (
+            <div {...provided.droppableProps} ref={}></div>
+        )}
+
+      </Droppable>
     ChapterList
   
     </div>
