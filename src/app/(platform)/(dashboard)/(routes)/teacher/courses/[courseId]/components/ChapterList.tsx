@@ -1,7 +1,7 @@
 'use client'
 
 import {Chapter} from "@prisma/client";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 interface  ChapterListFrom{
 items: Chapter[];
@@ -11,7 +11,14 @@ onEdit: (id:string) => void;
 export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  {
   const [isMounted, setIsMounted] = useState(false);
   const [chapters,setChapters] = useState(items);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
+
+  if(!isMounted){
+    return null
+  }
   return (
     <div>
     ChapterList
