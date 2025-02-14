@@ -4,32 +4,37 @@ import {db} from "@/lib/db";
 
 export async function POST(req: Request, { params }: { params: { courseId: string } }) {
   try {
-    const { userId } =  await auth();
-    const { url } = await req.json();
+      const {userId} = await auth();
+      const {url} = await req.json();
 
-    if (!userId) {
-      return new NextResponse('Unauthorized', { status: 401 });
+      if (!userId) {
+          return new NextResponse('Unauthorized', {status: 401});
+      }
+
+      const courseOwner = await db.course.findUnique({where: {id: params.courseId, userId: userId}});
+      if (!courseOwner) {
+          return new NextResponse('Unauthorized', {status: 401});
+      }
+
+      const lastChapter = await db.chapter.findFirst({
+          where: {courseId: params.courseId},
+          orderBy: {
+              position: 'desc'
+          },
+      });
+const newPosition = lastChapter ?   lastChapter.position+ 1 : 1 ;
+
+
+const chapter =      await  db.chapter.create({
+    data: {
+        title,
+        courseId: params.courseId
+
     }
-
-    const courseOwner = await db.course.findUnique({ where: { id: params.courseId,userId: userId } });
-    if (!courseOwner) {
-      return new NextResponse('Unauthorized', { status: 401 });
-    }
-
-const lastChapter = await  db.chapter.findFirst({
 
 
 })
-
-    const attachment = await db.attachment.create({
-      data: {
-        url,
-        name: fileName,
-        courseId: params.courseId,
-      }
-    });
-    return NextResponse.json(attachment);
-  } catch (err) {
+  }catch (err) {
     console.log('COURSE_ID_ATTACHMENTS', err);
     return new NextResponse('Internal server error', { status: 500 });
   }
