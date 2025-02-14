@@ -2,7 +2,7 @@
 
 import {Chapter} from "@prisma/client";
 import {useEffect, useState} from "react";
-import {DragDropContext, Droppable} from "@hello-pangea/dnd";
+import {DragDropContext, Draggable, Droppable} from "@hello-pangea/dnd";
 
 interface  ChapterListFrom{
 items: Chapter[];
@@ -32,7 +32,9 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {chapters.map((chapter,index) => (
                   <Draggable key={chapter.id}
-                  dra/>
+                             draggableId={chapter.id}
+                  index={index}
+                  />
               ))}
             </div>
         )}
