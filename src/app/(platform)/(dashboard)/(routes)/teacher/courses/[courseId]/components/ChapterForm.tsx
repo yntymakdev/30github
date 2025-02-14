@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Chapter, Course } from "@prisma/client";
 import { Input } from "@/components/ui/input";
+import ChapterList from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ChapterList";
 
 const formSchema = z.object({
     title: z.string().min(1),
@@ -81,12 +82,13 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
             )}
             {!isCreating && (
                 <div className={cn('text-sm mt-2', { 'text-slate-500 italic': !initialData.chapters.length })}>
-                    {!initialData.chapters.length ? 'No chapters' : ''}
+                        {!initialData.chapters.length ? 'No chapters' : ''}
+                    <ChapterList onEdit={() => {}} onReorder={} items={initialData.chapters || []} />
                 </div>
             )}
             {!isCreating && (
                 <p className="text-xs text-muted-foreground mt-4">
-                    Drag and drop to reorder the chapters
+                    Drag and drop to reorder     the chapters
                 </p>
             )}
         </div>
