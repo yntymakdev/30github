@@ -14,6 +14,10 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
   useEffect(() => {
     setIsMounted(true);
   }, []);
+  useEffect(() => {
+    setChapters(items);
+  }, []);
+
 
 
   if(!isMounted){
