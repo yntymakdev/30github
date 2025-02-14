@@ -16,12 +16,10 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
+const lastChapter = await  db.chapter.findFirst({
 
-const lastChapter = await  db.chapter
-    const fileName = url.split('/').pop();
-    if (!fileName) {
-      return new NextResponse('Invalid file URL', { status: 400 });
-    }
+
+})
 
     const attachment = await db.attachment.create({
       data: {
