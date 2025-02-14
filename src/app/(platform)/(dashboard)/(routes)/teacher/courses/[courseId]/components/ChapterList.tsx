@@ -42,7 +42,10 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
                             chapter.isPublished && 'bg-sky-100 border-sky-200 text-sky-700'
                         )}
                         ref={provided.innerRef}
-                             {...provided.draggableProps}></div>
+                             {...provided.draggableProps}>
+                           <div className={cn('px2 py-3 `')}></div>
+
+                        </div>
 
                     )}
 
