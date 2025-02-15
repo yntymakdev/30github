@@ -47,7 +47,7 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
                                chapter.isPublished &&'border-r-sky-200 hover:bg-sky-200'
                                )}
 
-                                {...provi}
+                                {...provided}
                            ></div>
 
                         </div>
