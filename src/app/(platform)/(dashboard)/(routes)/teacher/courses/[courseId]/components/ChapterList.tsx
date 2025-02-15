@@ -4,6 +4,7 @@ import {Chapter} from "@prisma/client";
 import {useEffect, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "@hello-pangea/dnd";
 import {cn} from "@/lib/utils";
+import {Grid} from "lucide-react";
 
 interface  ChapterListFrom{
 items: Chapter[];
@@ -47,8 +48,12 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
                                chapter.isPublished &&'border-r-sky-200 hover:bg-sky-200'
                                )}
 
-                                {...provided.dragHan}
-                           ></div>
+                                {...provided.dragHandleProps}
+
+                           ><Grid className='h-5 w-5'/>
+                           </div>
+                          <div className='ml-auto pr-2 fle'></div>
+                          {chapter.title}
 
                         </div>
 
