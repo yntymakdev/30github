@@ -52,7 +52,7 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
 
                            ><Grid className='h-5 w-5'/>
                            </div>
-                          div
+                          <div className={}></div>
                           {chapter.title}
 
                         </div>
