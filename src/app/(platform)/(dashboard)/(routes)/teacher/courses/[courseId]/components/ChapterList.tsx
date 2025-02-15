@@ -4,6 +4,7 @@ import {Chapter} from "@prisma/client";
 import {useEffect, useState} from "react";
 import {DragDropContext, Draggable, Droppable} from "@hello-pangea/dnd";
 import {cn} from "@/lib/utils";
+import {Grid} from "lucide-react";
 
 interface  ChapterListFrom{
 items: Chapter[];
@@ -49,7 +50,7 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
 
                                 {...provided.dragHandleProps}
 
-                           ><Gri
+                           ><Grid/>
 
                            </div>
 
