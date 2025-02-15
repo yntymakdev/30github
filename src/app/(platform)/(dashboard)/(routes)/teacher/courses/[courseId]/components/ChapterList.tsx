@@ -48,7 +48,10 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
                                )}
 
                                 {...provided.dragHandleProps}
-                           ></div>
+
+                           ><Gr
+
+                           </div>
 
                         </div>
 
