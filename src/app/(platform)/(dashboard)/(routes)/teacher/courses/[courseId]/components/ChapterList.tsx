@@ -50,7 +50,7 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
 
                                 {...provided.dragHandleProps}
 
-                           ><Grid className={}/>
+                           ><Grid className='h-5'/>
 
                            </div>
 
