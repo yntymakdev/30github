@@ -43,7 +43,9 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
                         )}
                         ref={provided.innerRef}
                              {...provided.draggableProps}>
-                           <div className={cn('px2 py-3 border-r-slate-200 hover:bg-slate-300 rounded-l-md transition`')}></div>
+                           <div className={cn('px2 py-3 border-r-slate-200 hover:bg-slate-300 rounded-l-md transition',
+                               chapter
+                               )}></div>
 
                         </div>
 
