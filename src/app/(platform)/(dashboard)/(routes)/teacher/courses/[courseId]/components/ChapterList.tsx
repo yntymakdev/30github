@@ -60,8 +60,10 @@ Free
                                 </Badge>
                             )}
                             <Badge className={cn(
-                                'bg'
+                                'bg-slate-500',
+                                chapter.isPublished?"Published":"Draft"
                             )}></Badge>
+                            <Pencil
                           </div>
 
                         </div>
