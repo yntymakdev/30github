@@ -59,7 +59,9 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
 Free
                                 </Badge>
                             )}
-                            <Badge className={cn()}></Badge>
+                            <Badge className={cn(
+                                ''
+                            )}></Badge>
                           </div>
 
                         </div>
