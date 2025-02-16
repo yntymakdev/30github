@@ -63,7 +63,7 @@ Free
                                 'bg-slate-500',
                                 chapter.isPublished?"Published":"Draft"
                             )}></Badge>
-                            <Pencil/>
+                            <Pencil onCLick={}/>
                           </div>
 
                         </div>
