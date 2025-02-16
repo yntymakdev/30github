@@ -54,7 +54,9 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
                            </div>
                           {chapter.title}
                           <div className='ml-auto pr-2 flex items gap-x-2'>
-                            {chapter.isFree &&()}
+                            {chapter.isFree &&(
+                                <Badge
+                            )}
                           </div>
 
                         </div>
