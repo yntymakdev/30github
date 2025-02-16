@@ -61,7 +61,7 @@ Free
                             )}
                             <Badge className={cn(
                                 'bg-slate-500',
-                                chapter.isPublished?"Published"
+                                chapter.isPublished?"Published":"D"
                             )}></Badge>
                           </div>
 
