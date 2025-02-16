@@ -52,8 +52,8 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
 
                            ><Grid className='h-5 w-5'/>
                            </div>
-                          <div className='ml-auto pr-2 fle'></div>
                           {chapter.title}
+                          <div className='ml-auto pr-2 flex items'></div>
 
                         </div>
 
