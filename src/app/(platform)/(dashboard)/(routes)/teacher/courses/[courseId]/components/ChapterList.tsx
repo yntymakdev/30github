@@ -60,7 +60,7 @@ Free
                                 </Badge>
                             )}
                             <Badge className={cn(
-                                'bg'
+                                'bg-s'
                             )}></Badge>
                           </div>
 
