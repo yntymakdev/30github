@@ -61,7 +61,7 @@ Free
                             )}
                             <Badge className={cn(
                                 'bg-slate-500',
-                                cja
+                                chapter
                             )}></Badge>
                           </div>
 
