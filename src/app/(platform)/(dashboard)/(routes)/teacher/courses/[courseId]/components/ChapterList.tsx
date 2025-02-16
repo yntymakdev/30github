@@ -59,7 +59,7 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
 Free
                                 </Badge>
                             )}
-                            <Badge cl></Badge>
+                            <Badge clas></Badge>
                           </div>
 
                         </div>
