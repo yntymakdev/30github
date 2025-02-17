@@ -46,7 +46,13 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             </div>
           </div>
         </div>
-        <div className=""></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+          <div className="space-y-4">
+            <div>
+              <div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
