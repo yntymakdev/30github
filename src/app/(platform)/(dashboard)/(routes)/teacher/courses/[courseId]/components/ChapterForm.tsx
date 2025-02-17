@@ -59,7 +59,9 @@ await  axios.put(`/api/courses/${courseId}/chapters/reorder`,{
             toast.success("Chapter reordered!");
 router.refresh();
         }catch (error){
-            console.log(error)
+            toast.error('Something went wrong!');
+        }finally {
+            setIsupdating(false);
         }
 
     }
