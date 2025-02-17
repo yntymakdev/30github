@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Icon, LayoutDashboard } from "lucide-react";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
@@ -50,7 +50,8 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           <div className="space-y-4">
             <div>
               <div className="flex items-center gap-x-2">
-                <Icon
+                <Icon icon={LayoutDashboard} />
+                <h2>Customize your chapter</h2>
               </div>
             </div>
           </div>
