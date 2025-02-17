@@ -6,8 +6,16 @@ export async function PUT(
 ){
     try {
 const {userId} = await auth()
+
+        if(!userId){
+            return new NextResponse('Unauthorized', {status:401})
+        }
+        const {list }= await  req.json()
+
     }catch (error){
         console.log('[REORDER]', error);
         return new NextResponse('Internal Server Error', {status: 500})
     }
 }
+
+
