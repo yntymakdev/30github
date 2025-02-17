@@ -50,7 +50,12 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
             console.error("Ошибка при обновлении курса:", error);
         }
     };
+    const onReorder= async (updateData:{id:string;position:number}[]) => {
+        try {
 
+        }
+
+    }
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">

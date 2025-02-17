@@ -49,7 +49,7 @@ setChapters(items)
   }
 
   return (
-      <DragDropContext onDragEnd={() => {onDragEnd}}>
+      <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="chapters">
           {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
