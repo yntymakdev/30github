@@ -50,7 +50,19 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
             console.error("Ошибка при обновлении курса:", error);
         }
     };
+    const onReorder= async (updateData:{id:string;position:number}[]) => {
+        try {
+setIsupdating(true);
+await  axios.put(`/api/courses/${courseId}/chapters/reorder`,{
+    list:updateData
+})
+            toast.success("Chapter reordered!");
+router.refresh();
+        }catch (error){
+            console.log(error)
+        }
 
+    }
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
@@ -84,7 +96,7 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
                 <div className={cn('text-sm mt-2', { 'text-slate-500 italic': !initialData.chapters.length })}>
                         {!initialData.chapters.length ? 'No chapters' : ''}
                     <ChapterList onEdit={() => {}}
-                                 onReorder={() => {}}
+                                 onReorder={onReorder}
                                  items={initialData.chapters || []} />
                 </div>
             )}
