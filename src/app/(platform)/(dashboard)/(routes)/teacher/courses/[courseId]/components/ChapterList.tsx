@@ -25,12 +25,23 @@ export default function ChapterList({ items, onReorder, onEdit }: ChapterListFro
     setChapters(items);
   }, [items]);
 
+
+  const   DragEnd = (result:DropResult) => {
+    if(!result.destination) return;
+    const items = Array.from(chapters);
+    const [reorderedItem] = items.splice(result.source.index,1);
+    items.splice(result.destination.index,0.reorderedItem);
+    const startIndex = Math.
+
+
+  }
+
   if (!isMounted) {
     return null;
   }
 
   return (
-      <DragDropContext onDragEnd={() => {}}>
+      <DragDropContext onDragEnd={() => {onDragEnd}}>
         <Droppable droppableId="chapters">
           {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
