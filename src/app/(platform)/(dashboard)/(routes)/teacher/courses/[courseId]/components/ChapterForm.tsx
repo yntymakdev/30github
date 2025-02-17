@@ -83,7 +83,9 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
             {!isCreating && (
                 <div className={cn('text-sm mt-2', { 'text-slate-500 italic': !initialData.chapters.length })}>
                         {!initialData.chapters.length ? 'No chapters' : ''}
-                    <ChapterList onEdit={() => {}} onReorder={} items={initialData.chapters || []} />
+                    <ChapterList onEdit={() => {}}
+                                 onReorder={() => {}}
+                                 items={initialData.chapters || []} />
                 </div>
             )}
             {!isCreating && (
