@@ -65,6 +65,14 @@
             }
 
         }
+
+
+        const onEdit =(id: string) => {
+            router.push(`/teacher/courses/${courseId}/chapters/${id}`);
+
+
+        }
+
         return (
             <div className="relative mt-6 border bg-slate-100 rounded-md p-4">
                 {isUpdating && (
