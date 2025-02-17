@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { ArrowLeft, Icon, LayoutDashboard } from "lucide-react";
+import { IconBadge } from "@/components/icon-badge";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
@@ -50,7 +51,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           <div className="space-y-4">
             <div>
               <div className="flex items-center gap-x-2">
-                <Icon icon={LayoutDashboard} />
+                <IconBadge icon={LayoutDashboard} />
                 <h2>Customize your chapter</h2>
               </div>
             </div>
