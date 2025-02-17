@@ -28,8 +28,7 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
     return null
   }
   return (
-    <div>
-      <DragDropContext onDragEnd={() => {}}/>
+      <DragDropContext onDragEnd={()=> {}}>
       <Droppable droppableId='chapters'>
         {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -70,14 +69,12 @@ export default function ChapterList ({items,onReorder,onEdit}:ChapterListFrom)  
                     )}
                   </Draggable>
               ))}
+              {provided.placeholder}
             </div>
         )}
-
       </Droppable>
-    ChapterList
-  
-    </div>
-  );
+</DragDropContex>
+);
 };
 
 
