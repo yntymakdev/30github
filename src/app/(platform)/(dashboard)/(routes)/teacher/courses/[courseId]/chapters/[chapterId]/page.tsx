@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
@@ -35,6 +36,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             href={`/teacher/courses/${params.courseId}`}
             className="flex items-center text-sm hover:opacity-75 transition mb-6"
           />
+          <ArrowLeft className="h-4 w-4 mr-2" />
         </div>
       </div>
       Chapterid
