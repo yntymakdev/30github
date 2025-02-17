@@ -31,9 +31,17 @@ export default function ChapterList({ items, onReorder, onEdit }: ChapterListFro
     const items = Array.from(chapters);
     const [reorderedItem] = items.splice(result.source.index,1);
     items.splice(result.destination.index,0.reorderedItem);
-    const startIndex = Math.
+    const startIndex = Math.min(result.destination.index,result.source.index);
+    const endIndex = Math.max(result.destination.index,result.source.index);
+const updatedChapters = items.slice(startIndex, endIndex + 1);
+setChapters(items)
 
 
+    const bulkUpdateDate = updatedChapters.map((chapter) => ({
+      id: chapter.id,
+      position: items.findIndex((item) => item.id === chapter.id),
+    }))
+    onReorder(bulkUpdateDate);
   }
 
   if (!isMounted) {
