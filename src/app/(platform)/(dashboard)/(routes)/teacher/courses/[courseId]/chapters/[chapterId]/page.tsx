@@ -20,9 +20,21 @@ const ChapterIdPage =async ({params}: {params:{courseId:string;chapterId:string}
         include:{
             muxData: true
         }
-
     })
+    if(!chapter){
 
+        return redirect('/')
+    }
+
+    const requiredFields = [
+        chapter.title,
+        chapter.description,
+        chapter.videoUrl,
+    ]
+
+    const totalFields = requiredFields.length;
+    const completedFields = requiredFields.filter(Boolean).length;
+    const completionText = (`${completedFields}/${totalFields}`)
     return (
         <div>
           Chapterid
