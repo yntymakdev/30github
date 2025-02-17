@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { ArrowLeft, Icon, LayoutDashboard } from "lucide-react";
+import { IconBadge } from "@/components/icon-badge";
+import { ChapterTitle } from "./components/ChapterTitleForm";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
@@ -46,14 +48,15 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-          <div className="space-y-4">
-            <div>
-              <div className="flex items-center gap-x-2">
-                <Icon icon={LayoutDashboard} />
-                <h2>Customize your chapter</h2>
-              </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+        <div className="space-y-4">
+          <div>
+            <div className="flex items-center gap-x-2">
+              <IconBadge icon={LayoutDashboard} />
+              <h2>Customize your chapter</h2>
             </div>
+            <ChapterTitle initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
           </div>
         </div>
       </div>
