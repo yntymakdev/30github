@@ -4,7 +4,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { Pencil, PlusCircle } from "lucide-react";
+import {Loader2, Pencil, PlusCircle} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import toast from "react-hot-toast";
@@ -25,7 +25,7 @@ interface ChapterFormProps {
 
 export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
     const [isCreating, setIsCreating] = useState(false);
-    const [Isupdating, setIsupdating] = useState(false);
+    const [isUpdating, setIsupdating] = useState(false);
     const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -67,7 +67,7 @@ router.refresh();
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             {isUpdating && (
                 <div>
-
+<Loader2/>
                 </div>
             )}
             <div className="font-medium flex items-center justify-between">
