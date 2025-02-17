@@ -39,6 +39,12 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to course setup
           </Link>
+          <div className="flex items-center justify-between w-fill">
+            <div className="flex flex-col gap-y-2">
+              <h1 className="text-2xl font-medium">Chapter Creation</h1>
+              <span></span>
+            </div>
+          </div>
         </div>
       </div>
       Chapterid
