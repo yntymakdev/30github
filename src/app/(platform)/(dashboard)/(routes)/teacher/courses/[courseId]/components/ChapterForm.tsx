@@ -96,7 +96,7 @@ router.refresh();
                 <div className={cn('text-sm mt-2', { 'text-slate-500 italic': !initialData.chapters.length })}>
                         {!initialData.chapters.length ? 'No chapters' : ''}
                     <ChapterList onEdit={() => {}}
-                                 onReorder={() => {}}
+                                 onReorder={onReorder}
                                  items={initialData.chapters || []} />
                 </div>
             )}
