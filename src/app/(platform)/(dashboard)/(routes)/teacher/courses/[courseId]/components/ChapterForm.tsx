@@ -69,8 +69,6 @@
 
         const onEdit =(id: string) => {
             router.push(`/teacher/courses/${courseId}/chapters/${id}`);
-
-
         }
 
         return (
@@ -110,7 +108,7 @@
                 {!isCreating && (
                     <div className={cn('text-sm mt-2', { 'text-slate-500 italic': !initialData.chapters.length })}>
                             {!initialData.chapters.length ? 'No chapters' : ''}
-                        <ChapterList onEdit={() => {}}
+                        <ChapterList onEdit={onEdit}
                                      onReorder={onReorder}
                                      items={initialData.chapters || []} />
                     </div>
