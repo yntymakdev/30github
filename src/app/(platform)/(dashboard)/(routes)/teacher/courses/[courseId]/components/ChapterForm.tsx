@@ -52,7 +52,14 @@ export const ChapterForm = ({ initialData, courseId }: ChapterFormProps) => {
     };
     const onReorder= async (updateData:{id:string;position:number}[]) => {
         try {
-
+setIsupdating(true);
+await  axios.put(`/api/courses/${courseId}/chapters/reorder`,{
+    list:updateData
+})
+            toast.success("Chapter reordered!");
+router.refresh();
+        }catch (error){
+            console.log(error)
         }
 
     }
