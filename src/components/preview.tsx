@@ -8,7 +8,7 @@ interface PreviewProps {
   value: string;
 }
 
-export const Edtor =
+export const Preview =
   () =>
   ({ value }: PreviewProps) => {
     const ReactQuil = useMemo(() => dynamic(() => import("react-quill"), { ssr: false }), []);
