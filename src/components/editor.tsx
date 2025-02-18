@@ -1,22 +1,18 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useMemo } from "react";
-import ReactQuill from "react-quill";
+
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface EditorProps {
   onChange: (value: string) => void;
   value: string;
 }
 
-export const Edtor =
-  () =>
-  ({ onChange, value }: EditorProps) => {
-    const ReactQuil = useMemo(() => dynamic(() => import("react-quill"), { ssr: false }), []);
-
-    return (
-      <div className="bg-white">
-        <ReactQuill theme="show" value={value} onChange={onChange} />
-      </div>
-    );
-  };
+export const Editor = ({ onChange, value }: EditorProps) => {
+  return (
+    <div className="bg-white">
+      <ReactQuill theme="snow" value={value} onChange={onChange} />
+    </div>
+  );
+};
