@@ -60,6 +60,9 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             <ChapterTitleForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
             <ChapterDescriptionForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
           </div>
+          <div>
+            <IconBadge />
+          </div>
         </div>
       </div>
     </div>
