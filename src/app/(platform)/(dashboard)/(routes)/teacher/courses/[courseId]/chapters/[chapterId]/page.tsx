@@ -7,6 +7,7 @@ import { ArrowLeft, Eye, Icon, LayoutDashboard } from "lucide-react";
 import { IconBadge } from "@/components/icon-badge";
 import { ChapterTitleForm } from "./components/ChapterTitleForm";
 import { ChapterDescriptionForm } from "./components/ChapterDescriptionForm";
+import { ChapterAccessForm } from "./components/ChapterAccesForm";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
@@ -64,6 +65,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             <IconBadge icon={Eye} />
             <h2 className="text-xl">Access Settings</h2>
           </div>
+          <ChapterAccessForm initialData={} />
         </div>
       </div>
     </div>
