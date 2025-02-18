@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import { ArrowLeft, Icon, LayoutDashboard } from "lucide-react";
 import { IconBadge } from "@/components/icon-badge";
-import { ChapterTitle, ChapterTitleForm } from "./components/ChapterTitleForm";
+import { ChapterTitleForm } from "./components/ChapterTitleForm";
 import { ChapterDescriptionForm } from "./components/ChapterDescriptionForm";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {

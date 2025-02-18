@@ -14,7 +14,7 @@ import { Chapter } from "@prisma/client";
 import { Editor } from "@/components/editor";
 
 const formSchema = z.object({
-  description: z.string().min(1, "Description is required"),
+  description: z.string().min(1),
 });
 
 interface ChapterDescriptionFormProps {
