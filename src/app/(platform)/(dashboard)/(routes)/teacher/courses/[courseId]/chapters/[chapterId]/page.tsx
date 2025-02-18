@@ -62,6 +62,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           </div>
           <div className="flex items-center gap-x-2">
             <IconBadge icon={Eye} />
+            <h2 className="text-xl">Access Settings</h2>
           </div>
         </div>
       </div>
