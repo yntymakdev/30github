@@ -13,6 +13,8 @@ import { cn } from "@/lib/utils";
 import { Chapter } from "@prisma/client";
 import { Editor } from "@/components/editor";
 import { Textarea } from "@/components/ui/textarea";
+import { Preview } from "@/components/preview";
+import { init } from "next/dist/compiled/webpack/webpack";
 
 const formSchema = z.object({
   description: z.string().min(1),
@@ -67,9 +69,7 @@ export const ChapterDescriptionForm = ({ chapterId, initialData, courseId }: Cha
       {!isEditing && (
         <div className={cn("text-sm mt-2", !initialData.description && "text-slate-500 italic")}>
           {!initialData.description && "No description"}
-          {initialData.description && (
-            <P
-          )}
+          {initialData.description && <Preview value={initialData.description} />}
         </div>
       )}
       {isEditing && (
@@ -81,7 +81,7 @@ export const ChapterDescriptionForm = ({ chapterId, initialData, courseId }: Cha
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea {...field} />
+                    <Editor {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
