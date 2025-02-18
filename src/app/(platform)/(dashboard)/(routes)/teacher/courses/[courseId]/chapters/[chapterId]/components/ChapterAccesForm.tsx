@@ -64,7 +64,11 @@ export const ChapterAccessForm = ({ chapterId, initialData, courseId }: ChapterA
         </Button>
       </div>
 
-      {!isEditing && <div className={cn("text-sm mt-2", !initialData.isFree && "text-slate-500 italic")}></div>}
+      {!isEditing && (
+        <p className={cn("text-sm mt-2", !initialData.isFree && "text-slate-500 italic")}>
+          {initialData.isFree ? <>This chapter is free for preview</> : <>This chapter is not free</>}
+        </p>
+      )}
       {isEditing && (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
