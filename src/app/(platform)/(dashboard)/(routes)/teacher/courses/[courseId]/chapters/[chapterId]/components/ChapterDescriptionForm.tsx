@@ -7,12 +7,10 @@ import axios from "axios";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { Course } from "@prisma/client";
+import { Chapter } from "@prisma/client";
 import { Editor } from "@/components/editor";
 
 const formSchema = z.object({
@@ -20,7 +18,7 @@ const formSchema = z.object({
 });
 
 interface ChapterDescriptionFormProps {
-  initialData: Course;
+  initialData: Chapter;
   courseId: string;
   chapterId: string;
 }
