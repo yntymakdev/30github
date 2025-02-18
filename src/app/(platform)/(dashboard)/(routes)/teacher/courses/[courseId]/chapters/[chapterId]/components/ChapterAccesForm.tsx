@@ -73,18 +73,7 @@ export const ChapterAccessForm = ({ chapterId, initialData, courseId }: ChapterA
       {isEditing && (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Editor {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <FormField control={form.control} name="isFree" render={({ field }) => <FormItem></FormItem>} />
             <div className="flex items-center gap-x-2">
               <Button type="submit" disabled={isSubmitting || !isDirty} className="mt-2">
                 Save
