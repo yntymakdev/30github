@@ -65,7 +65,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             <IconBadge icon={Eye} />
             <h2 className="text-xl">Access Settings</h2>
           </div>
-          <ChapterAccessForm initialData={} />
+          <ChapterAccessForm initialData={chapter} courseId={params.courseId}  chapterId={params.chapterId/>
         </div>
       </div>
     </div>
