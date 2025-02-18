@@ -33,7 +33,7 @@ export const ChapterAccessForm = ({ chapterId, initialData, courseId }: ChapterA
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      isFree: initialData?.description || "",
+      isFree: !!initialData.isFree,
     },
   });
 
