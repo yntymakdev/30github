@@ -65,9 +65,9 @@ export const ChapterDescriptionForm = ({ chapterId, initialData, courseId }: Cha
       </div>
 
       {!isEditing && (
-        <p className={cn("text-sm mt-2", !initialData.description ? "text-slate-500 italic" : "")}>
+        <div className={cn("text-sm mt-2", !initialData.description ? "text-slate-500 italic" : "")}>
           {initialData.description || "No description"}
-        </p>
+        </div>
       )}
       {isEditing && (
         <Form {...form}>
