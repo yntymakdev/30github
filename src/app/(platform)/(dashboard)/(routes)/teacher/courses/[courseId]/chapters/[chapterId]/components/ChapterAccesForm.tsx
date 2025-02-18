@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -80,6 +80,11 @@ export const ChapterAccessForm = ({ chapterId, initialData, courseId }: ChapterA
                 <FormControl>
                   <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                 </FormControl>
+                <div className="space-y-1 leading-none">
+                    <FormDescription>
+                        Check this box if you want to make this
+                    </FormDescription>
+                </div>
               )}
             />
             <div className="flex items-center gap-x-2">
