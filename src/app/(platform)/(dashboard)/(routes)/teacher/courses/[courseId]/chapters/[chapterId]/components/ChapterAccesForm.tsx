@@ -77,14 +77,14 @@ export const ChapterAccessForm = ({ chapterId, initialData, courseId }: ChapterA
               control={form.control}
               name="isFree"
               render={({ field }) => (
-                <FormControl>
-                  <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                </FormControl>
-                <div className="space-y-1 leading-none">
-                    <FormDescription>
-                        Check this box if you want to make this
-                    </FormDescription>
-                </div>
+                <FormItem>
+                  <FormControl>
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormDescription>Check this box if you want to make this chapter free for preview</FormDescription>
+                  </div>
+                </FormItem>
               )}
             />
             <div className="flex items-center gap-x-2">
