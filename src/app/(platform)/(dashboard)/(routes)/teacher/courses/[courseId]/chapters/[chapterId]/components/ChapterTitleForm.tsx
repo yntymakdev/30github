@@ -15,14 +15,14 @@ const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
 });
 
-interface ChapterTitleProps {
+interface ChapterTitleFormProps {
   initialData: {
     title: string;
   };
   chapterId: string;
   courseId: string;
 }
-export const ChapterTitle = ({ initialData, courseId, chapterId }: ChapterTitleProps) => {
+export const ChapterTitleForm = ({ initialData, courseId, chapterId }: ChapterTitleFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({

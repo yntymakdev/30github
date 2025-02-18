@@ -12,9 +12,10 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Chapter } from "@prisma/client";
 import { Editor } from "@/components/editor";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  description: z.string().min(1, "Description is required"),
+  description: z.string().min(1),
 });
 
 interface ChapterDescriptionFormProps {
@@ -64,9 +65,12 @@ export const ChapterDescriptionForm = ({ chapterId, initialData, courseId }: Cha
       </div>
 
       {!isEditing && (
-        <p className={cn("text-sm mt-2", !initialData.description ? "text-slate-500 italic" : "")}>
-          {initialData.description || "No description"}
-        </p>
+        <div className={cn("text-sm mt-2", !initialData.description && "text-slate-500 italic")}>
+          {!initialData.description && "No description"}
+          {initialData.description && (
+            <P
+          )}
+        </div>
       )}
       {isEditing && (
         <Form {...form}>
@@ -77,7 +81,7 @@ export const ChapterDescriptionForm = ({ chapterId, initialData, courseId }: Cha
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Editor {...field} />
+                    <Textarea {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
