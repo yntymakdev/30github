@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Chapter } from "@prisma/client";
 import { Editor } from "@/components/editor";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   description: z.string().min(1),
@@ -77,7 +78,7 @@ export const ChapterDescriptionForm = ({ chapterId, initialData, courseId }: Cha
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Editor {...field} />
+                    <Textarea {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
