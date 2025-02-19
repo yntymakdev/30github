@@ -16,12 +16,10 @@ interface ChapterVideoFormProps {
   chapterId: string;
 }
 const formSchema = z.object({
-  imageUrl: z.string().min(1, {
-    message: "Image is required",
-  }),
+  videoUrl: z.string().min(1),
 });
 
-export const ChapterVideoForm = ({ initialData, courseId }: ChapterVideoFormProps) => {
+export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVideoFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
