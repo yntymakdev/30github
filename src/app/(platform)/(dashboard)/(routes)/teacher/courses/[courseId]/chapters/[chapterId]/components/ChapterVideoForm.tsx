@@ -49,7 +49,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
               Add an video
             </>
           )}
-          {!isEditing && initialData.imageUrl && (
+          {!isEditing && initialData.videoUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
               Edit video
@@ -58,13 +58,13 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
         </Button>
       </div>
       {!isEditing &&
-        (!initialData.imageUrl ? (
+        (!initialData.videoUrl ? (
           <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
             <ImageIcon className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            <Image fill alt="Upload" className="object-cover rounded-md" src={initialData.imageUrl} />
+            <Image fill alt="Upload" className="object-cover rounded-md" src={initialData.videoUrl} />
           </div>
         ))}
       {isEditing && (
@@ -73,7 +73,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
             endpoint="courseImage"
             onChange={(url) => {
               if (url) {
-                onSubmit({ imageUrl: url });
+                onSubmit({ videoUrl: url });
               }
             }}
           />
