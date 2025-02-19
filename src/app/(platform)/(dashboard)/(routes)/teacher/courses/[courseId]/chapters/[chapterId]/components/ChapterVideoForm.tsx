@@ -68,7 +68,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
       {isEditing && (
         <div>
           <FileUpload
-            endpoint="courseVideo"
+            endpoint="courseImage"
             onChange={(url) => {
               if (url) {
                 onSubmit({ videoUrl: url });
@@ -79,7 +79,9 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
         </div>
       )}
       {initialData.videoUrl && !isEditing && (
-        <div>Videos can take a few minutes to process.Regresh the page if video does not appear</div>
+        <div className="text-xs text-muted-foreground mt-2">
+          Videos can take a few minutes to process.Regresh the page if video does not appear
+        </div>
       )}
     </div>
   );
