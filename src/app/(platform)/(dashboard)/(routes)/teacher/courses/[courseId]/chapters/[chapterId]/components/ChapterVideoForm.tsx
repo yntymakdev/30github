@@ -27,8 +27,8 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("Course updated!");
+      await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
+      toast.success("Chapter updated!");
       toggleEdit();
       router.refresh();
     } catch (error) {
@@ -39,20 +39,9 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Course Image
+        Course Chapter Video
         <Button variant="ghost" onClick={toggleEdit}>
-          {isEditing ? (
-            <>Cancel</>
-          ) : !initialData?.imageUrl ? (
-            <>
-              <PlusCircle className="w-5 h-5 mr-2" />
-              Add an image
-            </>
-          ) : (
-            <>
-              <Pencil className="h-4" /> Edit Image
-            </>
-          )}
+          {}
         </Button>
       </div>
       {!isEditing &&
