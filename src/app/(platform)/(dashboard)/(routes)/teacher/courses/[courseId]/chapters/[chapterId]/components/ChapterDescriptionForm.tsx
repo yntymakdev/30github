@@ -13,8 +13,6 @@ import { cn } from "@/lib/utils";
 import { Chapter } from "@prisma/client";
 import { Textarea } from "@/components/ui/textarea";
 import { Preview } from "@/components/preview";
-import { init } from "next/dist/compiled/webpack/webpack";
-import { Editor } from "@/components/editor";
 
 const formSchema = z.object({
   description: z.string().min(1),
