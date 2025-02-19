@@ -8,6 +8,7 @@ import { IconBadge } from "@/components/icon-badge";
 import { ChapterTitleForm } from "./components/ChapterTitleForm";
 import { ChapterDescriptionForm } from "./components/ChapterDescriptionForm";
 import { ChapterAccessForm } from "./components/ChapterAccesForm";
+import { ChapterVideoForm } from "./components/ChapterVideoForm";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
@@ -73,6 +74,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           <IconBadge icon={Video} />
           <h2 className="text-xl">Add a video</h2>
         </div>
+        <ChapterVideoForm courseId={params.courseId} chapterId={params.chapterId} initialData={chapter} />
       </div>
     </div>
   );
