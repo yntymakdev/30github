@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import * as z from "zod";
 import axios from "axios";
-import { ImageIcon, Pencil, PlusCircle } from "lucide-react";
+import { ImageIcon, Pencil, Plus, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -42,7 +42,11 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
         Course Chapter Video
         <Button variant="ghost" onClick={toggleEdit}>
           {isEditing && <>Cancel</>}
-          {!isEditing && !
+          {!isEditing && !initialData.videoUrl && (
+            <>
+            <PlusCircle className="h-4 w-4 mr-2"/>
+            </>
+          )
           {isEditing && <>Cancel</>}
         </Button>
       </div>
