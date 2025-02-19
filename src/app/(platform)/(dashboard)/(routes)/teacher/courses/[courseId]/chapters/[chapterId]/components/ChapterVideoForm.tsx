@@ -68,16 +68,17 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
       {isEditing && (
         <div>
           <FileUpload
-            endpoint="courseImage"
+            endpoint="courseVideo"
             onChange={(url) => {
               if (url) {
                 onSubmit({ videoUrl: url });
               }
             }}
           />
-          <div className="text-xs text-muted-foreground mt-4">16:9 aspect ralio recommended</div>
+          <div className="text-xs text-muted-foreground mt-4">Upload this chapter's vide</div>
         </div>
       )}
+      {initialData.videoUrl && !isEditing && <div>Video can </div>}
     </div>
   );
 };
