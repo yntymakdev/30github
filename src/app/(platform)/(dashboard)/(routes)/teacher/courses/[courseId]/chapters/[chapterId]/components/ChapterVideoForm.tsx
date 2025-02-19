@@ -42,6 +42,8 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
         Course Chapter Video
         <Button variant="ghost" onClick={toggleEdit}>
           {isEditing && <>Cancel</>}
+          {!isEditing && !
+          {isEditing && <>Cancel</>}
         </Button>
       </div>
       {!isEditing &&
