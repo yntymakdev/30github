@@ -78,7 +78,9 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
           <div className="text-xs text-muted-foreground mt-4">Upload this chapter's vide</div>
         </div>
       )}
-      {initialData.videoUrl && !isEditing && <div>Video can </div>}
+      {initialData.videoUrl && !isEditing && (
+        <div>Videos can take a few minutes to process.Regresh the page if video does not appear</div>
+      )}
     </div>
   );
 };
