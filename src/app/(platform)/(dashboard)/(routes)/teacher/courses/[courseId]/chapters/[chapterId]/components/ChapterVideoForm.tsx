@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Chapter, Course, MuxData } from "@prisma/client";
 import Image from "next/image";
 import { FileUpload } from "@/components/file-upload";
+import { init } from "next/dist/compiled/webpack/webpack";
 
 interface ChapterVideoFormProps {
   initialData: Chapter & { muxData?: MuxData | null };
@@ -44,10 +45,11 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
           {isEditing && <>Cancel</>}
           {!isEditing && !initialData.videoUrl && (
             <>
-            <PlusCircle className="h-4 w-4 mr-2"/>
+              <PlusCircle className="h-4 w-4 mr-2" />
+              Add an video
             </>
-          )
-          {isEditing && <>Cancel</>}
+          )}
+          {!isEditing && initialData.imageUrl && ()}
         </Button>
       </div>
       {!isEditing &&
