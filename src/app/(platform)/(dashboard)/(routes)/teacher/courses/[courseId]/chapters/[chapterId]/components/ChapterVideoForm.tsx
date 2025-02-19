@@ -41,7 +41,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
       <div className="font-medium flex items-center justify-between">
         Course Chapter Video
         <Button variant="ghost" onClick={toggleEdit}>
-          {}
+          {isEditing && <>Cancel</>}
         </Button>
       </div>
       {!isEditing &&
