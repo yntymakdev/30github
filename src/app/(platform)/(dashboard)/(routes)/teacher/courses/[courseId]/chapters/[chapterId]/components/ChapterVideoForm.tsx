@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import * as z from "zod";
 import axios from "axios";
-import { ImageIcon, Pencil, Plus, PlusCircle } from "lucide-react";
+import { ImageIcon, Pencil, Plus, PlusCircle, VideoIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -46,7 +46,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
           {!isEditing && !initialData.videoUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Add an video
+              Add a video
             </>
           )}
           {!isEditing && initialData.videoUrl && (
@@ -60,12 +60,10 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
       {!isEditing &&
         (!initialData.videoUrl ? (
           <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
-            <ImageIcon className="h-10 w-10 text-slate-500" />
+            <VideoIcon className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
-          <div className="relative aspect-video mt-2">
-            <Image fill alt="Upload" className="object-cover rounded-md" src={initialData.videoUrl} />
-          </div>
+          <div className="relative aspect-video mt-2">Video uploaded</div>
         ))}
       {isEditing && (
         <div>
