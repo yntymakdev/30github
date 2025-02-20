@@ -63,7 +63,9 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
             <VideoIcon className="h-10 w-10 text-slate-500" />
           </div>
         ) : (
-          <div className="relative aspect-video mt-2">Vide</div>
+          <div className="relative aspect-video mt-2">
+            <MuxPlayer />
+          </div>
         ))}
       {isEditing && (
         <div>
