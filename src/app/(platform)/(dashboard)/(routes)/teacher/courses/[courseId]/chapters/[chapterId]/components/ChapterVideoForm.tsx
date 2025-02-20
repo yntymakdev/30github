@@ -64,7 +64,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            <M />
+            <Mu />
           </div>
         ))}
       {isEditing && (
