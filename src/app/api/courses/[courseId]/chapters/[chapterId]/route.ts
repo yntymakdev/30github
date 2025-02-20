@@ -58,8 +58,13 @@ test: false
 
 })
 await   db.muxData.create({
+data:{
+chapterId: params.chapterId,
+assetI: asset.id
+playbackId: asset.playback_ids
 
-  
+}
+
 })
 
 
