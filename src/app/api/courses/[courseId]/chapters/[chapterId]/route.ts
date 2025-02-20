@@ -34,7 +34,15 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
       },
     });
     if (values.videoUrl) {
-      const existingMuxData = await db.muxData.findFirst;
+      const existingMuxData = await db.muxData.findFirst({
+        where: {
+          chapterId: params.chapterId,
+        },
+      });
+
+      if (existingMuxData) {
+        await Video.Assets.del(existingMuxData.assetId);
+      }
     }
 
     return NextResponse.json(chapter);
