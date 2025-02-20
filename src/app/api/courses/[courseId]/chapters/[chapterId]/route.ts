@@ -33,8 +33,9 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
         ...values,
       },
     });
-if(values.)
-
+    if (values.videoUrl) {
+      const existingMuxData = await db.muxData.findFirst;
+    }
 
     return NextResponse.json(chapter);
   } catch (error) {
