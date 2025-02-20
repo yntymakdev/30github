@@ -53,7 +53,7 @@ where: {
 
 const asset = await   Video.Assets.create({
 input : values.videoUrl,
-playback_policy: "public  " 
+playback_policy: "public" 
 test: false
 
 })
@@ -61,7 +61,7 @@ await   db.muxData.create({
 data:{
 chapterId: params.chapterId,
 assetI: asset.id
-playbackId: asset.playback_ids
+playbackId: asset.playback_ids?:[0]?.id
 
 }
 
