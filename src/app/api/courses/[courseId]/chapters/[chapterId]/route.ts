@@ -33,6 +33,8 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
         ...values,
       },
     });
+if(values.)
+
 
     return NextResponse.json(chapter);
   } catch (error) {
