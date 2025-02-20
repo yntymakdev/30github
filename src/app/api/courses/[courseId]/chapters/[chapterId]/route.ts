@@ -53,9 +53,13 @@ where: {
 
 const asset = await   Video.Assets.create({
 input : values.videoUrl,
-playback_policy
+playback_policy: "public  " 
+test: false
 
 })
+
+  
+
 
       }
 
