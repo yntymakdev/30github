@@ -57,8 +57,11 @@ playback_policy: "public  "
 test: false
 
 })
+await   db.muxData.create({
 
   
+})
+
 
 
       }
