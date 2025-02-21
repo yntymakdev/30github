@@ -33,8 +33,51 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
     });
 
     if (!chapter) {
-      return new NextResponse("Not found", { status: 404 });
+      return new NextResponse("N ot found", { status: 404 });
     }
+    if (chapter.videoUrl) {
+      const existingMuxData = await db.muxData.findFirst({
+        where: {
+          chapterId: params.chapterId,
+        },
+      });
+      if (existingMuxData) {
+        console.log("Deleting existing Mux asset:", existingMuxData.assetId);
+        await assets.delete(existingMuxData.assetId);
+        await db.muxData.delete({
+          where: {
+            id: existingMuxData.id,
+          },
+        });
+      }
+    }
+
+    const deletedChapter = await db.chapter.delete({
+      where: {
+        id: params.chapterId,
+      },
+    });
+
+    const publishedChaptersInCourse = await db.chapter.findMany({
+      where: {
+        courseId: params.courseId,,
+        isPublished: true
+      },
+    });
+
+if(!publishedChaptersInCourse.length){
+  await   db.course.update({
+where: {
+  id: params.courseId
+},
+data: {
+
+  isPublished: false
+}
+
+  })
+}
+return  NextResponse.json(deletedChapter) 
   } catch (error) {
     console.log("[CHAPTER_ID_DELETE]");
   }
@@ -44,7 +87,7 @@ async function PATCH(req: Request, { params }: { params: { courseId: string; cha
     console.log("Request started");
 
     const { userId } = await auth();
-    console.log("User ID:", userId); // Логируем userId
+    console.log("User ID:", userId);
 
     const { isPublished, ...values } = await req.json();
     console.log("Request body values:", values);
@@ -124,7 +167,7 @@ async function PATCH(req: Request, { params }: { params: { courseId: string; cha
     console.log("Chapter updated successfully");
     return NextResponse.json(chapter);
   } catch (error) {
-    console.error("[COURSES_CHAPTER_ID]", error); // Логируем ошибку
+    console.error("[COURSES_CHAPTER_ID]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
