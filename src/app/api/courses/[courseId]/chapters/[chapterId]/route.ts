@@ -33,8 +33,30 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
     });
 
     if (!chapter) {
-      return new NextResponse("Not found", { status: 404 });
+      return new NextResponse("N ot found", { status: 404 });
     }
+    if (chapter.videoUrl) {
+      const existingMuxData = await db.muxData.findFirst({
+        where: {
+          chapterId: params.chapterId,
+        },
+      });
+      if (existingMuxData) {
+        console.log("Deleting existing Mux asset:", existingMuxData.assetId);
+        await assets.delete(existingMuxData.assetId);
+        await db.muxData.delete({
+          where: {
+            id: existingMuxData.id,
+          },
+        });
+      }
+    }
+
+    const deletedChapter = await db.chapter.delete({
+      where: {
+        id: params.chapterId,
+      },
+    });
   } catch (error) {
     console.log("[CHAPTER_ID_DELETE]");
   }
