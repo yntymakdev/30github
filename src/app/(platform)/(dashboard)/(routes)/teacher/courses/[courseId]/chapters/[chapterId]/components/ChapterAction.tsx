@@ -1,4 +1,5 @@
 "use client";
+import ConfirmModal from "@/components/modals/ConfirmModal";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import React from "react";
@@ -16,9 +17,11 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
       <Button onClick={() => {}} disabled={disabled} variant="outline" size="sm">
         {isPublished ? "Unpublished" : "Publish"}
       </Button>
-      <Button size="sm">
-        <Trash className="h-4 w-4" />
-      </Button>
+      <ConfirmModal onConfirm={}>
+        <Button size="sm">
+          <Trash className="h-4 w-4" />
+        </Button>
+      </ConfirmModal>
     </div>
   );
 };
