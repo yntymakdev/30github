@@ -15,7 +15,7 @@ interface BannerProps extends VariantProps<typeof bannerVariants> {
   label: string;
 }
 
-const Banner = () => {
+const Banner = (label, variant) => {
   return <div>Banner</div>;
 };
 
