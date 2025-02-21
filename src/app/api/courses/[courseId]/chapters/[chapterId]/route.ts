@@ -67,11 +67,17 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
 
 if(!publishedChaptersInCourse.length){
   await   db.course.update({
-whereL 
+where: {
+  id: params.courseId
+},
+data: {
+
+  isPublished: false
+}
 
   })
 }
-
+return  NextResponse 
   } catch (error) {
     console.log("[CHAPTER_ID_DELETE]");
   }
