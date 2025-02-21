@@ -10,6 +10,7 @@ import { ChapterDescriptionForm } from "./components/ChapterDescriptionForm";
 import { ChapterAccessForm } from "./components/ChapterAccesForm";
 import { ChapterVideoForm } from "./components/ChapterVideoForm";
 import Banner from "@/components/bunner";
+import ChapterAction from "./components/ChapterAction";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
