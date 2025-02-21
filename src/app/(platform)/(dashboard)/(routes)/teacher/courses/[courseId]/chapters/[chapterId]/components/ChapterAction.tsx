@@ -2,7 +2,7 @@
 import ConfirmModal from "@/components/modals/ConfirmModal";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 interface ChapterActionProps {
@@ -13,6 +13,7 @@ interface ChapterActionProps {
 }
 
 const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterActionProps) => {
+  const [isLoading, setIsLoading] = useState();
   const onDelete = async () => {
     try {
     } catch (error) {
