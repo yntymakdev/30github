@@ -3,12 +3,12 @@ import React from "react";
 
 interface ChapterActionProps {
   disabled: boolean;
-  courseId: boolean;
-  chapterId: boolean;
-  disabled: boolean;
+  courseId: string;
+  chapterId: string;
+  isPublished: boolean;
 }
 
-const ChapterAction = () => {
+const ChapterAction = ({}) => {
   return <div>ChapterAction</div>;
 };
 
