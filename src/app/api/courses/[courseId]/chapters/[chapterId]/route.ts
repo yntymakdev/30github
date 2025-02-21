@@ -57,6 +57,13 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
         id: params.chapterId,
       },
     });
+
+    const publishedChaptersInCourse = await db.chapter.findMany({
+      where: {
+        courseId: params.courseId,,
+        isPublished
+      },
+    });
   } catch (error) {
     console.log("[CHAPTER_ID_DELETE]");
   }
