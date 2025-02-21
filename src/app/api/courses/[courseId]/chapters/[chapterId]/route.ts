@@ -77,7 +77,7 @@ data: {
 
   })
 }
-return  NextResponse 
+return  NextResponse.json(deletedChapter) 
   } catch (error) {
     console.log("[CHAPTER_ID_DELETE]");
   }
@@ -87,7 +87,7 @@ async function PATCH(req: Request, { params }: { params: { courseId: string; cha
     console.log("Request started");
 
     const { userId } = await auth();
-    console.log("User ID:", userId); // Логируем userId
+    console.log("User ID:", userId);
 
     const { isPublished, ...values } = await req.json();
     console.log("Request body values:", values);
@@ -167,7 +167,7 @@ async function PATCH(req: Request, { params }: { params: { courseId: string; cha
     console.log("Chapter updated successfully");
     return NextResponse.json(chapter);
   } catch (error) {
-    console.error("[COURSES_CHAPTER_ID]", error); // Логируем ошибку
+    console.error("[COURSES_CHAPTER_ID]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
