@@ -8,7 +8,7 @@ interface ChapterActionProps {
   isPublished: boolean;
 }
 
-const ChapterAction = ({}) => {
+const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterActionProps) => {
   return <div>ChapterAction</div>;
 };
 
