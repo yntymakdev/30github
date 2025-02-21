@@ -2,11 +2,11 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import Mux from "@mux/mux-node";
-
-const { Video } = new Mux({
+const mux = new Mux({
   tokenId: process.env.MUX_TOKEN_ID!,
   tokenSecret: process.env.MUX_TOKEN_SECRET!,
 });
+const { assets } = mux.video;
 
 export async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
   try {
