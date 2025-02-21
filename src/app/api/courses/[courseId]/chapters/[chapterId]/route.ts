@@ -3,11 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import Mux from "@mux/mux-node";
 
-if (!process.env.MUX_TOKEN_ID || !process.env.MUX_TOKEN_SECRET) {
-  throw new Error("MUX credentials are missing");
-}
-
-const mux = new Mux({
+const { Video } = new Mux({
   tokenId: process.env.MUX_TOKEN_ID!,
   tokenSecret: process.env.MUX_TOKEN_SECRET!,
 });
@@ -46,15 +42,15 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
       return new NextResponse("Chapter not found", { status: 404 });
     }
 
-    if (values.videoUrl && typeof values.videoUrl === "string") {
+    if (values.videoUr) {
       const existingMuxData = await db.muxData.findFirst({
         where: {
           chapterId: params.chapterId,
         },
       });
 
-      if (existingMuxData?.assetId) {
-        await mux.video.assets.delete(existingMuxData.assetId); // <-- исправлено
+      if (existingMuxData) {
+        await Video.Assets.del(existingMuxData.assetId);
         await db.muxData.delete({
           where: {
             id: existingMuxData.id,
@@ -64,7 +60,7 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
 
       const asset = await mux.video.assets.create({
         input: values.videoUrl,
-        playback_policy: ["public"], // Должен быть массив
+        playback_policy: ["public"],
         test: false,
       });
 
