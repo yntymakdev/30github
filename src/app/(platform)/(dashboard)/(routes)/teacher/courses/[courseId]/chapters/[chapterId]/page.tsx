@@ -9,6 +9,7 @@ import { ChapterTitleForm } from "./components/ChapterTitleForm";
 import { ChapterDescriptionForm } from "./components/ChapterDescriptionForm";
 import { ChapterAccessForm } from "./components/ChapterAccesForm";
 import { ChapterVideoForm } from "./components/ChapterVideoForm";
+import Banner from "@/components/bunner";
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const { userId } = await auth();
@@ -37,6 +38,9 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
 
   return (
     <>
+      {!chapter.isPublished && (
+        <Banner variant="warning" label="This chapter is unpublished.It will not be visible in the course " />
+      )}
       <div className="p-6">
         <div className="flex items-center justify-center">
           <div className="w-full">
