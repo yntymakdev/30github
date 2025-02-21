@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import * as z from "zod";
 import axios from "axios";
 import { Pencil, PlusCircle, VideoIcon } from "lucide-react";
-import MuxPlayer from "@mux/mux-player-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -43,9 +42,10 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
   useEffect(() => {
     if (videoRef.current && Hls.isSupported()) {
       const hls = new Hls({
-        startLevel: 0,
-        bufferLow: 10, // Минимальный размер буфера
-        bufferHigh: 30, // Максимальный размер буфера
+        // Параметры для настройки буферизации
+        maxBufferLength: 30, // Максимальная длина буфера
+        maxBufferSize: 60 * 1000 * 1000, // Максимальный размер буфера в байтах
+        maxMaxBufferLength: 600, // Максимальная длина буфера в секундах
       });
 
       hls.attachMedia(videoRef.current);
