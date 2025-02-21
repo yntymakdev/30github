@@ -13,7 +13,7 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
   return (
     <div className="flex items-center gap-x-2">
       <Button onClick={() => {}} disabled={disabled} variant="outline" size="sm">
-        {isPublished}
+        {isPublished ? "Unpublished" : "Publish"}
       </Button>
     </div>
   );
