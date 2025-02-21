@@ -11,7 +11,7 @@ interface ChapterActionProps {
   disabled: boolean;
   courseId: string;
   chapterId: string;
-  isPublished: boolean;
+  isPublished: boolean | null;
 }
 
 const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterActionProps) => {
