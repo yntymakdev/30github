@@ -32,11 +32,11 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
 
   return (
     <div className="flex items-center gap-x-2">
-      <Button onClick={() => {}} disabled={disabled} variant="outline" size="sm">
+      <Button onClick={() => {}} disabled={disabled || isLoading} variant="outline" size="sm">
         {isPublished ? "Unpublished" : "Publish"}
       </Button>
       <ConfirmModal onConfirm={() => {}}>
-        <Button size="sm">
+        <Button size="sm" disabled={isLoading}>
           <Trash className="h-4 w-4" />
         </Button>
       </ConfirmModal>
