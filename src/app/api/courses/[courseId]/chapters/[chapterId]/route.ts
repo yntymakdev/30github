@@ -9,7 +9,32 @@ const mux = new Mux({
 });
 const { assets } = mux.video;
 
-export async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
+export async function DELETE(req: Request
+{params}: { params: {courseId: string;chapterId: string}})
+{
+try {
+  const {userId} =await auth()
+if(!userId){
+  return  new NextResponse("Unauthorized", {status: 401})
+}
+const ownCourse = await db.course.findUnique({
+  where: {
+    id: params.courseId,
+    userId,
+  },
+});
+
+
+
+} catch (error) {
+  console.log("[CHAPTER_ID_DELETE]");
+  
+  
+}
+
+}
+;
+async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
   try {
     console.log("Request started");
 
