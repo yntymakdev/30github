@@ -22,9 +22,9 @@ const iconMap = {
 };
 
 const Banner = ({ label, variant }: BannerProps) => {
-  const Icon = iconMap[variant];
+  const Icon = iconMap[variant || "warning"];
 
-  return <div>Banner</div>;
+  return <div className={cn(bannerVariants({}))}>Banner</div>;
 };
 
 export default Banner;
