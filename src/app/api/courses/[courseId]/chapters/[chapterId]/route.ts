@@ -9,7 +9,9 @@ const mux = new Mux({
 });
 const { assets } = mux.video;
 
-export async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
+export async function DELETE(req: Request
+{params}: { params: {courseId: string;chapterId: string}});
+async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
   try {
     console.log("Request started");
 
