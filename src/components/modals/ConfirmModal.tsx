@@ -1,7 +1,14 @@
-import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@radix-ui/react-alert-dialog";
 import { AlertCircle } from "lucide-react";
 import React from "react";
-import { AlertDialogHeader } from "../ui/alert-dialog";
+import { AlertDialogFooter, AlertDialogHeader } from "../ui/alert-dialog";
 
 interface ConfirmModalProps {
   children: React.ReactNode;
@@ -14,7 +21,13 @@ const ConfirmModal = ({ children, onConfirm }: ConfirmModalProps) => {
       <AlertDialog>
         <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
         <AlertDialogContent>
-          <AlertDialogHeader><AL</AlertDialogHeader>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>This action cannot be </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+          </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>
