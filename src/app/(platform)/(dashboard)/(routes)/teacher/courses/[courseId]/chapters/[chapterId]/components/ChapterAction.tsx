@@ -12,7 +12,9 @@ interface ChapterActionProps {
 const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterActionProps) => {
   return (
     <div className="flex items-center gap-x-2">
-      <Button onClick={() => {}} disabled={disabled} variant="outline" size="sm" />
+      <Button onClick={() => {}} disabled={disabled} variant="outline" size="sm">
+        {isPublished}
+      </Button>
     </div>
   );
 };
