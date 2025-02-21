@@ -35,7 +35,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
   const completionText = `${completedFields}/${totalFields}`;
-
+  const isComplete = requiredFields.every(Boolean);
   return (
     <>
       {!chapter.isPublished && (
