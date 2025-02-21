@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import Link from "next/link";
-import { ArrowLeft, Eye, Icon, LayoutDashboard, Video } from "lucide-react";
+import { ArrowLeft, Eye, LayoutDashboard, Video } from "lucide-react";
 import { IconBadge } from "@/components/icon-badge";
 import { ChapterTitleForm } from "./components/ChapterTitleForm";
 import { ChapterDescriptionForm } from "./components/ChapterDescriptionForm";
@@ -15,6 +15,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
   if (!userId) {
     return redirect("/");
   }
+
   const chapter = await db.chapter.findUnique({
     where: {
       id: params.chapterId,
@@ -24,15 +25,16 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
       muxData: true,
     },
   });
+
   if (!chapter) {
     return redirect("/");
   }
 
   const requiredFields = [chapter.title, chapter.description, chapter.videoUrl];
-
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
   const completionText = `${completedFields}/${totalFields}`;
+
   return (
     <div className="p-6">
       <div className="flex items-center justify-center">
