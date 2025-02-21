@@ -19,10 +19,10 @@ interface BannerProps extends VariantProps<typeof bannerVariants> {
 const iconMap = {
   warning: AlertTriangle,
   success: CheckCircleIcon,
-}
+};
 
 const Banner = ({ label, variant }: BannerProps) => {
-  const icon = icons.
+  const Icon = iconMap[variant];
 
   return <div>Banner</div>;
 };
