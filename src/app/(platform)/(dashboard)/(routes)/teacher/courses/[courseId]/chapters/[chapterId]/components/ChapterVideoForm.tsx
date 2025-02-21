@@ -1,22 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as z from "zod";
 import axios from "axios";
-import { ImageIcon, Pencil, Plus, PlusCircle, VideoIcon } from "lucide-react";
+import { Pencil, PlusCircle, VideoIcon } from "lucide-react";
 import MuxPlayer from "@mux/mux-player-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Chapter, Course, MuxData } from "@prisma/client";
-import Image from "next/image";
+import { Chapter, MuxData } from "@prisma/client";
 import { FileUpload } from "@/components/file-upload";
-import { init } from "next/dist/compiled/webpack/webpack";
+import Hls from "hls.js";
 
 interface ChapterVideoFormProps {
   initialData: Chapter & { muxData?: MuxData | null };
   courseId: string;
   chapterId: string;
 }
+
 const formSchema = z.object({
   videoUrl: z.string().min(1),
 });
@@ -24,6 +24,7 @@ const formSchema = z.object({
 export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVideoFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const toggleEdit = () => setIsEditing((current) => !current);
 
@@ -37,6 +38,26 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
       console.error("Ошибка при обновлении курса:", error);
     }
   };
+
+  // Инициализация HLS.js
+  useEffect(() => {
+    if (videoRef.current && Hls.isSupported()) {
+      const hls = new Hls({
+        startLevel: 0,
+        bufferLow: 10, // Минимальный размер буфера
+        bufferHigh: 30, // Максимальный размер буфера
+      });
+
+      hls.attachMedia(videoRef.current);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        hls.loadSource(initialData?.muxData?.playbackId || "");
+      });
+
+      return () => {
+        hls.destroy();
+      };
+    }
+  }, [initialData?.muxData?.playbackId]);
 
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
@@ -65,7 +86,9 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            <MuxPlayer playbackId={initialData?.muxData?.playbackId || ""} />
+            <video ref={videoRef} controls className="w-full h-full">
+              {/* Этот источник будет загружен через HLS.js */}
+            </video>
           </div>
         ))}
       {isEditing && (
@@ -78,12 +101,12 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
               }
             }}
           />
-          <div className="text-xs text-muted-foreground mt-4">Upload this chapter's vide</div>
+          <div className="text-xs text-muted-foreground mt-4">Upload this chapter's video</div>
         </div>
       )}
       {initialData.videoUrl && !isEditing && (
         <div className="text-xs text-muted-foreground mt-2">
-          Videos can take a few minutes to process.Regresh the page if video does not appear
+          Videos can take a few minutes to process. Refresh the page if the video does not appear.
         </div>
       )}
     </div>
