@@ -31,6 +31,11 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
         courseId: params.courseId,
       },
     });
+
+    if (!chapter) {
+      console.log("Chapter not found");
+      return new NextResponse("Chapter not found", { status: 404 });
+    }
   } catch (error) {
     console.log("[CHAPTER_ID_DELETE]");
   }
