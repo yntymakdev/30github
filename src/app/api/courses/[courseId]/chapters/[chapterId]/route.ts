@@ -24,6 +24,9 @@ const ownCourse = await db.course.findUnique({
   },
 });
 
+if (!ownCourse) {
+      return new NextResponse("Unauthorized", { status: 401 });
+}
 
 
 } catch (error) {
