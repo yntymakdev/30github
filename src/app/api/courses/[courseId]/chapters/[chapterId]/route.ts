@@ -82,7 +82,7 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
 
     return NextResponse.json(deletedChapter);
   } catch (error) {
-    console.error("[CHAPTER_ID_DELETE] Error:", error);
+    console.error("[CHAPTER_ID_DELETE]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
