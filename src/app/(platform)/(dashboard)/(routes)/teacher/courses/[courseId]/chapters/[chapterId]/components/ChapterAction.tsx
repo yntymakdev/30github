@@ -1,7 +1,8 @@
 "use client";
 import ConfirmModal from "@/components/modals/ConfirmModal";
 import { Button } from "@/components/ui/button";
-import { Trash } from "lucide-react";
+import axios from "axios";
+import { AArrowDown, Trash } from "lucide-react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,9 +14,12 @@ interface ChapterActionProps {
 }
 
 const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterActionProps) => {
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const onDelete = async () => {
     try {
+      setIsLoading(true);
+      await axios.delete(`/api/courses/${courseId}/chapters/${chapterId}`);
+      toast.success("Chapter deleted!");
     } catch (error) {
       toast.error("Something went wrong");
     }
