@@ -61,6 +61,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <h1 className="text-2xl font-medium">Course Setup</h1>
             <span className="text-sm text-slate-700">Completed fields {completionText}</span>
           </div>
+          {/* Add actions here  */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
