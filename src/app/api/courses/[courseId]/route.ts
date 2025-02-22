@@ -8,7 +8,6 @@ const mux = new Mux({
   tokenSecret: process.env.MUX_TOKEN_SECRET!,
 });
 const { assets } = mux.video;
-
 export async function DELETE(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
   try {
     const { userId } = await auth();
@@ -36,42 +35,23 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
 
     for (const chapter of course.chapters) {
       if (chapter.muxData?.assetId) {
-        await video.assets.del(chapter.muxData.assetId);
+        await assets.delete(chapter.muxData.assetId);
       }
     }
 
-    const deletedCourse = await db.chapter.delete({
+    const deletedCourse = await db.course.delete({
       where: {
-        id: params.chapterId,
-      },
-    });
-    }
-  }
-
-    const publishedChaptersInCourse = await db.chapter.findMany({
-      where: {
-        courseId: params.courseId,
-        isPublished: true,
+        id: params.courseId,
       },
     });
 
-    if (!publishedChaptersInCourse.length) {
-      await db.course.update({
-        where: {
-          id: params.courseId,
-        },
-        data: {
-          isPublished: false,
-        },
-      });
-    }
-
-    return NextResponse.json(deletedChapter);
+    return NextResponse.json(deletedCourse);
   } catch (error) {
     console.error("[COURSE_ID_DELETE]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
+
 export async function PATCH(req: Request, { params }: { params: { courseId: string } }) {
   try {
     const { userId } = await auth();
