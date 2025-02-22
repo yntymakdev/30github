@@ -39,14 +39,10 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
   const onDelete = async () => {
     try {
       setIsLoading(true);
-
-      if (isPublished) {
-        await axios.patch(`api/courses/${courseId}/chapters/${chapterId}/unpublish`);
-        toast.success("Chapter unpublish");
-      } else {
-        await axios.patch(`api/courses/${courseId}/chapters/${chapterId}/publish`);
-        toast.success("Chapter published   ");
-      }
+      await axios.delete(`/api/courses/${courseId}/chapters/${chapterId}`);
+      toast.success("Chapter deleted!");
+      router.refresh();
+      router.push(`/teacher/courses/${courseId}`);
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
