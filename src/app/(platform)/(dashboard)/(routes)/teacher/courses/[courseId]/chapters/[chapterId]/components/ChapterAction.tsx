@@ -18,6 +18,24 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
+  const onClick = async () => {
+    try {
+      setIsLoading(true);
+
+      if (isPublished) {
+        await axios.patch(`api/courses/${courseId}/chapters/${chapterId}/unpublish`);
+        toast.success("Chapter unpublish");
+      } else {
+        await axios.patch(`api/courses/${courseId}/chapters/${chapterId}/publish`);
+        toast.success("Chapter published   ");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const onDelete = async () => {
     try {
       setIsLoading(true);
@@ -34,7 +52,7 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
 
   return (
     <div className="flex items-center gap-x-2">
-      <Button onClick={() => {}} disabled={disabled || isLoading} variant="outline" size="sm">
+      <Button onClick={onClick} disabled={disabled || isLoading} variant="outline" size="sm">
         {isPublished ? "Unpublished" : "Publish"}
       </Button>
       <ConfirmModal onConfirm={onDelete}>
