@@ -37,7 +37,12 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
     });
 
     if (!pubishedChaptersInCourse) {
-      await db;
+      await db.course.update({
+        where: {
+          id: params.courseId,
+        },
+        data: { isPublished: false },
+      });
     }
     return NextResponse.json(unpublishChapter);
   } catch (error) {
