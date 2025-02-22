@@ -33,6 +33,15 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
     if (!chapter || !muxData || !chapter.title || !chapter.description || !chapter.videoUrl) {
       return new NextResponse("Missing required  fields", { status: 400 });
     }
+
+    const publishChapter = await db.chapter.update({
+      where: {
+        id: params.chapterId,
+        courseId: params.courseId,
+      },
+      data: { isPublished: true },
+    });
+    return NextResponse.json(publishChapter);
   } catch (error) {
     console.error("[CHAPTER_PUBLISH]", error);
     return new NextResponse("Internal server error", { status: 500 });
