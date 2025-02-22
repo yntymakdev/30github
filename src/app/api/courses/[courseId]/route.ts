@@ -8,7 +8,6 @@ const mux = new Mux({
   tokenSecret: process.env.MUX_TOKEN_SECRET!,
 });
 const { assets } = mux.video;
-
 export async function DELETE(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
   try {
     const { userId } = await auth();
@@ -36,7 +35,7 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
 
     for (const chapter of course.chapters) {
       if (chapter.muxData?.assetId) {
-        await assets.delete(chapter.muxData.assetId);
+        await video.assets.del(chapter.muxData.assetId);
       }
     }
 
@@ -46,7 +45,7 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
       },
     });
 
-    return NextResponse.json(deletedCourse); // Исправлено с deletedChapter на deletedCourse
+    return NextResponse.json(deletedCourse);
   } catch (error) {
     console.error("[COURSE_ID_DELETE]", error);
     return new NextResponse("Internal server error", { status: 500 });
