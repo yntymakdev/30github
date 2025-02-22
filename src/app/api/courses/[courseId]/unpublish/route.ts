@@ -33,7 +33,7 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
         id: params.courseId,
         userId,
       },
-      data: { isPublished: true },
+      data: { isPublished: false },
     });
 
     return NextResponse.json(unpublishedCourse);
