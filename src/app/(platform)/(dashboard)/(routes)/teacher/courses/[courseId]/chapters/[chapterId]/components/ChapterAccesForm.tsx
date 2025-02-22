@@ -26,10 +26,7 @@ interface ChapterAccessFormProps {
 
 export const ChapterAccessForm = ({ chapterId, initialData, courseId }: ChapterAccessFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const onClick = async () => {
-    try {
-    } catch (error) {}
-  };
+
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
