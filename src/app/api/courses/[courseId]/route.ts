@@ -30,44 +30,23 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
       },
     });
 
-    if (!ownCourse) {
-      return new NextResponse("Unauthorized", { status: 401 });
+    if (!course) {
+      return new NextResponse("Not found", { status: 404 });
     }
 
-    const chapter = await db.chapter.findUnique({
-      where: {
-        id: params.chapterId,
-        courseId: params.courseId,
-      },
-    });
-
-    if (!chapter) {
-      return new NextResponse("Chapter not found", { status: 404 });
-    }
-
-    if (chapter.videoUrl) {
-      const existingMuxData = await db.muxData.findFirst({
-        where: {
-          chapterId: params.chapterId,
-        },
-      });
-
-      if (existingMuxData) {
-        console.log("Deleting existing Mux asset:", existingMuxData.assetId);
-        await assets.delete(existingMuxData.assetId);
-        await db.muxData.delete({
-          where: {
-            id: existingMuxData.id,
-          },
-        });
+    for (const chapter of course.chapters) {
+      if (chapter.muxData?.assetId) {
+        await video.assets.del(chapter.muxData.assetId);
       }
     }
 
-    const deletedChapter = await db.chapter.delete({
+    const deletedCourse = await db.chapter.delete({
       where: {
         id: params.chapterId,
       },
     });
+    }
+  }
 
     const publishedChaptersInCourse = await db.chapter.findMany({
       where: {
