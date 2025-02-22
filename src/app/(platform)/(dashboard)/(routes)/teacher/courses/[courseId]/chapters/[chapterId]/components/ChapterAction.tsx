@@ -11,7 +11,7 @@ interface ChapterActionProps {
   disabled: boolean;
   courseId: string;
   chapterId: string;
-  isPublished: boolean;
+  isPublished: boolean | null;
 }
 
 const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterActionProps) => {
@@ -24,9 +24,11 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
       await axios.delete(`/api/courses/${courseId}/chapters/${chapterId}`);
       toast.success("Chapter deleted!");
       router.refresh();
-      router.push(`/teacher/course/${courseId}`);
+      router.push(`/teacher/courses/${courseId}`);
     } catch (error) {
       toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -35,7 +37,7 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
       <Button onClick={() => {}} disabled={disabled || isLoading} variant="outline" size="sm">
         {isPublished ? "Unpublished" : "Publish"}
       </Button>
-      <ConfirmModal onConfirm={() => {}}>
+      <ConfirmModal onConfirm={onDelete}>
         <Button size="sm" disabled={isLoading}>
           <Trash className="h-4 w-4" />
         </Button>

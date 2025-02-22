@@ -1,15 +1,16 @@
+import { AlertCircle } from "lucide-react";
+import React from "react";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@radix-ui/react-alert-dialog";
-import { AlertCircle } from "lucide-react";
-import React from "react";
-import { AlertDialogFooter, AlertDialogHeader } from "../ui/alert-dialog";
+} from "../ui/alert-dialog";
 
 interface ConfirmModalProps {
   children: React.ReactNode;

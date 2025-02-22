@@ -15,6 +15,7 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
     const ownCourse = await db.course.findUnique({
       where: {
         id: params.courseId,
@@ -25,6 +26,7 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
     if (!ownCourse) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
     const chapter = await db.chapter.findUnique({
       where: {
         id: params.chapterId,
@@ -33,14 +35,16 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
     });
 
     if (!chapter) {
-      return new NextResponse("N ot found", { status: 404 });
+      return new NextResponse("Chapter not found", { status: 404 });
     }
+
     if (chapter.videoUrl) {
       const existingMuxData = await db.muxData.findFirst({
         where: {
           chapterId: params.chapterId,
         },
       });
+
       if (existingMuxData) {
         console.log("Deleting existing Mux asset:", existingMuxData.assetId);
         await assets.delete(existingMuxData.assetId);
@@ -60,29 +64,30 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
 
     const publishedChaptersInCourse = await db.chapter.findMany({
       where: {
-        courseId: params.courseId,,
-        isPublished: true
+        courseId: params.courseId,
+        isPublished: true,
       },
     });
 
-if(!publishedChaptersInCourse.length){
-  await   db.course.update({
-where: {
-  id: params.courseId
-},
-data: {
+    if (!publishedChaptersInCourse.length) {
+      await db.course.update({
+        where: {
+          id: params.courseId,
+        },
+        data: {
+          isPublished: false,
+        },
+      });
+    }
 
-  isPublished: false
-}
-
-  })
-}
-return  NextResponse.json(deletedChapter) 
+    return NextResponse.json(deletedChapter);
   } catch (error) {
-    console.log("[CHAPTER_ID_DELETE]");
+    console.error("[CHAPTER_ID_DELETE]", error);
+    return new NextResponse("Internal server error", { status: 500 });
   }
 }
-async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
+
+export async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
   try {
     console.log("Request started");
 
