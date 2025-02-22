@@ -36,7 +36,7 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
 
     for (const chapter of course.chapters) {
       if (chapter.muxData?.assetId) {
-        await video.assets.del(chapter.muxData.assetId);
+        await assets.delete(chapter.muxData.assetId);
       }
     }
 
@@ -45,12 +45,14 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
         id: params.chapterId,
       },
     });
-    return NextResponse.json(deletedChapter);
+
+    return NextResponse.json(deletedCourse); // Исправлено с deletedChapter на deletedCourse
   } catch (error) {
     console.error("[COURSE_ID_DELETE]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
+
 export async function PATCH(req: Request, { params }: { params: { courseId: string } }) {
   try {
     const { userId } = await auth();
