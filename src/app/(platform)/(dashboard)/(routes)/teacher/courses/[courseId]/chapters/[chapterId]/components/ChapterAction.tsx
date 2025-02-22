@@ -23,11 +23,11 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
       setIsLoading(true);
 
       if (isPublished) {
-        await axios.patch(`api/courses/${courseId}/chapters/${chapterId}/unpublish`);
+        await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/unpublish`);
         toast.success("Chapter unpublish");
       } else {
-        await axios.patch(`api/courses/${courseId}/chapters/${chapterId}/publish`);
-        toast.success("Chapter published   ");
+        await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/publish`);
+        toast.success("Chapter published");
       }
       router.refresh();
     } catch (error) {
