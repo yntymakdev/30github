@@ -87,7 +87,7 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
   }
 }
 
-async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
+export async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
   try {
     console.log("Request started");
 
