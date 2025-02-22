@@ -8,7 +8,7 @@ const mux = new Mux({
   tokenSecret: process.env.MUX_TOKEN_SECRET!,
 });
 const { assets } = mux.video;
-export async function DELETE(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
+export async function PATCH(req: Request, { params }: { params: { courseId: string; chapterId: string } }) {
   try {
     const { userId } = await auth();
     if (!userId) {
@@ -33,17 +33,14 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
       return new NextResponse("Not found", { status: 404 });
     }
 
-    for (const chapter of course.chapters) {
-      if (chapter.muxData?.assetId) {
-        await assets.delete(chapter.muxData.assetId);
-      }
-    }
+    const hasPublishedChapter = course.chapters.some((chapter) => chapter.isPublished);
 
-    const deletedCourse = await db.course.delete({
-      where: {
-        id: params.courseId,
-      },
-    });
+    if (!course.title || !course.description || !course.imageUrl || !course.categoryId || !hasPublishedChapter)
+      const deletedCourse = await db.course.delete({
+        where: {
+          id: params.courseId,
+        },
+      });
 
     return NextResponse.json(deletedCourse);
   } catch (error) {
