@@ -35,7 +35,7 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
       <Button onClick={() => {}} disabled={disabled || isLoading} variant="outline" size="sm">
         {isPublished ? "Unpublished" : "Publish"}
       </Button>
-      <ConfirmModal onConfirm={() => {}}>
+      <ConfirmModal onConfirm={onDelete}>
         <Button size="sm" disabled={isLoading}>
           <Trash className="h-4 w-4" />
         </Button>
