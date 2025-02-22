@@ -29,6 +29,7 @@ const ChapterAction = ({ disabled, courseId, chapterId, isPublished }: ChapterAc
         await axios.patch(`api/courses/${courseId}/chapters/${chapterId}/publish`);
         toast.success("Chapter published   ");
       }
+      router.refresh();
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
