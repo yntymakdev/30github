@@ -30,6 +30,8 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
 
     const muxData = await db.muxData.findUnique({ where: { chapterId: params.chapterId } });
 
+    if (!chapter || !muxData || !chapter.title || !chapter.description || !chapter.videoUrl) {
+    }
     return NextResponse.json(chapter);
   } catch (error) {
     console.error("[CHAPTER_PUBLISH]", error);
