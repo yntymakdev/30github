@@ -1,5 +1,3 @@
-"use client";
-
 import { db } from "@/lib/db";
 import Categories from "./components/Categories/Categories";
 
@@ -17,3 +15,4 @@ const SearchPage = async () => {
     </div>
   );
 };
+export default SearchPage;
