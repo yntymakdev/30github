@@ -16,10 +16,17 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const ownCourse = await db.course.findUnique({
+    const course = await db.course.findUnique({
       where: {
         id: params.courseId,
-        userId,
+        userId: userId,
+      },
+      include: {
+        chapters: {
+          include: {
+            muxData: true,
+          },
+        },
       },
     });
 
@@ -82,7 +89,7 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
 
     return NextResponse.json(deletedChapter);
   } catch (error) {
-    console.error("[CHAPTER_ID_DELETE]", error);
+    console.error("[COURSE_ID_DELETE]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
