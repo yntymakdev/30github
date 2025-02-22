@@ -21,16 +21,27 @@ export async function PATCH(req: Request, { params }: { params: { courseId: stri
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const publishChapter = await db.chapter.update({
+    const unpublishChapter = await db.chapter.update({
       where: {
         id: params.chapterId,
         courseId: params.courseId,
       },
       data: { isPublished: true },
     });
-    return NextResponse.json(publishChapter);
+
+    const pubishedChaptersInCourse = await db.chapter.findMany({
+      where: {
+        courseId: params.courseId,
+        isPublished: true,
+      },
+    });
+
+    if (!pubishedChaptersInCourse) {
+      await db;
+    }
+    return NextResponse.json(unpublishChapter);
   } catch (error) {
-    console.error("[CHAPTER_PUBLISH]", error);
+    console.error("[CHAPTER_UNPUBLISH]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
