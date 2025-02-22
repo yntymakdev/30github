@@ -35,13 +35,13 @@ export async function DELETE(req: Request, { params }: { params: { courseId: str
 
     for (const chapter of course.chapters) {
       if (chapter.muxData?.assetId) {
-        await video.assets.del(chapter.muxData.assetId);
+        await assets.delete(chapter.muxData.assetId);
       }
     }
 
-    const deletedCourse = await db.chapter.delete({
+    const deletedCourse = await db.course.delete({
       where: {
-        id: params.chapterId,
+        id: params.courseId,
       },
     });
 
