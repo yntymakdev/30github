@@ -11,6 +11,7 @@ import { PriceForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses
 import { AttachmentForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/AttachmentForm";
 import { ChapterForm } from "@/app/(platform)/(dashboard)/(routes)/teacher/courses/[courseId]/components/ChapterForm";
 import Banner from "@/components/bunner";
+import Actions from "./components/Actions";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = await auth();
@@ -62,6 +63,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <span className="text-sm text-slate-700">Completed fields {completionText}</span>
           </div>
           {/* Add actions here  */}
+          <Actions disabled={!isComplete} courseId={params.courseId} isPublished={course.isPublished} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
