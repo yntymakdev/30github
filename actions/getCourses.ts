@@ -3,7 +3,7 @@ import { Category, Course } from "@prisma/client";
 import { getProgress } from "./getProgress";
 
 type CourseWithProgressWithCategory = Course & {
-  Category: Category | null; // Поменял 'category' на 'Category'
+  Category: Category | null;
   chapters: { id: string }[];
   progress: number | null;
 };
@@ -23,11 +23,11 @@ export const getCourses = async ({
     const courses = await db.course.findMany({
       where: {
         isPublished: true,
-        title: title ? { contains: title } : undefined, // Добавляем проверку для пустого title
-        categoryId, // Фильтрация по categoryId
+        title: title ? { contains: title } : undefined,
+        categoryId,
       },
       include: {
-        Category: true, // Заменил 'category' на 'Category'
+        Category: true,
         chapters: {
           where: {
             isPublished: true,
@@ -49,11 +49,8 @@ export const getCourses = async ({
 
     const coursesWithProgress: CourseWithProgressWithCategory[] = await Promise.all(
       courses.map(async (course) => {
-        // Проверка наличия категории и глав
-        const validCategory = course.Category ?? null; // Если категории нет, присваиваем null
-        const validChapters = course.chapters.length > 0 ? course.chapters : []; // Если глав нет, присваиваем пустой массив
-
-        // Если покупка не найдена, прогресс равен null
+        const validCategory = course.Category ?? null;
+        const validChapters = course.chapters.length > 0 ? course.chapters : [];
         if (course.purchase.length === 0) {
           return {
             ...course,
