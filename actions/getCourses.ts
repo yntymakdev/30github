@@ -63,7 +63,6 @@ export const getCourses = async ({
           };
         }
 
-        // Получаем прогресс для текущего пользователя
         const progressPercentPage = await getProgress(userId, course.id);
 
         return {
