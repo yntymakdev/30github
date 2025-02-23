@@ -3,7 +3,7 @@ import { Category, Course } from "@prisma/client";
 import { getProgress } from "./getProgress";
 
 type CourseWithProgressWithCategory = Course & {
-  Category: Category | null;
+  category: Category | null;
   chapters: { id: string }[];
   progress: number | null;
 };
@@ -27,7 +27,7 @@ export const getCourses = async ({
         categoryId,
       },
       include: {
-        Category: true,
+        category: true,
         chapters: {
           where: {
             isPublished: true,
@@ -49,13 +49,9 @@ export const getCourses = async ({
 
     const coursesWithProgress: CourseWithProgressWithCategory[] = await Promise.all(
       courses.map(async (course) => {
-        const validCategory = course.Category ?? null;
-        const validChapters = course.chapters.length > 0 ? course.chapters : [];
         if (course.purchase.length === 0) {
           return {
             ...course,
-            Category: validCategory,
-            chapters: validChapters,
             progress: null,
           };
         }
@@ -64,8 +60,6 @@ export const getCourses = async ({
 
         return {
           ...course,
-          Category: validCategory,
-          chapters: validChapters,
           progress: progressPercentPage,
         };
       })
