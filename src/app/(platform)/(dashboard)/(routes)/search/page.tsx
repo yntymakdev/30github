@@ -4,6 +4,7 @@ import SearchInput from "@/components/SearchInput";
 import { getCourses } from "../../../../../../actions/getCourses";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import CourseList from "@/components/CourseList";
 
 interface SearchPageProps {
   searchParams: {
