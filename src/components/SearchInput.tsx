@@ -1,3 +1,4 @@
+"use client";
 import { Search } from "lucide-react";
 import qs from "query-string";
 import React, { useEffect, useState } from "react";
