@@ -3,7 +3,7 @@ import { Category, Course } from "@prisma/client";
 import { getProgress } from "./getProgress";
 
 type CourseWithProgressWithCategory = Course & {
-  category: Category | null;
+  Category: Category | null; // Поменял 'category' на 'Category'
   chapters: { id: string }[];
   progress: number | null;
 };
@@ -23,11 +23,11 @@ export const getCourses = async ({
     const courses = await db.course.findMany({
       where: {
         isPublished: true,
-        title: { contains: title },
+        title: title ? { contains: title } : undefined, // Добавляем проверку для пустого title
         categoryId, // Фильтрация по categoryId
       },
       include: {
-        category: true, // Включаем категорию
+        Category: true, // Заменил 'category' на 'Category'
         chapters: {
           where: {
             isPublished: true,
@@ -46,27 +46,38 @@ export const getCourses = async ({
         createdAt: "desc",
       },
     });
+
     const coursesWithProgress: CourseWithProgressWithCategory[] = await Promise.all(
       courses.map(async (course) => {
+        // Проверка наличия категории и глав
+        const validCategory = course.Category ?? null; // Если категории нет, присваиваем null
+        const validChapters = course.chapters.length > 0 ? course.chapters : []; // Если глав нет, присваиваем пустой массив
+
+        // Если покупка не найдена, прогресс равен null
         if (course.purchase.length === 0) {
           return {
             ...course,
-            progress: null, // Если нет покупки, прогресс = null
+            Category: validCategory,
+            chapters: validChapters,
+            progress: null,
           };
         }
 
+        // Получаем прогресс для текущего пользователя
         const progressPercentPage = await getProgress(userId, course.id);
 
         return {
           ...course,
-          progress: progressPercentPage, // Прогресс пользователя для курса
+          Category: validCategory,
+          chapters: validChapters,
+          progress: progressPercentPage,
         };
       })
     );
 
     return coursesWithProgress;
   } catch (error) {
-    console.log("[GET_PROGRESS]", error);
+    console.log("[GET_COURSES]", error);
     return [];
   }
 };
