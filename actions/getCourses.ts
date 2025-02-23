@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { Category, Course } from "@prisma/client";
+import { getProgress } from "./getProgress";
 
 type CourseWithProgrssWithcategory = Course & {
   category: Category | null;
@@ -58,6 +59,15 @@ if(course.purchase.length === 0){
     ...course,
     progress: null
   }
+}
+
+
+const progressPercentPage =   await  getProgress(userId,course.id)
+
+return {
+
+  ...course,
+  progres: progressPercentPage
 }
 
 })
