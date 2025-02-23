@@ -13,10 +13,12 @@ interface CourseListProps {
 }
 
 export const CourseList = ({ items }: CourseListProps) => {
-  return <div>{items.map(el) => (
-<div key={el.id}>
-    {el.title} 
-</div>
-
-  )}</div>;
+  return (
+    <div>
+      {items.map((el) => (
+        <div key={el.id}>{el.title}</div>
+      ))}
+      ;
+    </div>
+  );
 };
