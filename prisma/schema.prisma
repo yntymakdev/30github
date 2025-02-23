@@ -20,7 +20,7 @@
     attachments Attachment[]
     createdAt   DateTime     @default(now())
     updateAt    DateTime     @updatedAt
-    Category    Category?    @relation(fields: [categoryId], references: [id])
+    category    Category?    @relation(fields: [categoryId], references: [id])
     chapters    Chapter[]
     purchase    Purchase[]
     @@index([categoryId])
