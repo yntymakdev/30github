@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { Category, Course } from "@prisma/client";
 import { getProgress } from "./getProgress";
 
-type CourseWithProgrssWithcategory = Course & {
+type CourseWithProgressWithCategory = Course & {
   category: Category | null;
   chapters: { id: string }[];
   progress: number | null;
@@ -18,62 +18,54 @@ export const getCourses = async ({
   userId,
   title,
   categoryId,
-}: getCourses): Promise<CourseWithProgrssWithcategory[]> => {
+}: GetCourses): Promise<CourseWithProgressWithCategory[]> => {
   try {
-    const courses = await db.course.findMany(
-      {
-        where: {
-          isPublished: true,
-          title: { contains: title },
-        },
-        categoryId,
-      },
-
-      include:{
-categoryId: true,
-chapters: {
-    where: {
+    const courses = await db.course.findMany({
+      where: {
         isPublished: true,
-    },
-    select: {
-id: true
-    }
-},
-purchase:{
-    where: {
-        userId,
-    }
-}
+        title: { contains: title },
+        categoryId, // Фильтрация по categoryId
+      },
+      include: {
+        category: true, // Включаем категорию
+        chapters: {
+          where: {
+            isPublished: true,
+          },
+          select: {
+            id: true,
+          },
+        },
+        purchase: {
+          where: {
+            userId,
+          },
+        },
       },
       orderBy: {
-createdAt: "desc", 
-      }
-    )};
-    const coursesWithProgress: CourseWithProgrssWithcategory[] = await
-    Promise.all(
-      CourseIdPage.map(async course => {
+        createdAt: "desc",
+      },
+    });
+    const coursesWithProgress: CourseWithProgressWithCategory[] = await Promise.all(
+      courses.map(async (course) => {
+        if (course.purchase.length === 0) {
+          return {
+            ...course,
+            progress: null, // Если нет покупки, прогресс = null
+          };
+        }
 
-if(course.purchase.length === 0){
-  return {
+        const progressPercentPage = await getProgress(userId, course.id);
 
-    ...course,
-    progress: null
-  }
-}
+        return {
+          ...course,
+          progress: progressPercentPage, // Прогресс пользователя для курса
+        };
+      })
+    );
 
-
-const progressPercentPage =   await  getProgress(userId,course.id)
-
-return {
-
-  ...course,
-  progres: progressPercentPage
-}
-
-})
-)
-return CourseWithProgress;
- } catch (error) {
+    return coursesWithProgress;
+  } catch (error) {
     console.log("[GET_PROGRESS]", error);
     return [];
   }
