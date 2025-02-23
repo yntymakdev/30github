@@ -48,7 +48,21 @@ purchase:{
 createdAt: "desc", 
       }
     )};
-    const coursesWithProgress
+    const coursesWithProgress: CourseWithProgrssWithcategory[] = await
+    Promise.all(
+      CourseIdPage.map(async course => {
+
+if(course.purchase.length === 0){
+  return {
+
+    ...course,
+    progress: null
+  }
+}
+
+})
+)
+return CourseWithProgress;
  } catch (error) {
     console.log("[GET_PROGRESS]", error);
     return [];
