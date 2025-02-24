@@ -37,6 +37,7 @@ export const CourseCard = ({ id, title, price, imageUrl, chaptersLength, progres
                 </span>
               </div>
             </div>
+            {progress !== null ? <div>TODO: Progress moment</div> : <p className="text-"></p>}
           </div>
         </div>
       </Link>
