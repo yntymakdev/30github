@@ -19,27 +19,20 @@ interface CategiresProps {
 
 const iconMap: Record<string, IconType> = {
   "I-T": FcMusic,
-  Islam: FcOldTimeCamera, // Убедитесь, что имя категории совпадает
+  Islam: FcOldTimeCamera,
   "Software Engineering": FcSalesPerformance,
-  Engineering: FcEngineering, // Исправьте пробел в имени
-  Technologies: FcFilmReel, // Исправьте пробел в имени
+  Engineering: FcEngineering,
+  Technologies: FcFilmReel,
   "Robot Technik": FcMultipleDevices,
-  Accounting: FcMultipleDevices, // Исправьте пробел в имени
+  Accounting: FcMultipleDevices,
 };
 
 const Categories = ({ items }: CategiresProps) => {
   return (
     <div className="flex items-center gap-x-2 overflow-x-auto pb-2">
       {items.map((item) => {
-        const IconComponent = iconMap[item.name]; // Получаем иконку для категории
-        return (
-          <CategoryItem
-            key={item.id}
-            label={item.name}
-            icon={IconComponent || FcMusic} // Подставляем дефолтную иконку, если не нашли
-            value={item.id}
-          />
-        );
+        const IconComponent = iconMap[item.name];
+        return <CategoryItem key={item.id} label={item.name} icon={IconComponent || FcMusic} value={item.id} />;
       })}
     </div>
   );

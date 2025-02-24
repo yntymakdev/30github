@@ -13,22 +13,13 @@ interface CourseListProps {
 }
 
 export const CourseList = ({ items }: CourseListProps) => {
-  console.log("Количество курсов:", items.length); // Проверяем, есть ли данные
+  console.log("Количество курсов:", items.length);
 
   return (
-    <div className="block">
-      {" "}
-      {/* Убедимся, что контейнер не скрыт */}
-      {items.length > 0 ? (
-        items.map((el) => (
-          <div key={el.id} className="p-4 border-b">
-            <h2 className="text-lg font-bold">{el.title}</h2>
-            {el.category && <p className="text-sm text-gray-600">{el.category.name}</p>}
-          </div>
-        ))
-      ) : (
-        <p className="text-center text-gray-500">Нет курсов для отображения</p>
-      )}
+    <div>
+      {items.map((item) => (
+        <div key={item.id}>{item.title}</div>
+      ))}
     </div>
   );
 };
