@@ -23,10 +23,10 @@ export const CourseList = ({ items }: CourseListProps) => {
           <CourseCard
             key={item.id}
             id={item.id}
-            title={item.title}
-            imageUrl={item.imageUrl}
+            title={item.title || "No title"}
+            imageUrl={item.imageUrl!}
             chaptersLength={item.chapters.length}
-            price={item.price ?? 0}
+            price={item.price!}
             progress={item.progress}
             category={item?.category?.name!}
           />
