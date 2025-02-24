@@ -2,6 +2,7 @@
 import { Category, Course } from "@prisma/client";
 import { Item } from "@radix-ui/react-dropdown-menu";
 import React from "react";
+import { CourseCard } from "./CourseCard";
 
 type CourseWithProgressWithCategory = Course & {
   category: Category | null;
@@ -24,11 +25,11 @@ export const CourseList = ({ items }: CourseListProps) => {
           key ={item.id }
 id={item.id}
 title={item.title}
-imageUrl = {item.imageUrl}
+imageUrl = {item.imageUr!}
 chaptersLength={item.chapters.length}
-price={item.price}
+price={item.price!}
 progress={item.progress}
-category={item?.category?.name}
+category={item?.category?.name!}
           />
         ))}
       </div>
