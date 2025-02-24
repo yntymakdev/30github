@@ -24,7 +24,7 @@ export const CourseList = ({ items }: CourseListProps) => {
           <CourseCard 
           key ={item.id }
 id={item.id}
-title={item.title}
+title={item.title || "no title"}
 imageUrl = {item.imageUrl!}
 chaptersLength={item.chapters.length}
 price={item.price!}
@@ -40,7 +40,7 @@ Not course Found
         
           </div>
         ) 
-        ))}
+        )}
       </div>
     </div>
   );
