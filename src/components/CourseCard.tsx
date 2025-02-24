@@ -1,3 +1,4 @@
+import { Course } from '@prisma/client'
 import React from 'react'
 
 interface CourseCardProps{
@@ -9,7 +10,7 @@ progress: number | null
 category: string
 }
 
-export  const CourseCard = () => {
+export  const CourseCard = ({id,title,imageUrl,chaptersLength,progress,category}: CourseCardProps) => {
   return (
     <div>CourseCard</div>
   )
