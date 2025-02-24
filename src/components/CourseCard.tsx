@@ -1,4 +1,5 @@
 import { Course } from "@prisma/client";
+import Link from "next/link";
 import React from "react";
 
 interface CourseCardProps {
@@ -12,5 +13,11 @@ interface CourseCardProps {
 }
 
 export const CourseCard = ({ id, title, price, imageUrl, chaptersLength, progress, category }: CourseCardProps) => {
-  return <div>CourseCard</div>;
+  return (
+    <div>
+      <Link href={`/courses/${id}`}>
+        <div className="group "></div>
+      </Link>
+    </div>
+  );
 };
