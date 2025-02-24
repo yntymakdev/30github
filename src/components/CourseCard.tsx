@@ -16,7 +16,7 @@ export const CourseCard = ({ id, title, price, imageUrl, chaptersLength, progres
   return (
     <div>
       <Link href={`/courses/${id}`}>
-        <div className="group "></div>
+        <div className="group  hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full"></div>
       </Link>
     </div>
   );
