@@ -6,10 +6,11 @@ interface CourseCardProps {
   title: string;
   imageUrl: string;
   chaptersLength: number;
+  price: number;
   progress: number | null;
   category: string;
 }
 
-export const CourseCard = ({ id, title, imageUrl, chaptersLength, progress, category }: CourseCardProps) => {
+export const CourseCard = ({ id, title, price, imageUrl, chaptersLength, progress, category }: CourseCardProps) => {
   return <div>CourseCard</div>;
 };
