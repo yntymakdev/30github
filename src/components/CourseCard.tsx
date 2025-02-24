@@ -25,6 +25,8 @@ export const CourseCard = ({ id, title, price, imageUrl, chaptersLength, progres
             <div className="text-lg md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
               {title}
             </div>
+            <p className="text-xs text-muted-foreground">{category}</p>
+            <div className="my-3 flex items-center gap-x-2 text-sm md:text-xs"></div>
           </div>
         </div>
       </Link>
