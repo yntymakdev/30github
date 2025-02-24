@@ -21,6 +21,11 @@ export const CourseCard = ({ id, title, price, imageUrl, chaptersLength, progres
           <div className="relative w-full aspect-video rounded-md overflow-hidden">
             <Image fill className="object-cover" src={imageUrl} alt="title" />
           </div>
+          <div className="flex flex-col pt-2">
+            <div className="text-lg md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2">
+              {title}
+            </div>
+          </div>
         </div>
       </Link>
     </div>
