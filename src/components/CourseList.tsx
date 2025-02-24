@@ -17,9 +17,12 @@ export const CourseList = ({ items }: CourseListProps) => {
 
   return (
     <div>
-      {items.map((item) => (
-        <div key={item.id}>{item.title}</div>
-      ))}
+      <div className="grid sm:grid-cols-2 md:grid-cols-2 lg-grid-cols-3">
+        {items.map((item) => (
+          <div key={item.id}>{item.title}</div>
+        ))}
+      </div>
+      <div></div>
     </div>
   );
 };
