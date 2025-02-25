@@ -37,7 +37,9 @@ if(!course){
 const porgresCount = await getProgress(userId,course.id)
 
   return <div className="h-full">
-  <div className="hidden md:flex-full w-full flex-col fixed inset-y-0 z-50"></div>
+  <div className="hidden md:flex-full w-full flex-col fixed inset-y-0 z-50">
+    <CourseSideBar/>
+  </div>
     <main>
     {children}
   </main>
