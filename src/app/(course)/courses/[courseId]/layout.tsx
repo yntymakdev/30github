@@ -17,17 +17,24 @@ const CourseLayout = async ({ children }: { children: React.ReactNode }) => {
       },
       include: {
         userPorgress: {
-
-
           where:{
             userId
           }
         }
+      },
+      orderBy: {
+        position: "asc"
       }
     }
+  }
   });
 
+if(!course){
+  redirect('/')
+}
+
+const porgrescount = 
+
   return <div>{children}</div>;
-};
 
 export default CourseLayout;
