@@ -8,7 +8,24 @@ const CourseLayout = async ({ children }: { children: React.ReactNode }) => {
   if (!userId) {
     return redirect("/");
   }
-  const course = await db.course.findUnique({ where: { id: params.courseId } });
+  const course = await db.course.findUnique({ where: { id: params.courseId },
+  
+  }include:{
+    chapters: {
+      where: {
+        isPublished: true
+      },
+      include: {
+        userPorgress: {
+
+
+          where:{
+            userId
+          }
+        }
+      }
+    }
+  });
 
   return <div>{children}</div>;
 };
