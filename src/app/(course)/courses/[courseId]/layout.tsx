@@ -9,7 +9,6 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
   const { userId } = await auth();
   if (!userId) {
     redirect("/");
-    return null;
   }
 
   const course = await db.course.findUnique({
