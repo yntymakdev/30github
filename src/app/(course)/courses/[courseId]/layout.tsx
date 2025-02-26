@@ -3,13 +3,12 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
 import { getProgress } from "../../../../../actions/getProgress";
-import CourseSideBar from "@/components/CourseSideBar";
 
 const CourseLayout = async ({ children, params }: { children: React.ReactNode; params: { courseId: string } }) => {
   const { userId } = await auth();
   if (!userId) {
     redirect("/");
-    return null; // Чтобы избежать ошибки, так как redirect не возвращает JSX
+    return null;
   }
 
   const course = await db.course.findUnique({
