@@ -3,7 +3,6 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
 import { getProgress } from "../../../../../actions/getProgress";
-import CourseSideBar from "@/components/CourseSideBar";
 
 const CourseLayout = async ({ children, params }: { children: React.ReactNode; params: { courseId: string } }) => {
   const { userId } = await auth();
@@ -18,7 +17,7 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
       chapters: {
         where: { isPublished: true },
         include: {
-          userProgress: {
+          userPostgress: {
             where: { userId },
           },
         },
@@ -36,9 +35,7 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
 
   return (
     <div className="h-full">
-      <div className="hidden md:flex-full w-full flex-col fixed inset-y-0 z-50">
-        <CourseSideBar />
-      </div>
+      <div className="hidden md:flex-full w-full flex-col fixed inset-y-0 z-50">{/* <CourseSideBar /> */}</div>
       <main>{children}</main>
     </div>
   );
